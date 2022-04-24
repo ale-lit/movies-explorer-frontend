@@ -120,6 +120,44 @@
 
     <main class="main">
 
+        <style>
+            .search__form {
+                display: flex;
+                justify-content: space-between;
+                gap: 10px;
+                padding-top: 80px;
+                align-items: center;
+            }
+            .search__input {
+                height: 50px;
+                padding: 16px 20px;
+                background-color: #f4f4f4;
+                border: none;
+                border-radius: 8px;
+                max-width: 1086px;
+                width: calc(100vw - 194px);
+            }
+            .search__button {
+                background-color: #000;
+                color: #fff;
+                border-radius: 5px;
+                border: none;
+                width: 44px;
+                height: 44px;
+                cursor: pointer;
+                transition: all .3s ease-in-out;
+            }
+            .search__button:hover {
+                opacity: .8;
+            }
+        </style>
+        <section class="search project__wrapper">
+            <div class="search__form">
+                <input type="search" class="search__input" name="" id="" placeholder="Фильм">
+                <input type="button" class="search__button" value=">">
+            </div>
+        </section>
+
     </main>
 
     <style>
