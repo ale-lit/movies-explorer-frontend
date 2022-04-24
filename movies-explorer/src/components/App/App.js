@@ -28,22 +28,40 @@ function App() {
 
       <Switch>
         <Route path="/movies">
-          Фильмы
+          { () => {
+              <h2>Фильмы</h2>
+            }
+          }
         </Route>
         <Route path="/saved-movies">
-          Сохранённые фильмы
+          { () => {
+              return "<h2>Сохранённые фильмы</h2>";
+            }
+          }
         </Route>
         <Route path="/profile">
-          Профиль пользователя
+          { () => {
+              return "<h2>Профиль пользователя</h2>";
+            }
+          }
         </Route>
         <Route path="/signin">
-          Авторизация
+          { () => {
+              <h2>Авторизация</h2>
+            }
+          }
         </Route>
         <Route path="/signup">
-          Регистрация
+          { () => {
+              <h2>Регистрация</h2>
+            }
+          }          
         </Route>
         <Route exact path="/">
-          О проекте
+          { () => {
+              <h2>О проекте</h2>
+            }
+          }
         </Route>
       </Switch>      
     </div>

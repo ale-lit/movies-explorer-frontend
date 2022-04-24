@@ -18,41 +18,28 @@
             text-decoration: none;
             color: #000;
             transition: all .3s ease-in-out;
-
         }
 
         .project__link:hover {
-            /* border-bottom: 1px solid #000; */
             opacity: .7;
         }
 
-        .project__link::after {
-            content: '';
-            display: block;
-            height: 1px;
-            width: 0;
-            background: #959595;
-            transition: all .3s ease-in-out;
-            margin: 0 auto;
-        }
-
-        .project__link:hover::after {
-            width: 100%;
-        }
-
-        .inner-content {
+        .project__wrapper {
             max-width: 1280px;
             margin: 0 auto;
-        }
-
-        .head-section {
-            background: #dff7ff;
-            min-height: 560px;
-            padding: 50px 70px 60px;
+            padding: 0 70px;
             box-sizing: border-box;
         }
 
-        .main__title {
+        .head-section {            
+            min-height: 560px;
+            /* padding: 50px 0 60px; */
+            padding-top: 50px;
+            padding-bottom: 60px;
+            box-sizing: border-box;
+        }
+
+        .head-section__title {
             max-width: 626px;
             line-height: 52px;
             font-size: 40px;
@@ -60,31 +47,78 @@
             margin: 0;
         }
 
-        .about__title {
+        .main__title {
             font-size: 22px;
             font-weight: normal;
             line-height: 27px;
             letter-spacing: -0.04em;
             margin: 0;
+            padding-bottom: 23px;
+            border-bottom: 1px solid #000;
         }
 
-        .hr {
-            border: 0;
-            border-top: 1px solid #e8e8e8;
+        .blue-background {
+            background: #dff7ff;
         }
     </style>
 </head>
 
 <body class="project">
-    <header class="header">
 
+    <style>
+        .header {
+            min-height: 74px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header__logo {
+            width: 38px;
+            height: 38px;
+        }
+        .header__auth {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        .header__link {
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 500;
+        }
+        .header__login-butt {
+            padding: 8px 20px;
+            background: #000;
+            border-radius: 3px;
+            color: #fff;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all .3s ease-in-out;
+        }
+        .header__login-butt:hover {
+            opacity: .8;
+        }
+
+
+    </style>
+    <header class="header project__wrapper blue-background">
+        <img src="./images/logo.svg" alt="Логотип" class="header__logo">
+        <div class="header__auth">
+            <a href="" class="header__link project__link">Регистрация</a>
+            <button class="header__login-butt">Войти</button>
+        </div>
     </header>
     <main class="main">
-        <section class="head-section inner-content">
-            <h1 class="main__title">Учебный проект студента факультета Веб-разработки.</h1>
+
+        <section class="head-section project__wrapper blue-background">
+            <h1 class="head-section__title">Учебный проект студента факультета Веб-разработки.</h1>
             <img src="./images/text__landing-logo.svg" alt="">
         </section>
-        <section class="about inner-content">
+
+        <section class="about project__wrapper">
             <h2 class="about__title">О проекте</h2>
 
             <h3 class="about__subtitle">Дипломный проект включал 5 этапов</h3>
@@ -101,19 +135,25 @@
             <div class="about__time-line-backend">4 недели</div>
             Front-end
         </section>
-        <section class="tech inner-content">
-            <h2 class="about__title">Технологии</h2>
+
+        <style>
+            .tech {
+
+            }
+        </style>
+        <section class="tech project__wrapper blue-background">
+            <h2 class="main__title">Технологии</h2>
         </section>
 
         <style>
             .student {
-                padding: 0 70px;
+                padding: 110px 0 125px;
                 box-sizing: border-box;
             }
             .student__info {
                 display: flex;
                 justify-content: space-between;
-                padding: 0 0 100px;
+                padding: 66px 0 100px;
             }
             .student__name {
                 font-size: 50px;
@@ -147,19 +187,12 @@
             .student__link {
                 font-weight: 500;
             }
-            .student__photo {
-
-            }
             .student__photo-card {
                 width: 270px;
             }
-
-            .student__portfolio {
-
-            }
             .student__portfolio-title {
                 margin: 0;
-                font-style: 18px;
+                font-size: 18px;
                 line-height: 20px;
                 color: #a0a0a0;
                 font-weight: normal;
@@ -185,8 +218,8 @@
                 display: block;
             }
         </style>
-        <section class="student inner-content">
-            <h2 class="about__title">Студент</h2>
+        <section class="student project__wrapper">
+            <h2 class="main__title">Студент</h2>
             <div class="student__info">
                 <div class="student__left-block">
                     <h3 class="student__name">Александр</h3>
@@ -219,7 +252,7 @@
 
     <style>
         .footer {
-            padding: 0 70px;
+            padding: 79px 70px 0;
             box-sizing: border-box;
             font-size: 13px;
         }
@@ -229,7 +262,7 @@
             color: #a0a0a0;
             text-align: center;
             border-bottom: 1px solid #e8e8e8;
-            padding: 79px 0 20px;
+            padding: 0 0 20px;
         }
 
         .footer__bottom {
@@ -253,7 +286,7 @@
             list-style-type: none;
         }
     </style>
-    <footer class="footer inner-content">
+    <footer class="footer project__wrapper">
         <p class="footer__text">Учебный проект Яндекс.Практикум х BeatFilm.</p>
         <div class="footer__bottom">
             <p class="footer__copyright">&copy; 2022</p>
