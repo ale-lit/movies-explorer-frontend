@@ -103,6 +103,18 @@
             font-weight: 500;
         }
 
+
+        .header__profile-button {
+            width: 100px;
+            height: 30px;
+            display: block;
+            background-image: url('./images/profile.svg');
+            transition: all .3s ease-in-out;
+        }
+        .header__profile-button:hover {
+            opacity: .8;
+        }
+
     </style>
     <header class="header project__wrapper">
         <img src="./images/logo.svg" alt="Логотип" class="header__logo">
@@ -113,20 +125,24 @@
             </ul>
         </nav>
         <div class="header__auth">
-            <a href="" class="header__link project__link">Регистрация</a>
-            <button class="header__login-butt">Войти</button>
+            <a href="" class="header__profile-button"></a>
         </div>
     </header>
 
     <main class="main">
 
         <style>
+            .search {
+                
+            }
             .search__form {
                 display: flex;
                 justify-content: space-between;
                 gap: 10px;
-                padding-top: 80px;
                 align-items: center;
+                padding-top: 80px;
+                padding-bottom: 39px;
+                border-bottom: 1px solid #e8e8e8;
             }
             .search__input {
                 height: 50px;
@@ -156,6 +172,90 @@
                 <input type="search" class="search__input" name="" id="" placeholder="Фильм">
                 <input type="button" class="search__button" value=">">
             </div>
+            <input type="checkbox" name="" id="shorts">
+            <label for="shorts">Короткометражки</label>
+        </section>
+
+        <style>
+            .films__list {
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+                display: flex;
+            }
+            .films__item {
+                background-color: #fdfdfd;
+                box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+            }
+            .film__title {
+                font-size: 15px;
+                font-weight: 500;
+                line-height: 18px;
+            }
+            .film__duration {
+                color: #a0a0a0;
+                font-size: 11px;
+                line-height: 13px;
+            }
+            .film__save-button {
+                border: none;
+                cursor: pointer;
+                width: 30px;
+                height: 30px;
+                background-color: transparent;
+                background-image: url('./images/save_film.svg');
+                transition: all .3s ease-in-out;
+            }
+            .film__save-button:hover {
+                opacity: .8;
+            }
+            .film__save-button_active {
+                background-image: url('./images/saved_film.svg');
+            }
+            .film__poster {
+                height: 203px;
+            }
+
+            .films__more-button {
+                background: #f4f4f4;
+                border: none;
+                border-radius: 6px;
+                height: 36px;
+                cursor: pointer;
+                width: 100%;
+                transition: all .3s ease-in-out;
+                font-size: 12px;
+                line-height: 15px;
+                margin-top: 50px;
+                margin-bottom: 80px;
+            }
+            .films__more-button:hover {
+                opacity: .8;
+            }
+        </style>
+        <section class="films project__wrapper">
+            <ul class="films__list">
+                <li class="films__item">
+                    <p class="film__title">33 слова о дизайне</p>
+                    <p class="film__duration">1ч 47м</p>
+                    <button class="film__save-button"></button>
+                    <img src="./images/pic__COLOR_pic.jpg" class="film__poster" alt="">
+                </li>
+                <li class="films__item">
+                    <p class="film__title">33 слова о дизайне</p>
+                    <p class="film__duration">1ч 47м</p>
+                    <button class="film__save-button film__save-button_active"></button>
+                    <img src="./images/pic__COLOR_pic2.jpg" class="film__poster" alt="">
+                </li>
+                <li class="films__item">
+                    <p class="film__title">33 слова о дизайне</p>
+                    <p class="film__duration">1ч 47м</p>
+                    <button class="film__save-button"></button>
+                    <img src="./images/pic__COLOR_pic3.jpg" class="film__poster" alt="">
+                </li>
+            </ul>
+
+            <button class="films__more-button">Ещё</button>
         </section>
 
     </main>
