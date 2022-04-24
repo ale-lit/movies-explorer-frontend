@@ -1,12 +1,246 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="ru">
+
 <head>
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Учебный проект студента факультета Веб-разработки</title>
+    <link rel="stylesheet" href="./vendor/normalize.css">
+    <link rel="stylesheet" href="./vendor/Inter Web/inter.css">
+    <style>
+        .project {
+            font-family: Inter, Arial, sans-serif;
+            font-size: 14px;
+        }
+
+        .project__link {
+            text-decoration: none;
+            color: #000;
+            transition: all .3s ease-in-out;
+
+        }
+
+        .project__link:hover {
+            /* border-bottom: 1px solid #000; */
+            opacity: .7;
+        }
+
+        .project__link::after {
+            content: '';
+            display: block;
+            height: 1px;
+            width: 0;
+            background: #959595;
+            transition: all .3s ease-in-out;
+            margin: 0 auto;
+        }
+
+        .project__link:hover::after {
+            width: 100%;
+        }
+
+        .inner-content {
+            max-width: 1280px;
+            margin: 0 auto;
+        }
+
+        .head-section {
+            background: #dff7ff;
+            min-height: 560px;
+            padding: 50px 70px 60px;
+            box-sizing: border-box;
+        }
+
+        .main__title {
+            max-width: 626px;
+            line-height: 52px;
+            font-size: 40px;
+            font-weight: normal;
+            margin: 0;
+        }
+
+        .about__title {
+            font-size: 22px;
+            font-weight: normal;
+            line-height: 27px;
+            letter-spacing: -0.04em;
+            margin: 0;
+        }
+
+        .hr {
+            border: 0;
+            border-top: 1px solid #e8e8e8;
+        }
+    </style>
 </head>
-<body>
-    123
+
+<body class="project">
+    <header class="header">
+
+    </header>
+    <main class="main">
+        <section class="head-section inner-content">
+            <h1 class="main__title">Учебный проект студента факультета Веб-разработки.</h1>
+            <img src="./images/text__landing-logo.svg" alt="">
+        </section>
+        <section class="about inner-content">
+            <h2 class="about__title">О проекте</h2>
+
+            <h3 class="about__subtitle">Дипломный проект включал 5 этапов</h3>
+            <p class="about__description">Составление плана, работу над бэкендом, вёрстку, добавление функциональности и
+                финальные доработки.</p>
+
+            <h3 class="about__subtitle">На выполнение диплома ушло 5 недель</h3>
+            <p class="about__description">У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать,
+                чтобы успешно защититься.</p>
+
+            <div class="about__time-line-backend">1 неделя</div>
+            Back-end
+
+            <div class="about__time-line-backend">4 недели</div>
+            Front-end
+        </section>
+        <section class="tech inner-content">
+            <h2 class="about__title">Технологии</h2>
+        </section>
+
+        <style>
+            .student {
+                padding: 0 70px;
+                box-sizing: border-box;
+            }
+            .student__info {
+                display: flex;
+                justify-content: space-between;
+            }
+            .student__name {
+                font-size: 50px;
+                font-weight: normal;
+                line-height: 58px;
+                letter-spacing: -0.04em;
+                margin: 0;
+                padding: 0 0 18px;
+            }
+            .student__about {
+                font-size: 18px;
+                font-weight: 500;
+                line-height: 20px;
+                margin: 0;
+                padding: 0 0 26px;
+            }
+            .student__description {
+                font-size: 14px;
+                line-height: 22px;
+                margin: 0;
+                max-width: 600px;
+                padding: 0 0 99px;
+            }
+            .student__links {
+                margin: 0;
+                list-style-type: none;
+                padding: 0;
+                display: flex;
+                gap: 20px;
+            }
+            .student__link {
+                font-weight: 500;
+            }
+            .student__photo {
+
+            }
+            .student__photo-card {
+                width: 270px;
+            }
+
+            .student__portfolio {
+
+            }
+            .student__portfolio-title {
+                margin: 0;
+                font-style: 18px;
+                line-height: 20px;
+                color: #a0a0a0;
+                font-weight: normal;
+            }
+        </style>
+        <section class="student inner-content">
+            <h2 class="about__title">Студент</h2>
+            <div class="student__info">
+                <div class="student__left-block">
+                    <h3 class="student__name">Александр</h3>
+                    <p class="student__about">Фронтенд-разработчик, 36 лет</p>
+                    <p class="student__description">Я родился и живу в Санкт-Петербурге, закончил факультет экономики СГУ. У
+                        меня есть жена и дочь. Я люблю слушать музыку, а ещё увлекаюсь бегом. Недавно начал кодить. С 2015 года
+                        работал в компании «СКБ Контур». После того, как прошёл курс по веб-разработке, начал заниматься
+                        фриланс-заказами и ушёл с постоянной работы.</p>
+                    <ul class="student__links">                
+                        <li class="student__link"><a href="https://t.me/alelitv" target="_blank" class="project__link"
+                            rel="noopener">Telegram</a></li>
+                        <li class="student__link"><a href="https://github.com/ale-lit" target="_blank" class="project__link"
+                            rel="noopener">Github</a></li>
+                    </ul>
+                </div>
+                <div class="student__photo">
+                    <img src="./images/photo-card.jpg" alt="Литвиненко Александр" class="student__photo-card">
+                </div>
+            </div> 
+            <div class="student__portfolio">
+                <h3 class="student__portfolio-title">Портфолио</h3>
+            </div>  
+        </section>
+    </main>
+
+    <style>
+        .footer {
+            padding: 0 70px;
+            box-sizing: border-box;
+            font-size: 13px;
+        }
+
+        .footer__text {
+            margin: 0;
+            color: #a0a0a0;
+            text-align: center;
+            border-bottom: 1px solid #e8e8e8;
+            padding: 79px 0 20px;
+        }
+
+        .footer__bottom {
+            display: flex;
+            justify-content: space-between;
+            padding: 20px 0;
+        }
+
+        .footer__copyright {
+            margin: 0;
+        }
+
+        .footer__links {
+            margin: 0;
+            padding: 0;
+            display: flex;
+            gap: 20px;
+        }
+
+        .footer__links-item {
+            list-style-type: none;
+        }
+    </style>
+    <footer class="footer inner-content">
+        <p class="footer__text">Учебный проект Яндекс.Практикум х BeatFilm.</p>
+        <div class="footer__bottom">
+            <p class="footer__copyright">&copy; 2022</p>
+            <ul class="footer__links">
+                <li class="footer__links-item"><a href="https://practicum.yandex.ru/" target="_blank" class="project__link"
+                        rel="noopener">Яндекс.Практикум</a></li>
+                <li class="footer__links-item"><a href="https://github.com/ale-lit" target="_blank" class="project__link"
+                        rel="noopener">Github</a></li>
+                <li class="footer__links-item"><a href="https://t.me/alelitv" target="_blank" class="project__link"
+                        rel="noopener">Telegram</a></li>
+            </ul>
+        </div>
+    </footer>
 </body>
+
 </html>
