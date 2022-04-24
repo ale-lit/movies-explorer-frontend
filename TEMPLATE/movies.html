@@ -88,9 +88,30 @@
         }
 
 
+
+        .header__menu {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            display: flex;
+            font-size: 13px;
+            line-height: 18px;
+            gap: 16px;
+        }
+
+        .project__link_active {
+            font-weight: 500;
+        }
+
     </style>
     <header class="header project__wrapper">
         <img src="./images/logo.svg" alt="Логотип" class="header__logo">
+        <nav>
+            <ul class="header__menu">
+                <li class="header__menu-item"><a href="" class="project__link project__link_active">Фильмы</a></li>
+                <li class="header__menu-item"><a href="" class="project__link">Сохранённые фильмы</a></li>
+            </ul>
+        </nav>
         <div class="header__auth">
             <a href="" class="header__link project__link">Регистрация</a>
             <button class="header__login-butt">Войти</button>
