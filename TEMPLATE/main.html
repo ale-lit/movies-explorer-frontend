@@ -12,6 +12,7 @@
         .project {
             font-family: Inter, Arial, sans-serif;
             font-size: 14px;
+            line-height: 17px;
         }
 
         .project__link {
@@ -31,22 +32,6 @@
             box-sizing: border-box;
         }
 
-        .head-section {            
-            min-height: 560px;
-            /* padding: 50px 0 60px; */
-            padding-top: 50px;
-            padding-bottom: 60px;
-            box-sizing: border-box;
-        }
-
-        .head-section__title {
-            max-width: 626px;
-            line-height: 52px;
-            font-size: 40px;
-            font-weight: normal;
-            margin: 0;
-        }
-
         .main__title {
             font-size: 22px;
             font-weight: normal;
@@ -58,7 +43,7 @@
         }
 
         .blue-background {
-            background: #dff7ff;
+            background-color: #dff7ff;
         }
     </style>
 </head>
@@ -113,36 +98,164 @@
     </header>
     <main class="main">
 
+        <style>            
+            .head-section {            
+                min-height: 560px;
+                padding-top: 50px;
+                box-sizing: border-box;
+                background-image: url('./images/text__landing-logo.svg');
+                background-position: bottom 60px right 70px;
+                background-repeat: no-repeat;
+            }
+
+            .head-section__title {
+                max-width: 626px;
+                line-height: 52px;
+                font-size: 40px;
+                font-weight: normal;
+                margin: 0;
+            }
+        </style>
         <section class="head-section project__wrapper blue-background">
             <h1 class="head-section__title">Учебный проект студента факультета Веб-разработки.</h1>
-            <img src="./images/text__landing-logo.svg" alt="">
         </section>
 
+        <style>
+            .about {
+                padding-top: 110px;
+                padding-bottom: 110px;
+            }
+            .about__inner {
+                display: flex;
+                padding-top: 70px;
+            }
+            .about__subtitle {
+                font-weight: normal;
+                font-size: 20px;
+                line-height: 24px;
+                letter-spacing: -0.04em;
+                margin: 0;
+                padding-bottom: 26px;
+            }
+            .about__description {
+                font-size: 14px;
+                line-height: 20px;
+                padding-bottom: 110px;
+            }
+            .about__timeline {
+                display: flex;
+                color: #a0a0a0;
+            }
+            .about__timeline-backend {
+                width: 20%;
+                text-align: center;
+            }
+            .about__time-line-frontend {
+                width: 80%;
+                text-align: center;
+            }
+            .about__timeline-blackbg {
+                background: #000;
+                color: #fff;
+                display: block;
+                padding: 9px 0;
+                height: 36px;
+                box-sizing: border-box;                
+                margin-bottom: 20px;
+            }
+            .about__timeline-graybg {
+                background: #f2f2f2;
+                color: #000;
+                display: block;
+                padding: 9px 0;
+                height: 36px;
+                box-sizing: border-box;
+                margin-bottom: 20px;
+            }
+        </style>
         <section class="about project__wrapper">
-            <h2 class="about__title">О проекте</h2>
+            <h2 class="main__title">О проекте</h2>
 
-            <h3 class="about__subtitle">Дипломный проект включал 5 этапов</h3>
-            <p class="about__description">Составление плана, работу над бэкендом, вёрстку, добавление функциональности и
-                финальные доработки.</p>
+            <div class="about__inner">
+                <div class="about__inner-block">
+                    <h3 class="about__subtitle">Дипломный проект включал 5 этапов</h3>
+                    <p class="about__description">Составление плана, работу над бэкендом, вёрстку, добавление функциональности и
+                        финальные доработки.</p>
+                </div>
 
-            <h3 class="about__subtitle">На выполнение диплома ушло 5 недель</h3>
-            <p class="about__description">У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать,
-                чтобы успешно защититься.</p>
+                <div class="about__inner-block">
+                    <h3 class="about__subtitle">На выполнение диплома ушло 5 недель</h3>
+                    <p class="about__description">У каждого этапа был мягкий и жёсткий дедлайн, которые нужно было соблюдать,
+                        чтобы успешно защититься.</p>
+                </div>
+            </div>
 
-            <div class="about__time-line-backend">1 неделя</div>
-            Back-end
-
-            <div class="about__time-line-backend">4 недели</div>
-            Front-end
+            <div class="about__timeline">
+                <div class="about__timeline-backend">
+                    <span class="about__timeline-blackbg">1 неделя</span>
+                    Back-end
+                </div>                
+    
+                <div class="about__time-line-frontend">
+                    <span class="about__timeline-graybg">4 недели</span>
+                    Front-end
+                </div>                
+            </div>
         </section>
 
         <style>
             .tech {
-
+                padding-top: 100px;
+                padding-bottom: 100px;
+            }
+            .tech__title {
+                text-align: center;
+                font-size: 50px;
+                line-height: 58px;
+                letter-spacing: -0.04em;
+                font-weight: normal;
+            }
+            .tech__description {
+                text-align: center;
+                line-height: 20px;
+                letter-spacing: -0.04em;
+                max-width: 460px;
+                margin: 0 auto;
+                margin-bottom: 100px;
+            }
+            .tech__list {
+                margin: 0;
+                padding: 0;
+                list-style-type: none;
+                display: flex;
+                gap: 10px;
+                justify-content: center;
+            }
+            .tech__item {
+                width: 90px;
+                height: 60px;
+                background-color: #fff;
+                border-radius: 10px;
+                letter-spacing: -0.04em;
+                text-align: center;
+                padding-top: 21px;
+                padding-bottom: 22px;
+                box-sizing: border-box;
             }
         </style>
         <section class="tech project__wrapper blue-background">
             <h2 class="main__title">Технологии</h2>
+            <h3 class="tech__title">7 технологий</h3>
+            <p class="tech__description">На курсе веб-разработки мы освоили технологии, которые применили в дипломном проекте.</p>
+            <ul class="tech__list">
+                <li class="tech__item">HTML</li>
+                <li class="tech__item">CSS</li>
+                <li class="tech__item">JS</li>
+                <li class="tech__item">React</li>
+                <li class="tech__item">Git</li>
+                <li class="tech__item">Express.js</li>
+                <li class="tech__item">mongoDB</li>
+            </ul>
         </section>
 
         <style>
