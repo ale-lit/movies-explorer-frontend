@@ -1,7 +1,11 @@
-// import React from 'react';
+import React from 'react';
 import { Route, Switch, Link } from 'react-router-dom';
 // import Header from '../Header';
 import './App.css';
+
+import Login from "../Login/Login";
+import Register from "../Register/Register";
+import Footer from "../Footer";
 
 function App() {
   return (
@@ -28,42 +32,26 @@ function App() {
 
       <Switch>
         <Route path="/movies">
-          { () => {
-              <h2>Фильмы</h2>
-            }
-          }
+
         </Route>
         <Route path="/saved-movies">
-          { () => {
-              return "<h2>Сохранённые фильмы</h2>";
-            }
-          }
+
         </Route>
         <Route path="/profile">
-          { () => {
-              return "<h2>Профиль пользователя</h2>";
-            }
-          }
+
         </Route>
         <Route path="/signin">
-          { () => {
-              <h2>Авторизация</h2>
-            }
-          }
+          <Login />
         </Route>
         <Route path="/signup">
-          { () => {
-              <h2>Регистрация</h2>
-            }
-          }          
+          <Register />
         </Route>
         <Route exact path="/">
-          { () => {
-              <h2>О проекте</h2>
-            }
-          }
+
         </Route>
-      </Switch>      
+      </Switch>
+
+      <Footer />   
     </div>
   );
 }
