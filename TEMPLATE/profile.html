@@ -1,0 +1,203 @@
+<!DOCTYPE html>
+<html lang="ru">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Учебный проект студента факультета Веб-разработки</title>
+    <link rel="stylesheet" href="./vendor/normalize.css">
+    <link rel="stylesheet" href="./fonts/inter.css">
+    <style>
+        .project {
+            font-family: Inter, Arial, sans-serif;
+            font-size: 14px;
+            line-height: 17px;
+        }
+
+        .project__link {
+            text-decoration: none;
+            color: #000;
+            transition: all .3s ease-in-out;
+        }
+
+        .project__link:hover {
+            opacity: .7;
+        }
+
+        .project__wrapper {
+            max-width: 1280px;
+            margin: 0 auto;
+            padding: 0 70px;
+            box-sizing: border-box;
+        }
+
+        .main__title {
+            font-size: 22px;
+            font-weight: normal;
+            line-height: 27px;
+            letter-spacing: -0.04em;
+            margin: 0;
+            padding-bottom: 23px;
+            border-bottom: 1px solid #000;
+        }
+    </style>
+</head>
+
+<body class="project">
+
+    <style>
+        .header {
+            min-height: 74px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .header__logo {
+            width: 38px;
+            height: 38px;
+        }
+        .header__auth {
+            display: flex;
+            gap: 30px;
+            align-items: center;
+        }
+        .header__link {
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 500;
+        }
+        .header__login-butt {
+            padding: 8px 20px;
+            background: #000;
+            border-radius: 3px;
+            color: #fff;
+            font-size: 12px;
+            line-height: 16px;
+            font-weight: 500;
+            border: none;
+            cursor: pointer;
+            transition: all .3s ease-in-out;
+        }
+        .header__login-butt:hover {
+            opacity: .8;
+        }
+
+
+
+        .header__menu {
+            margin: 0;
+            padding: 0;
+            list-style-type: none;
+            display: flex;
+            font-size: 13px;
+            line-height: 18px;
+            gap: 16px;
+        }
+
+        .project__link_active {
+            font-weight: 500;
+        }
+
+
+        .header__profile-button {
+            width: 100px;
+            height: 30px;
+            display: block;
+            background-image: url('./images/profile.svg');
+            transition: all .3s ease-in-out;
+        }
+        .header__profile-button:hover {
+            opacity: .8;
+        }
+
+    </style>
+    <header class="header project__wrapper">
+        <img src="./images/logo.svg" alt="Логотип" class="header__logo">
+        <nav>
+            <ul class="header__menu">
+                <li class="header__menu-item"><a href="" class="project__link project__link_active">Фильмы</a></li>
+                <li class="header__menu-item"><a href="" class="project__link">Сохранённые фильмы</a></li>
+            </ul>
+        </nav>
+        <div class="header__auth">
+            <a href="" class="header__profile-button"></a>
+        </div>
+    </header>
+
+    <main class="main">
+        <style>
+            .user {
+                text-align: center;
+            }
+            .user__hello {
+                padding-top: 74px;
+                padding-bottom: 123px;
+                font-size: 24px;
+                line-height: 29px;
+                font-weight: 500;
+            }
+            .user__name {
+                display: flex;
+                font-size: 11px;
+                line-height: 13px;
+                justify-content: space-between;
+                max-width: 410px;
+                margin: 0 auto;
+                border-bottom: 1px solid #e8e8e8;
+                padding-bottom: 16px;
+            }
+            .user__email {
+                display: flex;
+                font-size: 11px;
+                line-height: 13px;
+                justify-content: space-between;
+                max-width: 410px;
+                margin: 0 auto;
+                padding-top: 17px;
+            }
+            .user__name-title {
+                font-weight: 500;
+            }
+            .user__email-title {
+                font-weight: 500;
+            }
+
+            .user__links {
+                font-size: 13px;
+                line-height: 16px;
+                display: flex;
+                flex-direction: column;
+                padding-top: 220px;
+                padding-bottom: 70px;
+                gap: 16px;
+            }
+
+            .user__link-logout {
+                font-weight: 500;
+                color: #ff3459;
+            }
+            
+        </style>
+        <section class="user project__wrapper">
+            <h1 class="user__hello">
+                Привет, Александр!
+            </h1>
+            <p class="user__name">
+                <span class="user__name-title">Имя</span>
+                <span>Александр</span>
+            </p>
+            <p class="user__email">
+                <span class="user__email-title">E-mail</span>
+                <span>alelit@internet.ru</span>
+            </p>
+
+            <div class="user__links">
+                <a href="" class="project__link">Редактировать</a>
+                <a href="" class="project__link user__link-logout">Выйти из аккаунта</a>
+            </div>
+        </section>
+    </main>
+</body>
+
+</html>
