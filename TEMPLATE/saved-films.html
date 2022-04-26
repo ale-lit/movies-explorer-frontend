@@ -238,29 +238,19 @@
             .films__save-button:hover {
                 opacity: .8;
             }
-            .films__save-button_type_active {
+            .films__save-button_active {
                 background-image: url('./images/saved_film.svg');
             }
+
+            
+            .films__save-button_type_remove {
+                background-image: url('./images/delete-button.svg');
+            }
+
             .films__poster {
                 height: 203px;
             }
 
-            .films__more-button {
-                background: #f4f4f4;
-                border: none;
-                border-radius: 6px;
-                height: 36px;
-                cursor: pointer;
-                width: 100%;
-                transition: all .3s ease-in-out;
-                font-size: 12px;
-                line-height: 15px;
-                margin-top: 50px;
-                margin-bottom: 80px;
-            }
-            .films__more-button:hover {
-                opacity: .8;
-            }
         </style>
         <section class="films project__wrapper">
             <ul class="films__list">
@@ -270,7 +260,7 @@
                             <p class="films__title">33 слова о дизайне</p>
                             <p class="films__duration">1ч 47м</p>
                         </div>                        
-                        <button class="films__save-button"></button>
+                        <button class="films__save-button films__save-button_type_remove" aria-label="Удалить из закладок"></button>
                     </div>
                     <img src="./images/pic__COLOR_pic.jpg" class="films__poster" alt="">
                 </li>
@@ -280,7 +270,7 @@
                             <p class="films__title">33 слова о дизайне</p>
                             <p class="films__duration">1ч 47м</p>
                         </div>                        
-                        <button class="films__save-button films__save-button_type_active"></button>
+                        <button class="films__save-button films__save-button_type_remove"></button>
                     </div>
                     <img src="./images/pic__COLOR_pic2.jpg" class="films__poster" alt="">
                 </li>
@@ -290,106 +280,11 @@
                             <p class="films__title">33 слова о дизайне</p>
                             <p class="films__duration">1ч 47м</p>
                         </div>                        
-                        <button class="films__save-button"></button>
-                    </div>
-                    <img src="./images/pic__COLOR_pic3.jpg" class="films__poster" alt="">
-                </li>
-
-                <li class="films__item">
-                    <div class="films__item-header">
-                        <div class="films__item-info">
-                            <p class="films__title">33 слова о дизайне</p>
-                            <p class="films__duration">1ч 47м</p>
-                        </div>                        
-                        <button class="films__save-button"></button>
-                    </div>
-                    <img src="./images/pic__COLOR_pic.jpg" class="films__poster" alt="">
-                </li>
-                <li class="films__item">
-                    <div class="films__item-header">
-                        <div class="films__item-info">
-                            <p class="films__title">33 слова о дизайне</p>
-                            <p class="films__duration">1ч 47м</p>
-                        </div>                        
-                        <button class="films__save-button films__save-button_type_active"></button>
-                    </div>
-                    <img src="./images/pic__COLOR_pic2.jpg" class="films__poster" alt="">
-                </li>
-                <li class="films__item">
-                    <div class="films__item-header">
-                        <div class="films__item-info">
-                            <p class="films__title">33 слова о дизайне</p>
-                            <p class="films__duration">1ч 47м</p>
-                        </div>                        
-                        <button class="films__save-button"></button>
-                    </div>
-                    <img src="./images/pic__COLOR_pic3.jpg" class="films__poster" alt="">
-                </li>
-
-                <li class="films__item">
-                    <div class="films__item-header">
-                        <div class="films__item-info">
-                            <p class="films__title">33 слова о дизайне</p>
-                            <p class="films__duration">1ч 47м</p>
-                        </div>                        
-                        <button class="films__save-button"></button>
-                    </div>
-                    <img src="./images/pic__COLOR_pic.jpg" class="films__poster" alt="">
-                </li>
-                <li class="films__item">
-                    <div class="films__item-header">
-                        <div class="films__item-info">
-                            <p class="films__title">33 слова о дизайне</p>
-                            <p class="films__duration">1ч 47м</p>
-                        </div>                        
-                        <button class="films__save-button films__save-button_type_active"></button>
-                    </div>
-                    <img src="./images/pic__COLOR_pic2.jpg" class="films__poster" alt="">
-                </li>
-                <li class="films__item">
-                    <div class="films__item-header">
-                        <div class="films__item-info">
-                            <p class="films__title">33 слова о дизайне</p>
-                            <p class="films__duration">1ч 47м</p>
-                        </div>                        
-                        <button class="films__save-button"></button>
-                    </div>
-                    <img src="./images/pic__COLOR_pic3.jpg" class="films__poster" alt="">
-                </li>
-
-                <li class="films__item">
-                    <div class="films__item-header">
-                        <div class="films__item-info">
-                            <p class="films__title">33 слова о дизайне</p>
-                            <p class="films__duration">1ч 47м</p>
-                        </div>                        
-                        <button class="films__save-button"></button>
-                    </div>
-                    <img src="./images/pic__COLOR_pic.jpg" class="films__poster" alt="">
-                </li>
-                <li class="films__item">
-                    <div class="films__item-header">
-                        <div class="films__item-info">
-                            <p class="films__title">33 слова о дизайне</p>
-                            <p class="films__duration">1ч 47м</p>
-                        </div>                        
-                        <button class="films__save-button films__save-button_type_active"></button>
-                    </div>
-                    <img src="./images/pic__COLOR_pic2.jpg" class="films__poster" alt="">
-                </li>
-                <li class="films__item">
-                    <div class="films__item-header">
-                        <div class="films__item-info">
-                            <p class="films__title">33 слова о дизайне</p>
-                            <p class="films__duration">1ч 47м</p>
-                        </div>                        
-                        <button class="films__save-button"></button>
+                        <button class="films__save-button films__save-button_type_remove"></button>
                     </div>
                     <img src="./images/pic__COLOR_pic3.jpg" class="films__poster" alt="">
                 </li>
             </ul>
-
-            <button class="films__more-button">Ещё</button>
         </section>
 
     </main>
