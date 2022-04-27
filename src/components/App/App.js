@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Route, Link } from 'react-router-dom';
+import { Switch, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import './App.css';
 
@@ -10,20 +10,7 @@ import Footer from "../Footer/Footer";
 
 function App() {
   return (
-      <>        
-        <Link to="/movies">
-          Фильмы
-        </Link>
-        <Link to="/saved-movies">
-          Сохранённые фильмы
-        </Link>
-        <Link to="/profile">
-          Профиль пользователя
-        </Link>
-        <Link to="/">
-          О проекте
-        </Link>
-
+      <>
         <Header />
 
         <Switch>
