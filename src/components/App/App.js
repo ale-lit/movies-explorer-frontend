@@ -1,15 +1,16 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
 // import Header from '../Header';
-// import './App.css';
+import './App.css';
 
 import Login from "../Login/Login";
 import Register from "../Register/Register";
+import Main from "../Main/Main";
 import Footer from "../Footer/Footer";
 
 function App() {
   return (
-      <div className="App">
+      <>
         {/* <Header /> */}
         <Link to="/movies">
           Фильмы
@@ -47,12 +48,12 @@ function App() {
             <Register />
           </Route>
           <Route exact path="/">
-            <h1>О проекте</h1>
+            <Main />
           </Route>
         </Switch>
 
         <Footer />   
-      </div>
+      </>
   );
 }
 

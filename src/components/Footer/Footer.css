@@ -1,0 +1,29 @@
+.footer {
+    padding: 79px 70px 0;
+    box-sizing: border-box;
+    font-size: 13px;
+}
+.footer__text {
+    margin: 0;
+    color: #a0a0a0;
+    text-align: center;
+    border-bottom: 1px solid #e8e8e8;
+    padding: 0 0 20px;
+}
+.footer__bottom {
+    display: flex;
+    justify-content: space-between;
+    padding: 20px 0;
+}
+.footer__copyright {
+    margin: 0;
+}
+.footer__links {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+.footer__links-item {
+    list-style-type: none;
+}
