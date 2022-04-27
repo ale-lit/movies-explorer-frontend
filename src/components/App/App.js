@@ -1,6 +1,6 @@
 import React from 'react';
 import { Switch, Route, Link } from 'react-router-dom';
-// import Header from '../Header';
+import Header from '../Header/Header';
 import './App.css';
 
 import Login from "../Login/Login";
@@ -10,8 +10,7 @@ import Footer from "../Footer/Footer";
 
 function App() {
   return (
-      <>
-        {/* <Header /> */}
+      <>        
         <Link to="/movies">
           Фильмы
         </Link>
@@ -31,6 +30,8 @@ function App() {
           О проекте
         </Link>
 
+        <Header />
+        
         <Switch>
           <Route path="/movies">
             <h1>Фильмы</h1>

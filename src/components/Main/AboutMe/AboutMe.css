@@ -1,0 +1,73 @@
+.student {
+    padding-top: 110px;
+    padding-bottom: 125px;
+    box-sizing: border-box;
+}
+.student__info {
+    display: flex;
+    justify-content: space-between;
+    padding: 66px 0 100px;
+}
+.student__name {
+    font-size: 50px;
+    font-weight: normal;
+    line-height: 58px;
+    letter-spacing: -0.04em;
+    margin: 0;
+    padding: 0 0 18px;
+}
+.student__about {
+    font-size: 18px;
+    font-weight: 500;
+    line-height: 20px;
+    margin: 0;
+    padding: 0 0 26px;
+}
+.student__description {
+    font-size: 14px;
+    line-height: 22px;
+    margin: 0;
+    max-width: 600px;
+    padding: 0 0 99px;
+}
+.student__links {
+    margin: 0;
+    list-style-type: none;
+    padding: 0;
+    display: flex;
+    gap: 20px;
+}
+.student__link {
+    font-weight: 500;
+}
+.student__photo-card {
+    width: 270px;
+}
+.student__portfolio-title {
+    margin: 0;
+    font-size: 18px;
+    line-height: 20px;
+    color: #a0a0a0;
+    font-weight: normal;
+    padding: 0 0 50px 0;
+}
+.student__portfolio-items {
+    margin: 0;
+    padding: 0;
+    list-style-type: none;
+}
+.student__portfolio-item {
+    border-bottom: 1px solid #e8e8e8;
+    padding: 20px 0 19px;
+}
+.student__portfolio-item:last-child {
+    border-bottom: 0;
+}
+.student__portfolio-link {
+    font-size: 30px;
+    line-height: 50px;
+    letter-spacing: -0.04em;
+    background: url("../../../images/portfolio-link-arrow.svg") center right
+        no-repeat;
+    display: block;
+}
