@@ -15,8 +15,8 @@
     padding-bottom: 26px;
 }
 .about__description {
-    font-size: 14px;
     line-height: 20px;
+    margin: 0;
     padding-bottom: 110px;
 }
 .about__timeline {
@@ -38,7 +38,7 @@
     padding: 9px 0;
     height: 36px;
     box-sizing: border-box;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
 }
 .about__timeline-graybg {
     background: #f2f2f2;
@@ -47,5 +47,5 @@
     padding: 9px 0;
     height: 36px;
     box-sizing: border-box;
-    margin-bottom: 20px;
+    margin-bottom: 14px;
 }

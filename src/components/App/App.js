@@ -20,18 +20,12 @@ function App() {
         <Link to="/profile">
           Профиль пользователя
         </Link>
-        <Link to="/signin">
-          Авторизация
-        </Link>
-        <Link to="/signup">
-          Регистрация
-        </Link>
         <Link to="/">
           О проекте
         </Link>
 
         <Header />
-        
+
         <Switch>
           <Route path="/movies">
             <h1>Фильмы</h1>

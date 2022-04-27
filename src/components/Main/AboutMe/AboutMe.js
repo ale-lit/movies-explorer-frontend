@@ -51,42 +51,7 @@ function AboutMe() {
                         className="student__photo-card"
                     />
                 </div>
-            </div>
-            <div className="student__portfolio">
-                <h3 className="student__portfolio-title">Портфолио</h3>
-                <ul className="student__portfolio-items">
-                    <li className="student__portfolio-item">
-                        <a
-                            href="https://github.com/ale-lit"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="student__portfolio-link project__link"
-                        >
-                            Статичный сайт
-                        </a>
-                    </li>
-                    <li className="student__portfolio-item">
-                        <a
-                            href="https://github.com/ale-lit"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="student__portfolio-link project__link"
-                        >
-                            Адаптивный сайт
-                        </a>
-                    </li>
-                    <li className="student__portfolio-item">
-                        <a
-                            href="https://github.com/ale-lit"
-                            target="_blank"
-                            rel="noopener noreferrer"
-                            className="student__portfolio-link project__link"
-                        >
-                            Одностраничное приложение
-                        </a>
-                    </li>
-                </ul>
-            </div>
+            </div>            
         </section>
     );
 }
