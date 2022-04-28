@@ -25,8 +25,9 @@
     font-size: 30px;
     line-height: 50px;
     letter-spacing: -0.04em;
-    background: url("../../../images/portfolio-link-arrow.svg") center right
-        no-repeat;
+    background: url("../../../images/portfolio-link-arrow.svg") no-repeat;
+    background-size: 18px;
+    background-position: right 6px top 18px;
     display: block;
 }
 
@@ -36,7 +37,6 @@
     }
     .portfolio__link {
         font-size: 28px;
-        background-size: 18px;
         background-position: right 5px top 19px;
     }
 }
