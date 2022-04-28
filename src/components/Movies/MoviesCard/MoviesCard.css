@@ -1,0 +1,44 @@
+
+.films__item {
+    background-color: #fdfdfd;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+}
+.films__item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px;
+}
+.films__title {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+}
+.films__duration {
+    color: #a0a0a0;
+    font-size: 11px;
+    line-height: 13px;
+}
+.films__save-button {
+    border: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    background-image: url('../../../images/save_film.svg');
+    transition: all .3s ease-in-out;
+}
+.films__save-button:hover {
+    opacity: .8;
+}
+.films__save-button_type_active {
+    background-image: url('../../../images/saved_film.svg');
+}
+.films__poster {
+    height: 203px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+.films__poster:hover {
+    opacity: .7;
+}

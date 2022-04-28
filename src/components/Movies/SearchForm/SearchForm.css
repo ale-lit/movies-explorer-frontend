@@ -1,0 +1,29 @@
+.search__form {
+    display: flex;
+    justify-content: space-between;
+    gap: 10px;
+    align-items: center;
+    padding-top: 80px;
+    padding-bottom: 39px;                
+}
+.search__input {
+    height: 50px;
+    padding: 16px 20px;
+    background-color: #f4f4f4;
+    border: none;
+    border-radius: 8px;
+    max-width: 1086px;
+    width: calc(100vw - 194px);
+}
+.search__button {
+    color: #fff;
+    border: none;
+    width: 44px;
+    height: 44px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    background: url('../../../images/find-button.svg');
+}
+.search__button:hover {
+    opacity: .8;
+}

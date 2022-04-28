@@ -6,6 +6,7 @@ import './App.css';
 import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Main from "../Main/Main";
+import Movies from "../Movies/Movies";
 import Footer from "../Footer/Footer";
 
 function App() {
@@ -15,7 +16,7 @@ function App() {
 
         <Switch>
           <Route path="/movies">
-            <h1>Фильмы</h1>
+            <Movies />
           </Route>
           <Route path="/saved-movies">
             <h1>Сохранённые фильмы</h1>

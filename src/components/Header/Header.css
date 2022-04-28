@@ -38,6 +38,15 @@
 .header__login-link:hover {
     opacity: .8;
 }
+.header__profile-link {
+    font-size: 14px;
+    line-height: 30px;
+    font-weight: 500;
+    display: block;
+    width: 100px;
+    height: 30px;
+    background: url('../../images/profile.svg') no-repeat right center;
+}
 
 @media screen and (max-width: 768px) {
     .header {
