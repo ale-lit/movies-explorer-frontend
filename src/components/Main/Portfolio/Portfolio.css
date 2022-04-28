@@ -41,7 +41,26 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 550px) {
+    .portfolio__link {
+        font-size: 22px;
+        line-height: 35px;
+        background-position: right 5px top 10px;
+    }
+}
+
+@media screen and (max-width: 450px) {
+    .portfolio {
+        padding: 0 30px 70px;
+    }
+    .portfolio__link {
+        font-size: 18px;
+        line-height: 28px;
+        background-size: 11px;
+    }
+}
+
+@media screen and (max-width: 380px) {
     .portfolio {
         padding: 0 14px 70px;
     }
@@ -49,10 +68,10 @@
         font-size: 14px;
         padding-bottom: 20px;
     }
+}
+
+@media screen and (max-width: 320px) {
     .portfolio__link {
-        font-size: 18px;
-        line-height: 28px;
-        background-size: 11px;
         background-position: right 4px top 8px;
     }
 }

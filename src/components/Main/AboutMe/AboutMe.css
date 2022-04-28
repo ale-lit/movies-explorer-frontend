@@ -78,7 +78,7 @@
     .student__left-block {
         order: 1;
     }
-    .student__photo-card {
+    .student__photo {
         text-align: center;
     }
     .student__name {
@@ -93,7 +93,7 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 380px) {
     .student {
         padding: 70px 14px 69px;
     }
@@ -114,9 +114,15 @@
         padding-bottom: 40px;
     }
     .student__photo-card {
-        width: 100%;
+        width: 80%;
     }
     .student__links {
         gap: 26px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .student__photo-card {
+        width: 100%;
     }
 }

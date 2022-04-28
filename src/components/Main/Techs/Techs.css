@@ -51,6 +51,12 @@
         line-height: 18px;
         margin-bottom: 83px;
     }
+    .techs__list {
+        flex-wrap: wrap;
+        width: 272px;
+        margin: 0 auto;
+        justify-content: flex-start;
+    }
     .techs__item {
         width: 84px;
         height: 57px;
@@ -60,7 +66,7 @@
     }
 }
 
-@media screen and (max-width: 320px) {
+@media screen and (max-width: 400px) {
     .techs {
         padding-top: 70px;
         padding-bottom: 70px;
@@ -70,15 +76,15 @@
         font-size: 30px;
         line-height: 36px;
     }
+}
+
+@media screen and (max-width: 320px) {
     .techs__description {
         font-size: 11px;
         line-height: 16px;
         margin-bottom: 50px;
     }
     .techs__list {
-        flex-wrap: wrap;
         width: 178px;
-        margin: 0 auto;
-        justify-content: flex-start;
     }
 }
