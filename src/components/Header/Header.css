@@ -3,6 +3,7 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    padding: 0 70px;
 }
 .header__logo {
     width: 38px;
@@ -33,4 +34,10 @@
 }
 .header__login-link:hover {
     opacity: .8;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 0 30px;
+    }
 }

@@ -6,7 +6,7 @@ import logo from "../../images/logo.svg";
 
 function Header() {
     return (
-        <header className="header project__wrapper blue-background">
+        <header className="header blue-background">
             <Link to="/">
                 <img src={logo} alt="Логотип" className="header__logo" />
             </Link>

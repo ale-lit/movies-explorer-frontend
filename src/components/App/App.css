@@ -23,3 +23,9 @@
   padding: 0 70px;
   box-sizing: border-box;
 }
+
+@media screen and (max-width: 768px) {
+  .project__wrapper {
+    padding: 0 50px;
+  }
+}

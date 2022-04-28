@@ -5,6 +5,7 @@
 .about__inner {
     display: flex;
     padding-top: 70px;
+    gap: 40px;
 }
 .about__subtitle {
     font-weight: normal;
@@ -48,4 +49,22 @@
     height: 36px;
     box-sizing: border-box;
     margin-bottom: 14px;
+}
+
+@media screen and (max-width: 768px) {
+    .about {
+        padding-top: 90px;
+        padding-bottom: 90px;
+    }
+    .about__inner {
+        gap: 30px;
+    }
+    .about__subtitle {
+        padding-bottom: 22px;
+    }
+    .about__description {
+        font-size: 12px;
+        line-height: 18px;
+        padding-bottom: 93px;
+    }
 }

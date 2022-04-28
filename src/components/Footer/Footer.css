@@ -1,5 +1,5 @@
 .footer {
-    padding: 79px 70px 0;
+    padding-top: 60px;
     box-sizing: border-box;
     font-size: 13px;
     line-height: 16px;
@@ -27,4 +27,11 @@
 }
 .footer__links-item {
     list-style-type: none;
+}
+
+@media screen and (max-width: 768px) {
+    .footer {
+        padding-left: 30px;
+        padding-right: 30px;
+    }
 }

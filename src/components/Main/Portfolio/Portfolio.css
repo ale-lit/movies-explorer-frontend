@@ -7,7 +7,7 @@
     line-height: 20px;
     color: #a0a0a0;
     font-weight: normal;
-    padding: 0 0 50px 0;
+    padding-bottom: 30px;
 }
 .portfolio__items {
     margin: 0;
@@ -28,4 +28,15 @@
     background: url("../../../images/portfolio-link-arrow.svg") center right
         no-repeat;
     display: block;
+}
+
+@media screen and (max-width: 768px) {
+    .portfolio {
+        padding-bottom: 90px;
+    }
+    .portfolio__link {
+        font-size: 28px;
+        background-size: 18px;
+        background-position: right 5px top 19px;
+    }
 }

@@ -12,4 +12,18 @@
     font-size: 40px;
     font-weight: normal;
     margin: 0;
+    letter-spacing: -0.04em;
+}
+
+@media screen and (max-width: 768px) {
+    .promo {
+        padding-top: 300px;
+        background-size: 680px;
+        background-position: bottom 70px center;
+        min-height: 844px;
+    }
+    .promo__title {
+        text-align: center;
+        max-width: 680px;
+    }
 }

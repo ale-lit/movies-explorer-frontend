@@ -6,7 +6,7 @@
 .student__info {
     display: flex;
     justify-content: space-between;
-    padding: 66px 0 100px;
+    padding-top: 66px;
 }
 .student__name {
     font-size: 50px;
@@ -14,21 +14,21 @@
     line-height: 58px;
     letter-spacing: -0.04em;
     margin: 0;
-    padding: 0 0 18px;
+    padding-bottom: 18px;
 }
 .student__about {
     font-size: 18px;
     font-weight: 500;
     line-height: 20px;
     margin: 0;
-    padding: 0 0 26px;
+    padding-bottom: 26px;
 }
 .student__description {
     font-size: 14px;
     line-height: 22px;
     margin: 0;
     max-width: 600px;
-    padding: 0 0 77px;
+    padding-bottom: 77px;
 }
 .student__links {
     margin: 0;
@@ -42,4 +42,30 @@
 }
 .student__photo-card {
     width: 270px;
+}
+
+@media screen and (max-width: 768px) {
+    .student {
+        padding-top: 90px;
+        padding-bottom: 90px;
+    }
+    .student__name {
+        font-size: 40px;
+        line-height: 40px;     
+        padding-bottom: 16px;
+    }
+    .student__about {
+        font-size: 12px;
+        line-height: 18px;
+        padding-bottom: 20px;
+    }
+    .student__description {
+        max-width: 364px;
+        font-size: 12px;
+        line-height: 18px;
+        padding-bottom: 87px;
+    }    
+    .student__photo-card {
+        width: 255px;
+    }
 }

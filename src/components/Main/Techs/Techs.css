@@ -37,3 +37,25 @@
     padding-bottom: 22px;
     box-sizing: border-box;
 }
+
+@media screen and (max-width: 768px) {
+    .techs {
+        padding-top: 90px;
+        padding-bottom: 90px;
+    }
+    .techs__subtitle {
+        margin: 80px 0 22px;
+    }
+    .techs__description {
+        font-size: 12px;
+        line-height: 18px;
+        margin-bottom: 83px;
+    }
+    .techs__item {
+        width: 84px;
+        height: 57px;
+        padding-bottom: 21px;
+        font-size: 12px;
+        line-height: 15px;
+    }
+}
