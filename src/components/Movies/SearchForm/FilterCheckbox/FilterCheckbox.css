@@ -1,20 +1,60 @@
 .search__setting {
     border-bottom: 1px solid #e8e8e8;
     text-align: center;
-    padding-bottom: 40px;
+    padding-bottom: 39px;
 }
-.search__checkbox {
+.search__checkbox-label {
+    display: inline-block;
+    padding-left: 48px;
+    margin: 0;
+    position: relative;
+    cursor: pointer;
+}
+.search__checkbox-label input {
     position: absolute;
-    z-index: -1;
     opacity: 0;
+    cursor: inherit;
 }
-.search__checkbox-label::before {
-    content: '';
-    width: 36px;
+.search__checkbox-label span {
+    display: inline-block;
+    font-size: 12px;
+    line-height: 18px;
+    padding: 4px 0;
+}
+.search__checkbox-label span:before,
+.search__checkbox-label span:after {
+    content: "";
+    position: absolute;
+    top: 50%;
+    transition: 0.3s;
+    box-sizing: border-box;
+}
+.search__checkbox-label span:before {
+    left: 0;
     height: 20px;
-    display: block;
-    background: url('../../../../images/smalltumboff.svg');
+    margin-top: -10px;
+    width: 36px;
+    border-radius: 20px;
+    background: #ddd;
+    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.4);
 }
-.search__checkbox:checked::after {
-    background: url('../../../../images/smalltumb.svg');
+.search__checkbox-label span:after {
+    left: 2px;
+    height: 16px;
+    width: 16px;
+    margin-top: -8px;
+    background: #fff;
+    border-radius: 50%;
+    box-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+.search__checkbox-label input:checked + span:before {
+    background-color: #3890d0;
+}
+.search__checkbox-label input:checked + span:after {
+    left: 18px;
+}
+
+.search__checkbox-label input:focus + span:before {
+    box-shadow: 0 0 0 3px rgba(50, 150, 255, 0.2);
 }

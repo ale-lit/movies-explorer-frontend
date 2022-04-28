@@ -7,6 +7,7 @@ import Login from "../Login/Login";
 import Register from "../Register/Register";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
+import SavedMovies from "../SavedMovies/SavedMovies";
 import Footer from "../Footer/Footer";
 
 function App() {
@@ -19,7 +20,7 @@ function App() {
             <Movies />
           </Route>
           <Route path="/saved-movies">
-            <h1>Сохранённые фильмы</h1>
+            <SavedMovies />
           </Route>
           <Route path="/profile">
             <h1>Профиль пользователя</h1>

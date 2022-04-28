@@ -4,8 +4,11 @@
     list-style-type: none;
     display: grid;
     grid-template-columns: 1fr 1fr 1fr;
-    gap: 30px 24px;
-    padding-top: 80px;
+    gap: 27px 24px;
+    padding-top: 77px;
+}
+.films__more-block {
+    min-height: 187px;
 }
 .films__more-button {
     background: #f4f4f4;
@@ -17,8 +20,9 @@
     transition: all .3s ease-in-out;
     font-size: 12px;
     line-height: 15px;
-    margin-top: 50px;
-    margin-bottom: 80px;
+    margin-top: 77px;
+    margin-bottom: 100px;
+    padding: 0;
 }
 .films__more-button:hover {
     opacity: .8;

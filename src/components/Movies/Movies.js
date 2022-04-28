@@ -7,7 +7,7 @@ function Movies() {
     return (
         <main className="main">
             <SearchForm />
-            <MoviesCardList />
+            <MoviesCardList items="13" />
         </main>
     );
 }
