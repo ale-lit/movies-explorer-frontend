@@ -28,6 +28,12 @@
     }
 }
 
+@media screen and (max-width: 600px) {
+    .promo {
+        padding-top: 190px;
+    }
+}
+
 @media screen and (max-width: 320px) {
     .promo {
         padding: 183px 10px 0;
