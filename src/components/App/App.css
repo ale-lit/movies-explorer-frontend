@@ -29,3 +29,9 @@
     padding: 0 50px;
   }
 }
+
+@media screen and (max-width: 320px) {
+  .project__wrapper {
+    padding: 0 18px;
+  }
+}

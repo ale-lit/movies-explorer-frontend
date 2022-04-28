@@ -69,3 +69,37 @@
         width: 255px;
     }
 }
+
+@media screen and (max-width: 320px) {
+    .student {
+        padding: 70px 14px 69px;
+    }
+    .student__info {
+        flex-direction: column;
+        padding-top: 60px;
+    }
+    .student__name {
+        padding-top: 40px;
+        font-size: 30px;
+        line-height: 36px;
+        padding-bottom: 20px;
+    }
+    .student__about {
+        font-size: 11px;
+        line-height: 16px;
+    }
+    .student__description {
+        font-size: 11px;
+        line-height: 16px;
+        padding-bottom: 40px;
+    }
+    .student__left-block {
+        order: 1;
+    }
+    .student__photo-card {
+        width: 100%;
+    }
+    .student__links {
+        gap: 26px;
+    }
+}

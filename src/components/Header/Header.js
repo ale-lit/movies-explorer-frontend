@@ -1,6 +1,6 @@
 import React from "react";
 import { Link } from "react-router-dom";
-import NavTab from "./NavTab/NavTab";
+// import NavTab from "./NavTab/NavTab";
 import "./Header.css";
 import logo from "../../images/logo.svg";
 
@@ -10,7 +10,7 @@ function Header() {
             <Link to="/">
                 <img src={logo} alt="Логотип" className="header__logo" />
             </Link>
-            <NavTab />
+            {/* <NavTab /> */}
             <div className="header__auth">
                 <Link to="/signup" className="header__link project__link">
                     Регистрация

@@ -40,3 +40,19 @@
         background-position: right 5px top 19px;
     }
 }
+
+@media screen and (max-width: 320px) {
+    .portfolio {
+        padding: 0 14px 70px;
+    }
+    .portfolio__title {
+        font-size: 14px;
+        padding-bottom: 20px;
+    }
+    .portfolio__link {
+        font-size: 18px;
+        line-height: 28px;
+        background-size: 11px;
+        background-position: right 4px top 8px;
+    }
+}

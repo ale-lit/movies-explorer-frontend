@@ -3,7 +3,10 @@
     display: flex;
     justify-content: space-between;
     align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
     padding: 0 70px;
+    box-sizing: border-box;
 }
 .header__logo {
     width: 38px;
@@ -39,5 +42,21 @@
 @media screen and (max-width: 768px) {
     .header {
         padding: 0 30px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .header {
+        padding: 0 14px;
+    }
+    .header__auth {
+        gap: 14px;
+    }
+    .header__link {
+        font-size: 10px;
+    }
+    .header__login-link {
+        padding: 5px 12px;
+        font-size: 10px;
     }
 }

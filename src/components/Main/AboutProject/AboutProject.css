@@ -68,3 +68,44 @@
         padding-bottom: 93px;
     }
 }
+
+@media screen and (max-width: 320px) {
+    .about {
+        padding-top: 70px;
+        padding-bottom: 70px;
+    }
+    .about__inner {
+        padding-top: 60px;
+        padding-bottom: 4px;
+        flex-direction: column;
+        gap: 0;
+    }
+    .about__subtitle {
+        font-size: 18px;
+        line-height: 22px;
+        padding-bottom: 16px;
+    }
+    .about__description {
+        font-size: 11px;
+        line-height: 16px;
+        padding-bottom: 56px;
+    }
+    .about__timeline {
+        font-size: 11px;
+        line-height: 13px;
+    }
+    .about__timeline-backend {
+        width: 100px;
+    }
+    .about__timeline-frontend {
+        width: calc(100vw - 136px);
+    }
+    .about__timeline-blackbg {
+        padding: 11px 0;
+        margin-bottom: 10px;
+    }
+    .about__timeline-graybg {
+        padding: 11px 0;
+        margin-bottom: 10px;
+    }
+}
