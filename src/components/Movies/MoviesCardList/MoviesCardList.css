@@ -38,3 +38,14 @@
         gap: 33px 30px;
     }
 }
+
+@media screen and (max-width: 402px) {
+    .films {
+        padding: 0 10px;
+    }
+    .films__list {
+        grid-template-columns: 1fr;
+        gap: 13px;
+        padding-top: 50px;
+    }
+}

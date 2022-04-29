@@ -54,3 +54,12 @@
         height: 190px;
     }
 }
+
+@media screen and (max-width: 402px) {
+    .films__item {
+        max-width: 300px;
+    }
+    .films__poster {
+        height: 168px;
+    }
+}

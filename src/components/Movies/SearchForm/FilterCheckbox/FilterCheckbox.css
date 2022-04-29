@@ -1,7 +1,7 @@
 .search__setting {
     border-bottom: 1px solid #e8e8e8;
     text-align: center;
-    padding-bottom: 39px;
+    padding-bottom: 35px;
 }
 .search__checkbox-label {
     display: inline-block;
@@ -57,4 +57,13 @@
 
 .search__checkbox-label input:focus + span:before {
     box-shadow: 0 0 0 3px rgba(50, 150, 255, 0.2);
+}
+
+@media screen and (max-width: 402px) {
+    .search__checkbox-label {
+        padding-left: 49px;
+    }
+    .search__checkbox-label span {
+        font-size: 11px;
+    }
 }
