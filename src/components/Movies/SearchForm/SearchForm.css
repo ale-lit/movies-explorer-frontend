@@ -27,3 +27,15 @@
 .search__button:hover {
     opacity: .8;
 }
+
+@media screen and (max-width: 892px) {
+    .search {
+        padding: 0 30px;
+    }
+    .search__form {
+        padding-bottom: 40px; 
+    }
+    .search__input {
+        width: calc(100vw - 114px);
+    }
+}

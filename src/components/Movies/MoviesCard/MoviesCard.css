@@ -2,6 +2,7 @@
 .films__item {
     background-color: #fdfdfd;
     box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+    max-width: 364px;
 }
 .films__item-header {
     display: flex;
@@ -43,4 +44,13 @@
 }
 .films__poster:hover {
     opacity: .7;
+}
+
+@media screen and (max-width: 892px) {
+    .films__item {
+        max-width: 339px;
+    }
+    .films__poster {
+        height: 190px;
+    }
 }
