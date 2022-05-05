@@ -11,7 +11,7 @@ function Header() {
 
     // Временное решение
     useEffect(() => {
-        if(location === '/movies' || location === '/saved-movies') {
+        if(location === '/movies' || location === '/saved-movies' || location === '/profile') {
             setLogin(true);
         }
     }, []);
