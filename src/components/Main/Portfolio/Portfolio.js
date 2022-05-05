@@ -9,7 +9,7 @@ function Portfolio() {
             <ul className="portfolio__items">
                 <li className="portfolio__item">
                     <a
-                        href="https://github.com/ale-lit"
+                        href="https://github.com/ale-lit/how-to-learn"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="portfolio__link project__link"
@@ -19,7 +19,7 @@ function Portfolio() {
                 </li>
                 <li className="portfolio__item">
                     <a
-                        href="https://github.com/ale-lit"
+                        href="https://github.com/ale-lit/russian-travel"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="portfolio__link project__link"
@@ -29,7 +29,7 @@ function Portfolio() {
                 </li>
                 <li className="portfolio__item">
                     <a
-                        href="https://github.com/ale-lit"
+                        href="https://github.com/ale-lit/mesto"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="portfolio__link project__link"

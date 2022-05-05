@@ -13,10 +13,10 @@ function Login() {
 
                 <form className="register__form">
                     <label for="" className="register__label">E-mail</label>
-                    <input type="email" className="register__input" name="" id="" />                
+                    <input type="email" className="register__input" placeholder="Ваш E-mail" />                
 
                     <label for="" className="register__label">Пароль</label>
-                    <input type="password" className="register__input input-error" name="" id="" value="13243453245" />                
+                    <input type="password" className="register__input input-error" placeholder="Ваш пароль" value="13243453245" />                
                     <p className="register__error">Что-то пошло не так...</p>
 
                     <button className="login__button">Войти</button>
