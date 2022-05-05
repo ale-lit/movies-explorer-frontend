@@ -6,37 +6,54 @@ import logo from "../../images/logo.svg";
 
 function Header() {
     const [login, setLogin] = useState(false);
+    const [showMenu, setShowMenu] = useState(false);
 
     const location = useLocation().pathname;
 
     // Временное решение
-    useEffect(() => {
+    useEffect(() => {        
         if(location === '/movies' || location === '/saved-movies' || location === '/profile') {
             setLogin(true);
         }
     }, []);
 
+    function toggleMenu() {
+        if(showMenu) {
+            setShowMenu(false);
+        } else {
+            setShowMenu(true);
+        }
+    }
+
+    function closeMenu() {
+        setShowMenu(false);
+    }
 
     return (
         <header className={`header ${location === '/' ? ' blue-background' : ''}`}>
             <Link to="/">
                 <img src={logo} alt="Логотип" className="header__logo" />
             </Link>
-            {login ? (
-                <>
-                    <NavTab />
-                    <Link to='/profile' className='header__profile-link project__link'>Аккаунт</Link>
-                </>
-            ) : (
-                <div className="header__auth">
-                    <Link to="/signup" className="header__link project__link">
-                        Регистрация
-                    </Link>
-                    <Link to="/signin" className="header__login-link">
-                        Войти
-                    </Link>
-                </div>
-            )}
+                    {login ? (
+                        <>
+                            <div className={`header__cover ${showMenu ? 'header__cover_active' : ''}`}>
+                                <button className={`header__mob-menu-button ${showMenu ? 'header__mob-menu-button_active' : ''}`} onClick={toggleMenu}><span></span></button>
+                                <div className={`header__menu ${showMenu ? 'header__menu_visible' : ''}`}>
+                                <NavTab closeMenu={closeMenu} />
+                                <Link to='/profile' className='header__profile-link project__link' onClick={closeMenu}>Аккаунт</Link>
+                                </div>
+                            </div>
+                        </>
+                    ) : (
+                        <div className="header__auth">
+                            <Link to="/signup" className="header__link project__link">
+                                Регистрация
+                            </Link>
+                            <Link to="/signin" className="header__login-link">
+                                Войти
+                            </Link>
+                        </div>
+                    )}
         </header>
     );
 }

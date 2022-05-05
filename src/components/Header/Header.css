@@ -12,6 +12,71 @@
     width: 38px;
     height: 38px;
 }
+.header__mob-menu-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: none;
+    flex-direction: column;
+    gap: 7px;
+    transition: all .3s ease-in-out;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+.header__mob-menu-button span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: #000;
+}
+.header__mob-menu-button::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: #000;
+}
+.header__mob-menu-button::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: #000;
+}
+.header__mob-menu-button_active {
+    position: absolute;
+    z-index: 5;
+    top: 16px;
+    right: 16px;
+    transform: rotate(45deg);
+    gap: 0;
+}
+.header__mob-menu-button_active span {
+    display: none;
+}
+.header__mob-menu-button_active::before {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 22px;
+    top: 50%;
+    left: 50%;
+}
+.header__mob-menu-button_active::after {
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(90deg);
+    width: 22px;
+    top: 50%;
+    left: 50%;
+}
+.header__menu {
+    display: flex;
+    align-items: center;
+    width: 59%;
+    justify-content: space-between;
+}
 .header__auth {
     display: flex;
     gap: 30px;
@@ -51,6 +116,67 @@
 @media screen and (max-width: 768px) {
     .header {
         padding: 0 30px;
+    }
+    .header__mob-menu-button {
+        display: flex;
+    }
+    .header__menu {
+        display: none;
+        padding-top: 159px;
+        text-align: center;
+    }
+    .header__nav {
+        flex-direction: column;
+        font-size: 18px;
+        line-height: 22px;
+        gap: 29px;
+    }
+    .header__menu_visible {
+        display: block;
+        width: 520px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: #fff;        
+    }
+    .header__cover_active {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+        height: 100%;
+        z-index: 1;
+        transition: all .3s ease-in-out;
+    }
+    .header__profile-link {
+        position: absolute;
+        right: 50%;
+        bottom: 92px;
+        transform: translateX(50%);
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .header__mob-menu-button_active {
+        top: 7px;
+        right: 7px;
+    }
+    .header__menu {
+        padding-top: 145px;
+    }
+    .header__nav {
+        gap: 24px;
+    }
+    .header__menu_visible {
+        width: 100%;
+    }
+    .header__profile-link {
+        bottom: 58px;
     }
 }
 

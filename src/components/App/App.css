@@ -28,10 +28,17 @@
   .project__wrapper {
     padding: 0 50px;
   }
+  .project__link_active {
+    border-bottom: 2px solid #000;
+    padding-bottom: 4px;
+  }
 }
 
 @media screen and (max-width: 320px) {
   .project__wrapper {
     padding: 0 18px;
+  }
+  .project__link_active {
+    padding-bottom: 7px;
   }
 }

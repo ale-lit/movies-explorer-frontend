@@ -5,6 +5,14 @@
     display: flex;
     font-size: 13px;
     line-height: 18px;
-    gap: 16px;    
-    padding-left: 62px;
+    gap: 16px;
+}
+.header__nav-item:first-child {
+    display: none;
+}
+
+@media screen and (max-width: 768px) {
+    .header__nav-item:first-child {
+        display: inline-block;
+    }
 }
