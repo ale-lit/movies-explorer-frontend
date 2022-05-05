@@ -1,0 +1,216 @@
+.header {
+    min-height: 74px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 70px;
+    box-sizing: border-box;
+}
+.header__logo {
+    width: 38px;
+    height: 38px;
+}
+.header__cover {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
+.header__mob-menu-button {
+    border: none;
+    background: none;
+    cursor: pointer;
+    display: none;
+    flex-direction: column;
+    gap: 7px;
+    transition: all .3s ease-in-out;
+    width: 44px;
+    height: 44px;
+    padding: 0;
+    align-items: center;
+    justify-content: center;
+}
+.header__mob-menu-button span {
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: #000;
+}
+.header__mob-menu-button::before {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: #000;
+}
+.header__mob-menu-button::after {
+    content: '';
+    display: block;
+    width: 28px;
+    height: 3px;
+    background: #000;
+}
+.header__mob-menu-button_active {
+    position: absolute;
+    z-index: 5;
+    top: 16px;
+    right: 16px;
+    transform: rotate(45deg);
+    gap: 0;
+}
+.header__mob-menu-button_active span {
+    display: none;
+}
+.header__mob-menu-button_active::before {
+    position: absolute;
+    transform: translate(-50%, -50%);
+    width: 22px;
+    top: 50%;
+    left: 50%;
+}
+.header__mob-menu-button_active::after {
+    position: absolute;
+    transform: translate(-50%, -50%) rotate(90deg);
+    width: 22px;
+    top: 50%;
+    left: 50%;
+}
+.header__menu {
+    display: flex;
+    align-items: center;
+    width: 61%;
+    justify-content: space-between;
+}
+.header__auth {
+    display: flex;
+    gap: 30px;
+    align-items: center;
+}
+.header__link {
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+}
+.header__login-link {
+    padding: 8px 20px;
+    background: #000;
+    border-radius: 3px;
+    color: #fff;
+    font-size: 12px;
+    line-height: 16px;
+    font-weight: 500;
+    border: none;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+    text-decoration: none;
+}
+.header__login-link:hover {
+    opacity: .8;
+}
+.header__profile-link {
+    font-size: 14px;
+    line-height: 30px;
+    font-weight: 500;
+    display: block;
+    width: 100px;
+    height: 30px;
+    background: url('../../images/profile.svg') no-repeat right center;
+}
+
+@media screen and (max-width: 768px) {
+    .header {
+        padding: 0 30px;
+    }
+    .header__mob-menu-button {
+        display: flex;
+    }
+    .header__menu {
+        display: none;
+        padding-top: 159px;
+        text-align: center;
+    }
+    .header__nav {
+        flex-direction: column;
+        font-size: 18px;
+        line-height: 22px;
+        gap: 29px;
+    }
+    .header__menu_visible {
+        display: block;
+        width: 520px;
+        position: absolute;
+        top: 0;
+        right: 0;
+        bottom: 0;
+        background: #fff;        
+    }
+    .header__cover_active {
+        width: 100%;
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background: rgba(0, 0, 0, 0.3);
+        height: 100%;
+        z-index: 1;
+        transition: all .3s ease-in-out;
+    }
+    .header__profile-link {
+        position: absolute;
+        right: 50%;
+        bottom: 92px;
+        transform: translateX(50%);
+        text-align: left;
+    }
+}
+
+@media screen and (max-width: 520px) {
+    .header__mob-menu-button_active {
+        top: 7px;
+        right: 9px;
+    }
+    .header__menu {
+        padding-top: 145px;
+    }
+    .header__nav {
+        gap: 24px;
+    }
+    .header__menu_visible {
+        width: 100%;
+    }
+    .header__profile-link {
+        bottom: 58px;
+    }
+}
+
+@media screen and (max-width: 320px) {
+    .header {
+        padding: 0 14px;
+    }
+    .header__auth {
+        gap: 14px;
+    }
+    .header__link {
+        font-size: 10px;
+    }
+    .header__login-link {
+        padding: 5px 12px;
+        font-size: 10px;
+    }
+    .header__mob-menu-button {
+        gap: 6px;
+        width: 40px;
+        height: 43px;
+    }
+    .header__mob-menu-button span {
+        width: 22px;
+    }
+    .header__mob-menu-button::before {
+        width: 22px;
+    }
+    .header__mob-menu-button::after {
+        width: 22px;
+    }
+}

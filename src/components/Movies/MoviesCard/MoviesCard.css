@@ -1,0 +1,65 @@
+
+.films__item {
+    background-color: #fdfdfd;
+    box-shadow: 0px 4px 30px rgba(0, 0, 0, 0.08);
+    max-width: 364px;
+}
+.films__item-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 14px;
+}
+.films__title {
+    font-size: 15px;
+    font-weight: 500;
+    line-height: 18px;
+    margin: 0 0 9px;
+}
+.films__duration {
+    color: #a0a0a0;
+    font-size: 11px;
+    line-height: 13px;
+    margin: 0;
+}
+.films__save-button {
+    border: none;
+    cursor: pointer;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    background-image: url('../../../images/save-film.svg');
+    transition: all .3s ease-in-out;
+}
+.films__save-button:hover {
+    opacity: .8;
+}
+.films__save-button_type_active {
+    background-image: url('../../../images/saved-film.svg');
+}
+.films__poster {
+    height: 203px;
+    cursor: pointer;
+    transition: all .3s ease-in-out;
+}
+.films__poster:hover {
+    opacity: .7;
+}
+
+@media screen and (max-width: 892px) {
+    .films__item {
+        max-width: 339px;
+    }
+    .films__poster {
+        height: 190px;
+    }
+}
+
+@media screen and (max-width: 402px) {
+    .films__item {
+        max-width: 300px;
+    }
+    .films__poster {
+        height: 168px;
+    }
+}
