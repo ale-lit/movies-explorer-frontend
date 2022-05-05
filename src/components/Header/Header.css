@@ -12,6 +12,11 @@
     width: 38px;
     height: 38px;
 }
+.header__cover {
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+}
 .header__mob-menu-button {
     border: none;
     background: none;
