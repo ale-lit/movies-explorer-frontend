@@ -5,7 +5,7 @@
 .about__inner {
     display: flex;
     padding-top: 70px;
-    gap: 40px;
+    gap: 53px;
 }
 .about__subtitle {
     font-weight: normal;
@@ -39,7 +39,7 @@
     padding: 9px 0;
     height: 36px;
     box-sizing: border-box;
-    margin-bottom: 14px;
+    margin-bottom: 13px;
 }
 .about__timeline-graybg {
     background: #f2f2f2;
@@ -48,7 +48,7 @@
     padding: 9px 0;
     height: 36px;
     box-sizing: border-box;
-    margin-bottom: 14px;
+    margin-bottom: 13px;
 }
 
 @media screen and (max-width: 768px) {
@@ -57,7 +57,7 @@
         padding-bottom: 90px;
     }
     .about__inner {
-        gap: 30px;
+        gap: 38px;
     }
     .about__subtitle {
         padding-bottom: 22px;
@@ -66,6 +66,12 @@
         font-size: 12px;
         line-height: 18px;
         padding-bottom: 93px;
+    }
+    .about__timeline-backend {
+        width: 140px;
+    }
+    .about__timeline-frontend {
+        width: calc(100vw - 240px);
     }
 }
 

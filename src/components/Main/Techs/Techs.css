@@ -51,18 +51,21 @@
         line-height: 18px;
         margin-bottom: 83px;
     }
-    .techs__list {
-        flex-wrap: wrap;
-        width: 272px;
-        margin: 0 auto;
-        justify-content: flex-start;
-    }
     .techs__item {
         width: 84px;
         height: 57px;
         padding-bottom: 21px;
         font-size: 12px;
         line-height: 15px;
+    }
+}
+
+@media screen and (max-width: 750px) {
+    .techs__list {
+        flex-wrap: wrap;
+        width: 272px;
+        margin: 0 auto;
+        justify-content: flex-start;
     }
 }
 

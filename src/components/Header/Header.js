@@ -31,7 +31,7 @@ function Header() {
 
     return (
         <header className={`header ${location === '/' ? ' blue-background' : ''}`}>
-            <Link to="/">
+            <Link to="/" className="project__link" title="На главную">
                 <img src={logo} alt="Логотип" className="header__logo" />
             </Link>
                     {login ? (

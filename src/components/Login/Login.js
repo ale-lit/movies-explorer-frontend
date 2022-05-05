@@ -7,7 +7,7 @@ function Login() {
     return (
         <main className="main">
             <section className="register project__wrapper">
-                <Link to="/"><img src={logo} alt="Логотип" className="register__logo" /></Link>
+                <Link to="/" className="project__link" title="На главную"><img src={logo} alt="Логотип" className="register__logo" /></Link>
 
                 <h1 className="register__title">Рады видеть!</h1>
 

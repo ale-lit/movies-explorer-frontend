@@ -6,7 +6,7 @@
     grid-template-columns: repeat(auto-fit, minmax(364px, 1fr));
     justify-items: center;
     gap: 27px 24px;
-    padding-top: 77px;
+    padding-top: 80px;
 }
 .films__more-block {
     min-height: 187px;

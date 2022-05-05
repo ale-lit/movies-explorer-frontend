@@ -79,7 +79,7 @@
 .header__menu {
     display: flex;
     align-items: center;
-    width: 59%;
+    width: 61%;
     justify-content: space-between;
 }
 .header__auth {
@@ -169,7 +169,7 @@
 @media screen and (max-width: 520px) {
     .header__mob-menu-button_active {
         top: 7px;
-        right: 7px;
+        right: 9px;
     }
     .header__menu {
         padding-top: 145px;
@@ -198,5 +198,19 @@
     .header__login-link {
         padding: 5px 12px;
         font-size: 10px;
+    }
+    .header__mob-menu-button {
+        gap: 6px;
+        width: 40px;
+        height: 43px;
+    }
+    .header__mob-menu-button span {
+        width: 22px;
+    }
+    .header__mob-menu-button::before {
+        width: 22px;
+    }
+    .header__mob-menu-button::after {
+        width: 22px;
     }
 }

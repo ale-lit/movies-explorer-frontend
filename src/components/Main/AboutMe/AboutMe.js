@@ -19,7 +19,8 @@ function AboutMe() {
                         ab corrupti assumenda adipisci numquam quod autem, ullam
                         aut veniam natus tempora atque dolore modi! Lorem ipsum
                         dolor sit amet consectetur adipisicing elit. Lorem ipsum
-                        dolor sit amet consectetur...
+                        dolor sit amet consectetur adipisicing elit. Lorem ipsum
+                        dolor sit amet...
                     </p>
                     <ul className="student__links">
                         <li className="student__link">
