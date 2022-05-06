@@ -2,7 +2,7 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 
-function MoviesCardList({ movies, loadMoreMovies }) {
+function MoviesCardList({ movies, loadMoreMovies, moreButtonVisible }) {
     return (
         <section className="films project__wrapper">
             <ul className="films__list">
@@ -12,7 +12,7 @@ function MoviesCardList({ movies, loadMoreMovies }) {
             </ul>
 
             <div className="films__more-block">
-                {0 != 1 ? (
+                {moreButtonVisible ? (
                     <button
                         className="films__more-button"
                         onClick={loadMoreMovies}

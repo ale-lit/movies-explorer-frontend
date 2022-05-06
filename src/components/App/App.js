@@ -15,17 +15,33 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 import { getAllMovies } from "../../utils/MoviesApi";
 
 function App() {
+    // Количество отображаемых фильмов
     const [numViewMovies, setNumViewMovies] = useState(12);
 
+    // Все фильмы
+    const [allMovies, setAllMovies] = useState([]);
+
+    // Отображаемые фильмы
     const [movies, setMovies] = useState([]);
 
-    const [localMovies, setLocalMovies] = useState([]);
+    // Всего фильмов
+    const [allMoviesAmount, setAllMoviesAmount] = useState(0);
+
+    // Фильмов в 1 ряду
+    const [filmsPerRow, setFilmsPerRow] = useState(3);
+
+    // Показ кнопки "Ещё"
+    const [moreButtonVisible, setMoreButtonVisible] = useState(false);
 
     useEffect(() => {
         getAllMovies()
             .then((data) => {
-                setLocalMovies(data);
-                console.log(data);
+                // Подгружаем все фильмы в localstorage
+                setAllMovies(data);
+                // Вычисляем общее кол-во фильмов
+                setAllMoviesAmount(data.length);   
+                // Показываем кнопку "Ещё"?
+                checkMoreButton(numViewMovies, data.length)
             })
             .catch((err) => {
                 console.log(err);
@@ -33,12 +49,35 @@ function App() {
     }, []);
 
     useEffect(() => {
-        setMovies(localMovies.slice(0, numViewMovies));
-    }, [localMovies]);
+        // Добавляем новые фильмы к отображению
+        setMovies(allMovies.slice(0, numViewMovies));
+    }, [allMovies]);
 
+    // Добавляем новые фильмы к отображению при нажатии кнопки "Ещё"
     function loadMoreMovies() {
-        setMovies(movies.concat(localMovies.slice(numViewMovies, numViewMovies + 3)));        
-        setNumViewMovies(numViewMovies + 3);
+
+        let newNumViewMovies = numViewMovies + filmsPerRow;
+
+        // Корректируем кол-во подгружаемых фильмов
+        if(newNumViewMovies > allMoviesAmount) newNumViewMovies = allMoviesAmount;
+
+        // Пересобираем отображаемый массив фильмов
+        setMovies(
+            movies.concat(allMovies.slice(numViewMovies, newNumViewMovies))
+        );
+        // Добавляем новые фильмы в отображаемый массив
+        setNumViewMovies(newNumViewMovies);
+
+        // Показываем кнопку "Ещё"?
+        checkMoreButton(newNumViewMovies, allMoviesAmount)
+    }
+
+    function checkMoreButton(currMoviesNum, allMoviesNum) {
+        if(currMoviesNum < allMoviesNum) {
+            setMoreButtonVisible(true);
+        } else {
+            setMoreButtonVisible(false);
+        }
     }
 
     return (
@@ -46,7 +85,11 @@ function App() {
             <Switch>
                 <Route path="/movies">
                     <Header />
-                    <Movies movies={movies} loadMoreMovies={loadMoreMovies} />
+                    <Movies
+                        movies={movies}
+                        loadMoreMovies={loadMoreMovies}
+                        moreButtonVisible={moreButtonVisible}
+                    />
                     <Footer />
                 </Route>
                 <Route path="/saved-movies">
