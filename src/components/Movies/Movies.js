@@ -3,10 +3,10 @@ import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
-function Movies({ movies, loadMoreMovies, moreButtonVisible }) {
+function Movies({ onSearchForm, movies, loadMoreMovies, moreButtonVisible }) {
     return (
         <main className="main">
-            <SearchForm />
+            <SearchForm onSearchForm={onSearchForm} />
             <MoviesCardList
                 movies={movies}
                 loadMoreMovies={loadMoreMovies}
