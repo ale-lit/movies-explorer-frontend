@@ -3,9 +3,11 @@ import { useLocation } from "react-router-dom";
 import "./MoviesCard.css";
 import { BASE_MOVIES_URL } from "../../../constants";
 
-function MoviesCard({ title, duration, image, saved }) {
-
+function MoviesCard({ movie }) {
     const location = useLocation().pathname;
+
+    // TEMP
+    let saved = 0;
 
     function convertTime(duration) {
         let hours = parseInt(duration / 60);
@@ -17,8 +19,8 @@ function MoviesCard({ title, duration, image, saved }) {
         <li className="films__item">
             <div className="films__item-header">
                 <div className="films__item-info">
-                    <p className="films__title" title={title}>{title}</p>
-                    <p className="films__duration">{convertTime(duration)}</p>
+                    <p className="films__title" title={movie.nameRU}>{movie.nameRU}</p>
+                    <p className="films__duration">{convertTime(movie.duration)}</p>
                 </div>
                 {location === "/saved-movies" ? (
                     <button className="films__save-button films__save-button_type_remove"></button>
@@ -27,7 +29,7 @@ function MoviesCard({ title, duration, image, saved }) {
                 )}
                 
             </div>
-            <img src={BASE_MOVIES_URL + image} className="films__poster" alt={title} title={title} />
+            <a href={movie.trailerLink} target="_blank" rel="noopener noreferrer"><img src={BASE_MOVIES_URL + movie.image.url} className="films__poster" alt={movie.nameRU} title={movie.nameRU} /></a>
         </li>
     );
 }

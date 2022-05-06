@@ -3,11 +3,14 @@ import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
 
-function Movies({ movies }) {
+function Movies({ movies, loadMoreMovies }) {
     return (
         <main className="main">
             <SearchForm />
-            <MoviesCardList movies={movies} items="13" />
+            <MoviesCardList
+                movies={movies}
+                loadMoreMovies={loadMoreMovies}
+            />
         </main>
     );
 }
