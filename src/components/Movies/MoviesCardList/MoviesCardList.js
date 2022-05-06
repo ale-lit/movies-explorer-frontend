@@ -2,26 +2,12 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 
-import image from "../../../images/example.jpg";
-
-function MoviesCardList({ items }) {
-    // Временное решение
-    let cards = [];
-
-    for (let i = 0; i < items; i++) {
-        cards.push({
-            title: "33 слова о дизайне",
-            duration: "1ч 47м",
-            poster: image,
-            saved: Math.floor(Math.random() * 2),
-            _id: i,
-        });
-    }
-
+function MoviesCardList({ movies, items }) {
     return (
         <section className="films project__wrapper">
             <ul className="films__list">
-                {cards.map((card, i) =>
+
+                {/* {cards.map((card, i) =>
                     i < 12 ? (
                         <MoviesCard
                             title={card.title}
@@ -33,7 +19,18 @@ function MoviesCardList({ items }) {
                     ) : (
                         ""
                     )
-                )}
+                )} */}
+
+                {movies.map((movie, i) => (
+                    <MoviesCard
+                        title={movie.nameRU}
+                        duration={movie.duration}
+                        image={movie.image.url}
+                        saved={0}
+                        link={movie.trailerLink}
+                        key={movie.id}
+                    />
+                ))}
             </ul>
 
             <div className="films__more-block">

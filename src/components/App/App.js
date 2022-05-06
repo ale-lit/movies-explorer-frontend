@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { Switch, Route } from 'react-router-dom';
 import Header from '../Header/Header';
 import './App.css';
@@ -12,13 +12,29 @@ import Login from "../Login/Login";
 import Footer from "../Footer/Footer";
 import PageNotFound from "../PageNotFound/PageNotFound";
 
+import { getAllMovies } from "../../utils/MoviesApi";
+
 function App() {
+
+  const [movies, setMovies] = useState([]);
+
+  useEffect(() => {
+    getAllMovies()
+      .then((data) => {
+        setMovies(data);
+        console.log(data);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
       <>
         <Switch>
           <Route path="/movies">
             <Header />
-            <Movies />
+            <Movies movies={movies} />
             <Footer />
           </Route>
           <Route path="/saved-movies">
