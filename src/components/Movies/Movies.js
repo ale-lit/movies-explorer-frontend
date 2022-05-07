@@ -19,9 +19,14 @@ function Movies({
             setMessage("");
         }        
     }
-    // useEffect(() => {
-    //     setMessage("Нужно ввести ключевое слово");
-    // }, []);
+
+    useEffect(() => {
+        if(movies.length === 0) {
+            handleErrorMessage("Ничего не найдено");
+        } else {
+            handleErrorMessage("");
+        }
+    }, [movies]);
 
     return (
         <main className="main">

@@ -34,7 +34,7 @@ function SearchForm({ onSearchForm, searchText, onError }) {
                     placeholder="Фильм"
                     value={searchInputText || ""}
                     onChange={handleSearchTextChange}
-                    // required
+                    required
                 />
                 <input
                     type="submit"
