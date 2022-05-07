@@ -64,12 +64,6 @@ function App() {
         toggleCheckbox: toggleCheckbox,
     });
 
-    
-    // useEffect(() => {
-    //     console.log('shortMovies', shortMovies);
-    // }, [shortMovies]);
-
-
     // Начальная инициализация
     useEffect(() => {
         // Рассчитываем начальное кол-во отображаемых фильмов и подгружаемых
