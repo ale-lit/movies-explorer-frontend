@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
@@ -10,13 +10,31 @@ function Movies({
     loadMoreMovies,
     moreButtonVisible,
 }) {
+    const [message, setMessage] = useState("");
+
+    function handleErrorMessage(message) {
+        if(message) {
+            setMessage(message);
+        } else {
+            setMessage("");
+        }        
+    }
+    // useEffect(() => {
+    //     setMessage("Нужно ввести ключевое слово");
+    // }, []);
+
     return (
         <main className="main">
-            <SearchForm onSearchForm={onSearchForm} searchText={searchText} />
+            <SearchForm
+                onSearchForm={onSearchForm}
+                searchText={searchText}
+                onError={handleErrorMessage}
+            />
             <MoviesCardList
                 movies={movies}
                 loadMoreMovies={loadMoreMovies}
                 moreButtonVisible={moreButtonVisible}
+                message={message}
             />
         </main>
     );

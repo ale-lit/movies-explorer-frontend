@@ -2,7 +2,7 @@ import React, { useEffect, useState } from "react";
 import FilterCheckbox from "./FilterCheckbox/FilterCheckbox";
 import "./SearchForm.css";
 
-function SearchForm({ onSearchForm, searchText }) {
+function SearchForm({ onSearchForm, searchText, onError }) {
     const [searchInputText, setSearchInputText] = useState("");
 
     useEffect(() => {
@@ -18,8 +18,9 @@ function SearchForm({ onSearchForm, searchText }) {
     function handleSubmit(e) {
         e.preventDefault();
         if(searchInputText === "") {
-
+            onError("Нужно ввести ключевое слово");
         } else {
+            onError();
             onSearchForm(searchInputText);
         }
     }

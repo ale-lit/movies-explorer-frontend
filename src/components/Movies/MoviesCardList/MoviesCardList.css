@@ -10,7 +10,8 @@
 }
 .films__message {
     text-align: center;
-    margin: 0;
+    margin: 35px 0 0;
+    color: #ff3459;
 }
 .films__more-block {
     min-height: 187px;

@@ -1,26 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 
-function MoviesCardList({ movies, loadMoreMovies, moreButtonVisible }) {
-
-    const [message, setMessage] = useState("");
-    
-    useEffect(() => {        
-        setMessage("123");
-    }, []);
-
+function MoviesCardList({ movies, loadMoreMovies, moreButtonVisible, message }) {
     return (
         <section className="films project__wrapper">
-            {!movies.length ? (
-                <p className="films__message">{message}</p>
-            ) : (
+            {message ? <p className="films__message">{message}</p> : ""}
+
+            {movies.length ? (
                 <ul className="films__list">
                     {movies.map((movie, i) =>
                         <MoviesCard movie={movie} key={movie.id} />
                     )}
                 </ul>
-            )}
+            ) : ""}
 
             <div className="films__more-block">
                 {moreButtonVisible ? (
