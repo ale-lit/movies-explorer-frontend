@@ -116,7 +116,7 @@ function App() {
             // TODO: ПРОВЕРИТЬ КАК БУДЕТ ПРИ ПЕРЕХОДАХ ПО СТРАНИЧКАМ
             // setNewSearch(false);
         }
-    }, [searchText]);
+    }, [searchText, shortMovies]);
 
     // Вывод ошибок пользователю при поиске фильмов
     function handleMoviesErrorMessage(message) {
