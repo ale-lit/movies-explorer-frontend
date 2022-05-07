@@ -36,6 +36,8 @@ function App() {
     const [newSearch, setNewSearch] = useState(false);
     // Ошибка при поиске фильмов
     const [moviesMessage, setMoviesMessage] = useState("");
+    // Прелоадер
+    const [isLoading, setIsLoading] = useState(false);
 
     // Меняем кол-во выводимых фильмов в зав-ти от размера экрана
     function changeDisplayedMoviesNum() {
@@ -93,6 +95,8 @@ function App() {
     // Получаем фильмы по поисковому запросу
     useEffect(() => {
         if (newSearch) {
+            // Запускаем прелоадер
+            setIsLoading(true);
             // Получаем все фильмы по API
             getAllMovies()
                 .then((data) => {
@@ -104,6 +108,9 @@ function App() {
                         "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
                     );
                     console.log(err);
+                })
+                .finally(() => {
+                    setIsLoading(false);
                 });
 
             // TODO: ПРОВЕРИТЬ КАК БУДЕТ ПРИ ПЕРЕХОДАХ ПО СТРАНИЧКАМ
@@ -190,7 +197,7 @@ function App() {
             <Switch>
                 <Route path="/movies">
                     <Header />
-                    <ShortMoviesContext.Provider value={shortMovies}>
+                    <ShortMoviesContext.Provider value={shortMovies}>                        
                         <Movies
                             onSearchForm={handleSearch}
                             movies={displayedMovies}
@@ -199,6 +206,7 @@ function App() {
                             moreButtonVisible={moreButtonVisible}
                             message={moviesMessage}
                             onError={handleMoviesErrorMessage}
+                            isLoading={isLoading}
                         />
                     </ShortMoviesContext.Provider>
                     <Footer />

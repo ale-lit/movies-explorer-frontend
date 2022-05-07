@@ -2,6 +2,7 @@ import React, { useEffect } from "react";
 import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
+import Preloader from "../Preloader/Preloader";
 
 function Movies({
     onSearchForm,
@@ -10,10 +11,11 @@ function Movies({
     loadMoreMovies,
     moreButtonVisible,
     message,
-    onError
+    onError,
+    isLoading,
 }) {
     useEffect(() => {
-        if(movies.length === 0) {
+        if (movies.length === 0) {
             onError("Ничего не найдено");
         } else {
             onError("");
@@ -27,12 +29,16 @@ function Movies({
                 searchText={searchText}
                 onError={onError}
             />
-            <MoviesCardList
-                movies={movies}
-                loadMoreMovies={loadMoreMovies}
-                moreButtonVisible={moreButtonVisible}
-                message={message}
-            />
+            {isLoading ? (
+                <Preloader />
+            ) : (
+                <MoviesCardList
+                    movies={movies}
+                    loadMoreMovies={loadMoreMovies}
+                    moreButtonVisible={moreButtonVisible}
+                    message={message}
+                />
+            )}
         </main>
     );
 }
