@@ -56,10 +56,8 @@ function App() {
 
     // переключатель поиска по коротким видео
     function toggleCheckbox(e) {
-        setShortMovies({...shortMovies,
-            state: e.target.checked,
-        });        
-    };
+        setShortMovies({ ...shortMovies, state: e.target.checked });
+    }
 
     const [shortMovies, setShortMovies] = useState({
         state: true,
@@ -73,9 +71,13 @@ function App() {
         // Проверяем и подгружаем старые результаты поиска если они есть из localStorage
         if (!newSearch && localStorage.searchText) {
             setSearchText(localStorage.getItem("searchText"));
-            setShortMovies({...shortMovies,
-                state: localStorage.getItem("shortSearch") === 'true' ? true : false,
-            });            
+            setShortMovies({
+                ...shortMovies,
+                state:
+                    localStorage.getItem("shortSearch") === "true"
+                        ? true
+                        : false,
+            });
             setFilteredMovies(
                 JSON.parse(localStorage.getItem("filteredMovies"))
             );
@@ -98,6 +100,9 @@ function App() {
                     setAllMovies(data);
                 })
                 .catch((err) => {
+                    handleMoviesErrorMessage(
+                        "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
+                    );
                     console.log(err);
                 });
 
@@ -108,11 +113,11 @@ function App() {
 
     // Вывод ошибок пользователю при поиске фильмов
     function handleMoviesErrorMessage(message) {
-        if(message) {
+        if (message) {
             setMoviesMessage(message);
         } else {
             setMoviesMessage("");
-        }        
+        }
     }
 
     useEffect(() => {
