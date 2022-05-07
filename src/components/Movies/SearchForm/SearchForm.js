@@ -11,7 +11,11 @@ function SearchForm({ onSearchForm }) {
 
     function handleSubmit(e) {
         e.preventDefault();
-        onSearchForm(searchText);
+        if(searchText === "") {
+            
+        } else {
+            onSearchForm(searchText);
+        }
     }
 
     return (
@@ -23,7 +27,7 @@ function SearchForm({ onSearchForm }) {
                     placeholder="Фильм"
                     value={searchText || ""}
                     onChange={handleSearchTextChange}
-                    required
+                    // required
                 />
                 <input
                     type="submit"

@@ -8,6 +8,10 @@
     gap: 27px 24px;
     padding-top: 80px;
 }
+.films__message {
+    text-align: center;
+    margin: 0;
+}
 .films__more-block {
     min-height: 187px;
 }

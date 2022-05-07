@@ -17,8 +17,10 @@ import { getAllMovies } from "../../utils/MoviesApi";
 function App() {
     // Все фильмы
     const [allMovies, setAllMovies] = useState([]);
-    // Количество фильмов
-    const [countAllMovies, setCountAllMovies] = useState(0);
+    // Все отфильтрованные фильмы
+    const [filteredMovies, setFilteredMovies] = useState([]);
+    // Количество отфильтрованных фильмов
+    const [countFilteredMovies, setCountFilteredMovies] = useState(0);
     // Отображаемые фильмы
     const [displayedMovies, setDisplayedMovies] = useState([]);
     // Количество отображаемых фильмов
@@ -27,6 +29,10 @@ function App() {
     const [moviesPerRow, setMoviesPerRow] = useState(0);
     // Показ кнопки "Ещё"
     const [moreButtonVisible, setMoreButtonVisible] = useState(false);
+    // Поисковый запрос
+    const [searchText, setSearchText] = useState("");
+    // Показ кнопки "Ещё"
+    const [newSearch, setNewSearch] = useState(false);
 
     // Меняем кол-во выводимых фильмов в зав-ти от размера экрана
     function changeDisplayedMoviesNum() {
@@ -49,47 +55,85 @@ function App() {
     useEffect(() => {
         // Рассчитываем начальное кол-во отображаемых фильмов и подгружаемых
         changeDisplayedMoviesNum();
-
-        // Получаем все фильмы
-        getAllMovies()
-            .then((data) => {
-                // Подгружаем все фильмы в localstorage
-                setAllMovies(data);
-                // Вычисляем общее кол-во фильмов
-                setCountAllMovies(data.length);
-                // Показываем кнопку "Ещё"?
-                checkMoreButton(countDisplayedMovies, data.length);
-            })
-            .catch((err) => {
-                console.log(err);
-            });
+        // Проверяем и подгружаем старые результаты поиска если они есть из localStorage
+        if(!newSearch && localStorage.searchText) {
+            setSearchText(localStorage.getItem('searchText'));
+            setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')));
+        }        
     }, []);
+
+
+    // Поиск фильмов
+    function handleSearch(searchText) {
+        setNewSearch(true);
+        setSearchText(searchText);
+    }
+
+    // Получаем фильмы по поисковому запросу
+    useEffect(() => {
+        if(newSearch) {
+            // Получаем все фильмы по API
+            getAllMovies()
+                .then(data => {
+                    // Помещаем все фильмы в переменную
+                    setAllMovies(data);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+
+            // TODO: ПРОВЕРИТЬ КАК БУДЕТ ПРИ ПЕРЕХОДАХ ПО СТРАНИЧКАМ
+            // setNewSearch(false);
+        }
+    }, [searchText]);
+
+    useEffect(() => {
+        if(newSearch) {
+            // Фильтруем результаты по запросу
+            setFilteredMovies(
+                allMovies.filter(movie => {
+                    let re = new RegExp(searchText, 'i');
+                    return re.test(movie.nameRU);
+                })
+            );
+        }
+    }, [allMovies])
 
     // Формируем первичый набор отображаемых фильмов
     useEffect(() => {
+        // Вычисляем общее кол-во найденых фильмов
+        const countMovies = filteredMovies.length;
+        setCountFilteredMovies(countMovies);
+        // Сохраняем данные в localStorage
+        if(newSearch && countMovies > 0) {
+            localStorage.setItem('searchText', searchText);
+            localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
+        }
+        // Показываем кнопку "Ещё"?
+        checkMoreButton(countDisplayedMovies, countMovies);
         // Добавляем новые фильмы к отображению
-        setDisplayedMovies(allMovies.slice(0, countDisplayedMovies));
-    }, [allMovies]);
+        setDisplayedMovies(filteredMovies.slice(0, countDisplayedMovies));
+    }, [filteredMovies]);
 
     // Добавляем новые фильмы к отображению при нажатии кнопки "Ещё"
     function loadMoreMovies() {
         let newСountDisplayedMovies = countDisplayedMovies + moviesPerRow;
 
         // Корректируем кол-во подгружаемых фильмов для последней подгрузки
-        if (newСountDisplayedMovies > countAllMovies)
-            newСountDisplayedMovies = countAllMovies;
+        if (newСountDisplayedMovies > countFilteredMovies)
+            newСountDisplayedMovies = countFilteredMovies;
 
         // Пересобираем отображаемый массив фильмов
         setDisplayedMovies(
             displayedMovies.concat(
-                allMovies.slice(countDisplayedMovies, newСountDisplayedMovies)
+                filteredMovies.slice(countDisplayedMovies, newСountDisplayedMovies)
             )
         );
         // Добавляем новые фильмы в отображаемый массив
         setCountDisplayedMovies(newСountDisplayedMovies);
 
         // Показываем кнопку "Ещё"?
-        checkMoreButton(newСountDisplayedMovies, countAllMovies);
+        checkMoreButton(newСountDisplayedMovies, countFilteredMovies);
     }
 
     // Проверяем показывать ли кнопку для подгрузки
@@ -99,10 +143,6 @@ function App() {
         } else {
             setMoreButtonVisible(false);
         }
-    }
-
-    function handleSearch(searchText) {
-        alert(searchText);
     }
 
     return (
