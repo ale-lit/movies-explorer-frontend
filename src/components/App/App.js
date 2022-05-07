@@ -34,6 +34,8 @@ function App() {
     const [searchText, setSearchText] = useState("");
     // Новый поиск или нет
     const [newSearch, setNewSearch] = useState(false);
+    // Ошибка при поиске фильмов
+    const [moviesMessage, setMoviesMessage] = useState("");
 
     // Меняем кол-во выводимых фильмов в зав-ти от размера экрана
     function changeDisplayedMoviesNum() {
@@ -103,6 +105,15 @@ function App() {
             // setNewSearch(false);
         }
     }, [searchText]);
+
+    // Вывод ошибок пользователю при поиске фильмов
+    function handleMoviesErrorMessage(message) {
+        if(message) {
+            setMoviesMessage(message);
+        } else {
+            setMoviesMessage("");
+        }        
+    }
 
     useEffect(() => {
         if (newSearch) {
@@ -181,6 +192,8 @@ function App() {
                             searchText={searchText}
                             loadMoreMovies={loadMoreMovies}
                             moreButtonVisible={moreButtonVisible}
+                            message={moviesMessage}
+                            onError={handleMoviesErrorMessage}
                         />
                     </ShortMoviesContext.Provider>
                     <Footer />

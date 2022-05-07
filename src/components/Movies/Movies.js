@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from "react";
+import React, { useEffect } from "react";
 import "./Movies.css";
 import SearchForm from "./SearchForm/SearchForm";
 import MoviesCardList from "./MoviesCardList/MoviesCardList";
@@ -9,22 +9,14 @@ function Movies({
     searchText,
     loadMoreMovies,
     moreButtonVisible,
+    message,
+    onError
 }) {
-    const [message, setMessage] = useState("");
-
-    function handleErrorMessage(message) {
-        if(message) {
-            setMessage(message);
-        } else {
-            setMessage("");
-        }        
-    }
-
     useEffect(() => {
         if(movies.length === 0) {
-            handleErrorMessage("Ничего не найдено");
+            onError("Ничего не найдено");
         } else {
-            handleErrorMessage("");
+            onError("");
         }
     }, [movies]);
 
@@ -33,7 +25,7 @@ function Movies({
             <SearchForm
                 onSearchForm={onSearchForm}
                 searchText={searchText}
-                onError={handleErrorMessage}
+                onError={onError}
             />
             <MoviesCardList
                 movies={movies}
