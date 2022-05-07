@@ -1,8 +1,9 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
-import Header from "../Header/Header";
+import { ShortMoviesContext } from "../../contexts/ShortMoviesContext";
 import "./App.css";
 
+import Header from "../Header/Header";
 import Main from "../Main/Main";
 import Movies from "../Movies/Movies";
 import SavedMovies from "../SavedMovies/SavedMovies";
@@ -31,7 +32,7 @@ function App() {
     const [moreButtonVisible, setMoreButtonVisible] = useState(false);
     // Поисковый запрос
     const [searchText, setSearchText] = useState("");
-    // Показ кнопки "Ещё"
+    // Новый поиск или нет
     const [newSearch, setNewSearch] = useState(false);
 
     // Меняем кол-во выводимых фильмов в зав-ти от размера экрана
@@ -51,17 +52,39 @@ function App() {
         }
     }
 
+    // переключатель поиска по коротким видео
+    function toggleCheckbox(e) {
+        setShortMovies({...shortMovies,
+            state: e.target.checked,
+        });        
+    };
+
+    const [shortMovies, setShortMovies] = useState({
+        state: true,
+        toggleCheckbox: toggleCheckbox,
+    });
+
+    
+    // useEffect(() => {
+    //     console.log('shortMovies', shortMovies);
+    // }, [shortMovies]);
+
+
     // Начальная инициализация
     useEffect(() => {
         // Рассчитываем начальное кол-во отображаемых фильмов и подгружаемых
         changeDisplayedMoviesNum();
         // Проверяем и подгружаем старые результаты поиска если они есть из localStorage
-        if(!newSearch && localStorage.searchText) {
-            setSearchText(localStorage.getItem('searchText'));
-            setFilteredMovies(JSON.parse(localStorage.getItem('filteredMovies')));
-        }        
+        if (!newSearch && localStorage.searchText) {
+            setSearchText(localStorage.getItem("searchText"));
+            setShortMovies({...shortMovies,
+                state: localStorage.getItem("shortSearch") === 'true' ? true : false,
+            });            
+            setFilteredMovies(
+                JSON.parse(localStorage.getItem("filteredMovies"))
+            );
+        }
     }, []);
-
 
     // Поиск фильмов
     function handleSearch(searchText) {
@@ -71,10 +94,10 @@ function App() {
 
     // Получаем фильмы по поисковому запросу
     useEffect(() => {
-        if(newSearch) {
+        if (newSearch) {
             // Получаем все фильмы по API
             getAllMovies()
-                .then(data => {
+                .then((data) => {
                     // Помещаем все фильмы в переменную
                     setAllMovies(data);
                 })
@@ -88,16 +111,16 @@ function App() {
     }, [searchText]);
 
     useEffect(() => {
-        if(newSearch) {
+        if (newSearch) {
             // Фильтруем результаты по запросу
             setFilteredMovies(
-                allMovies.filter(movie => {
-                    let re = new RegExp(searchText, 'i');
+                allMovies.filter((movie) => {
+                    let re = new RegExp(searchText, "i");
                     return re.test(movie.nameRU);
                 })
             );
         }
-    }, [allMovies])
+    }, [allMovies]);
 
     // Формируем первичый набор отображаемых фильмов
     useEffect(() => {
@@ -105,9 +128,13 @@ function App() {
         const countMovies = filteredMovies.length;
         setCountFilteredMovies(countMovies);
         // Сохраняем данные в localStorage
-        if(newSearch && countMovies > 0) {
-            localStorage.setItem('searchText', searchText);
-            localStorage.setItem('filteredMovies', JSON.stringify(filteredMovies));
+        if (newSearch && countMovies > 0) {
+            localStorage.setItem("searchText", searchText);
+            localStorage.setItem("shortSearch", shortMovies.state);
+            localStorage.setItem(
+                "filteredMovies",
+                JSON.stringify(filteredMovies)
+            );
         }
         // Показываем кнопку "Ещё"?
         checkMoreButton(countDisplayedMovies, countMovies);
@@ -126,7 +153,10 @@ function App() {
         // Пересобираем отображаемый массив фильмов
         setDisplayedMovies(
             displayedMovies.concat(
-                filteredMovies.slice(countDisplayedMovies, newСountDisplayedMovies)
+                filteredMovies.slice(
+                    countDisplayedMovies,
+                    newСountDisplayedMovies
+                )
             )
         );
         // Добавляем новые фильмы в отображаемый массив
@@ -150,12 +180,15 @@ function App() {
             <Switch>
                 <Route path="/movies">
                     <Header />
-                    <Movies
-                        onSearchForm={handleSearch}
-                        movies={displayedMovies}
-                        loadMoreMovies={loadMoreMovies}
-                        moreButtonVisible={moreButtonVisible}
-                    />
+                    <ShortMoviesContext.Provider value={shortMovies}>
+                        <Movies
+                            onSearchForm={handleSearch}
+                            movies={displayedMovies}
+                            searchText={searchText}
+                            loadMoreMovies={loadMoreMovies}
+                            moreButtonVisible={moreButtonVisible}
+                        />
+                    </ShortMoviesContext.Provider>
                     <Footer />
                 </Route>
                 <Route path="/saved-movies">
