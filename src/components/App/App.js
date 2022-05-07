@@ -132,7 +132,12 @@ function App() {
             // Фильтруем результаты по запросу
             setFilteredMovies(
                 allMovies.filter((movie) => {
-                    let re = new RegExp(searchText, "i");
+                    // Фильтруем на короткометражки
+                    if(!shortMovies.state) {
+                        if(movie.duration <= 40) return false;
+                    }
+
+                    let re = new RegExp(searchText, "i");                    
                     return re.test(movie.nameRU);
                 })
             );
