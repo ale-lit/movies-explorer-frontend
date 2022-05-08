@@ -137,7 +137,12 @@ function App() {
                         if(movie.duration <= 40) return false;
                     }
 
-                    let re = new RegExp(searchText, "i");                    
+                    // Экранируем спецсимволы
+                    function regexpEsape(text) {
+                        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+                    }
+
+                    let re = new RegExp(regexpEsape(searchText), "i");                    
                     return re.test(movie.nameRU);
                 })
             );
