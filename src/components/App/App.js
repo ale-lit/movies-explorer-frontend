@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
+import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { ShortMoviesContext } from "../../contexts/ShortMoviesContext";
 import "./App.css";
 
@@ -38,6 +39,8 @@ function App() {
     const [moviesMessage, setMoviesMessage] = useState("");
     // Прелоадер
     const [isLoading, setIsLoading] = useState(false);
+    // Пользователь
+    const [currentUser, setCurrentUser] = useState({});
 
     // Меняем кол-во выводимых фильмов в зав-ти от размера экрана
     function changeDisplayedMoviesNum() {
@@ -204,47 +207,49 @@ function App() {
 
     return (
         <>
-            <Switch>
-                <Route path="/movies">
-                    <Header />
-                    <ShortMoviesContext.Provider value={shortMovies}>                        
-                        <Movies
-                            onSearchForm={handleSearch}
-                            movies={displayedMovies}
-                            searchText={searchText}
-                            loadMoreMovies={loadMoreMovies}
-                            moreButtonVisible={moreButtonVisible}
-                            message={moviesMessage}
-                            onError={handleMoviesErrorMessage}
-                            isLoading={isLoading}
-                        />
-                    </ShortMoviesContext.Provider>
-                    <Footer />
-                </Route>
-                <Route path="/saved-movies">
-                    <Header />
-                    <SavedMovies />
-                    <Footer />
-                </Route>
-                <Route path="/profile">
-                    <Header />
-                    <Profile />
-                </Route>
-                <Route path="/signup">
-                    <Register />
-                </Route>
-                <Route path="/signin">
-                    <Login />
-                </Route>
-                <Route exact path="/">
-                    <Header />
-                    <Main />
-                    <Footer />
-                </Route>
-                <Route path="*">
-                    <PageNotFound />
-                </Route>
-            </Switch>
+            <CurrentUserContext.Provider value={currentUser}>
+                <Switch>
+                    <Route path="/movies">
+                        <Header />
+                        <ShortMoviesContext.Provider value={shortMovies}>                        
+                            <Movies
+                                onSearchForm={handleSearch}
+                                movies={displayedMovies}
+                                searchText={searchText}
+                                loadMoreMovies={loadMoreMovies}
+                                moreButtonVisible={moreButtonVisible}
+                                message={moviesMessage}
+                                onError={handleMoviesErrorMessage}
+                                isLoading={isLoading}
+                            />
+                        </ShortMoviesContext.Provider>
+                        <Footer />
+                    </Route>
+                    <Route path="/saved-movies">
+                        <Header />
+                        <SavedMovies />
+                        <Footer />
+                    </Route>
+                    <Route path="/profile">
+                        <Header />
+                        <Profile />
+                    </Route>
+                    <Route path="/signup">
+                        <Register />
+                    </Route>
+                    <Route path="/signin">
+                        <Login />
+                    </Route>
+                    <Route exact path="/">
+                        <Header />
+                        <Main />
+                        <Footer />
+                    </Route>
+                    <Route path="*">
+                        <PageNotFound />
+                    </Route>
+                </Switch>
+            </CurrentUserContext.Provider>
         </>
     );
 }
