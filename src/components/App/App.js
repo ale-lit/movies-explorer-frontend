@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route, useLocation } from "react-router-dom";
+import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { ShortMoviesContext } from "../../contexts/ShortMoviesContext";
 import ProtectedRoute from "../../utils/ProtectedRoute";
@@ -50,6 +50,8 @@ function App() {
     // Ошибка формы
     const [formError, setFormError] = useState("");
 
+    const history = useHistory();
+
     // Меняем кол-во выводимых фильмов в зав-ти от размера экрана
     function changeDisplayedMoviesNum() {
         let displayWidth = window.screen.width;
@@ -79,6 +81,8 @@ function App() {
 
     // Начальная инициализация
     useEffect(() => {
+        // Проверяем токен (если он есть)
+        checkToken();
         // Рассчитываем начальное кол-во отображаемых фильмов и подгружаемых
         changeDisplayedMoviesNum();
         // Проверяем и подгружаем старые результаты поиска если они есть из localStorage
@@ -136,6 +140,25 @@ function App() {
         } else {
             setMoviesMessage("");
         }
+    }
+
+    function checkToken() {
+        const token = localStorage.getItem("token");
+        if(token) handleLogin(token);
+    }
+
+    function handleLogin(token) {
+        auth.getContent(token)
+            .then((res) => {                
+                if (res && !res.message) {
+                    setCurrentUser(res);
+                    setLoggedIn(true);
+                    history.push("/movies");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
 
     useEffect(() => {
@@ -224,15 +247,8 @@ function App() {
                 } else {
                     setFormError("");
                 }
-
-                console.log("res", res);
-
-                if (res) {
-                    // handleInfoTooltipPopupOpen("success");
-                    // setTimeout(redirectToLogin, 3000);
-                } else {
-                    // handleInfoTooltipPopupOpen("fail");
-                }
+                // При успехе авторизуем пользователя
+                if(res) handleLoginUser(newUser);
             })
             .catch((err) => {
                 console.log(err);
@@ -243,33 +259,26 @@ function App() {
     }
 
     // Авторизация пользователя
-    function handleLogin(token) {
-        console.log('handleLogin!', token)
-        // auth.getContent(token)
-        //     .then((res) => {
-        //         if (res) {
-        //             setCurrentEmail(res.email);
-        //             // авторизуем пользователя
-        //             setLoggedIn(true);
-        //             history.push("/");
-        //         }
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     });
-    }
-
     function handleLoginUser(user) {
         console.log('user', user)
         setIsLoading(true);
         auth.authorize(user.email, user.password)
             .then((data) => {
-                console.log("data", data);
+                if (data.message) {
+                    setFormError(data.message);
+                } else {
+                    setFormError("");
+                }
+
                 if (data.token) {
-                    handleLogin(data.token);
+                    console.log("data", data);
+                    localStorage.setItem("token", data.token);
+                    handleLogin(data.token);                    
                 }
             })
-            .catch(() => {
+            .catch((res) => {
+                console.log("res", res);
+                // TODO доделать
                 // запускается, если пользователь не найден
                 console.log("запускается, если пользователь не найден");
                 // handleInfoTooltipPopupOpen("fail");
@@ -287,7 +296,7 @@ function App() {
                     location === "/movies" ||
                     location === "/saved-movies" ||
                     location === "/profile" ? (
-                        <Header />
+                        <Header loggedIn={loggedIn} />
                     ) : (
                         ""
                     )}

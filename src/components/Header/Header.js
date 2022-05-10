@@ -1,21 +1,13 @@
-import React, { useState, useEffect } from "react";
+import React, { useState } from "react";
 import { Link, useLocation } from "react-router-dom";
 import NavTab from "./NavTab/NavTab";
 import "./Header.css";
 import logo from "../../images/logo.svg";
 
-function Header() {
-    const [login, setLogin] = useState(false);
+function Header({ loggedIn }) {
     const [showMenu, setShowMenu] = useState(false);
 
     const location = useLocation().pathname;
-
-    // Временное решение
-    useEffect(() => {        
-        if(location === '/movies' || location === '/saved-movies' || location === '/profile') {
-            setLogin(true);
-        }
-    }, []);
 
     function toggleMenu() {
         if(showMenu) {
@@ -34,7 +26,7 @@ function Header() {
             <Link to="/" className="project__link" title="На главную">
                 <img src={logo} alt="Логотип" className="header__logo" />
             </Link>
-                    {login ? (
+                    {loggedIn ? (
                         <>
                             <div className={`header__cover ${showMenu ? 'header__cover_active' : ''}`}>
                                 <button className={`header__mob-menu-button ${showMenu ? 'header__mob-menu-button_active' : ''}`} onClick={toggleMenu}><span></span></button>

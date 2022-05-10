@@ -33,24 +33,21 @@ export function authorize(email, password) {
     })
         .then((response) => response.json())
         .then((data) => {
-            if (data.token) {
-                localStorage.setItem("token", data.token);
-                return data;
-            }
+            return data;
         })
         .catch((err) => console.log(err));
 }
 
-// export function getContent(token) {
-//     return fetch(`${BASE_MAIN_URL}/users/me`, {
-//         method: "GET",
-//         headers: {
-//             Accept: "application/json",
-//             "Content-Type": "application/json",
-//             Authorization: token,
-//         },
-//     })
-//         .then((res) => res.json())
-//         .then((data) => data)
-//         .catch((err) => console.log(err));
-// }
+export function getContent(token) {
+    return fetch(`${BASE_MAIN_URL}/users/me`, {
+        method: "GET",
+        headers: {
+            Accept: "application/json",
+            "Content-Type": "application/json",
+            Authorization: token,
+        },
+    })
+        .then((res) => res.json())
+        .then((data) => data)
+        .catch((err) => console.log(err));
+}
