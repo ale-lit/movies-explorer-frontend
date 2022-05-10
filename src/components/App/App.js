@@ -1,7 +1,8 @@
 import React, { useState, useEffect } from "react";
-import { Switch, Route } from "react-router-dom";
+import { Switch, Route, useLocation } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { ShortMoviesContext } from "../../contexts/ShortMoviesContext";
+import ProtectedRoute from "../../utils/ProtectedRoute";
 import * as auth from "../../utils/MainApi";
 import "./App.css";
 
@@ -42,6 +43,10 @@ function App() {
     const [isLoading, setIsLoading] = useState(false);
     // Пользователь
     const [currentUser, setCurrentUser] = useState({});
+    // Залогинен ли пользователь?
+    const [loggedIn, setLoggedIn] = useState(false);
+    // Текущая локация
+    const location = useLocation().pathname;
 
     // Меняем кол-во выводимых фильмов в зав-ти от размера экрана
     function changeDisplayedMoviesNum() {
@@ -212,7 +217,7 @@ function App() {
         setIsLoading(true);
         auth.register(newUser.name, newUser.password, newUser.email)
             .then((res) => {
-                console.log('res', res);
+                console.log("res", res);
                 if (res) {
                     // handleInfoTooltipPopupOpen("success");
                     // setTimeout(redirectToLogin, 3000);
@@ -231,47 +236,61 @@ function App() {
     return (
         <>
             <CurrentUserContext.Provider value={currentUser}>
-                <Switch>
-                    <Route path="/movies">
+                <ShortMoviesContext.Provider value={shortMovies}>
+                    {location === "/" ||
+                    location === "/movies" ||
+                    location === "/saved-movies" ||
+                    location === "/profile" ? (
                         <Header />
-                        <ShortMoviesContext.Provider value={shortMovies}>
-                            <Movies
-                                onSearchForm={handleSearch}
-                                movies={displayedMovies}
-                                searchText={searchText}
-                                loadMoreMovies={loadMoreMovies}
-                                moreButtonVisible={moreButtonVisible}
-                                message={moviesMessage}
-                                onError={handleMoviesErrorMessage}
-                                isLoading={isLoading}
-                            />
-                        </ShortMoviesContext.Provider>
+                    ) : (
+                        ""
+                    )}
+                    <Switch>
+                        <ProtectedRoute
+                            path="/movies"
+                            component={Movies}
+                            onSearchForm={handleSearch}
+                            movies={displayedMovies}
+                            searchText={searchText}
+                            loadMoreMovies={loadMoreMovies}
+                            moreButtonVisible={moreButtonVisible}
+                            message={moviesMessage}
+                            onError={handleMoviesErrorMessage}
+                            isLoading={isLoading}
+                            loggedIn={loggedIn}
+                        />
+                        <ProtectedRoute
+                            path="/saved-movies"
+                            component={SavedMovies}
+                            // TODO ДОДЕЛАТЬ
+                            loggedIn={loggedIn}
+                        />
+                        <ProtectedRoute
+                            path="/profile"
+                            component={Profile}
+                            loggedIn={loggedIn}
+                        />
+                        <Route path="/signup">
+                            <Register onRegisterUser={handleRegisterUser} />
+                        </Route>
+                        <Route path="/signin">
+                            <Login />
+                        </Route>
+                        <Route exact path="/">
+                            <Main />
+                        </Route>
+                        <Route path="*">
+                            <PageNotFound />
+                        </Route>
+                    </Switch>
+                    {location === "/" ||
+                    location === "/movies" ||
+                    location === "/saved-movies" ? (
                         <Footer />
-                    </Route>
-                    <Route path="/saved-movies">
-                        <Header />
-                        <SavedMovies />
-                        <Footer />
-                    </Route>
-                    <Route path="/profile">
-                        <Header />
-                        <Profile />
-                    </Route>
-                    <Route path="/signup">
-                        <Register onRegisterUser={handleRegisterUser} />
-                    </Route>
-                    <Route path="/signin">
-                        <Login />
-                    </Route>
-                    <Route exact path="/">
-                        <Header />
-                        <Main />
-                        <Footer />
-                    </Route>
-                    <Route path="*">
-                        <PageNotFound />
-                    </Route>
-                </Switch>
+                    ) : (
+                        ""
+                    )}
+                </ShortMoviesContext.Provider>
             </CurrentUserContext.Provider>
         </>
     );
