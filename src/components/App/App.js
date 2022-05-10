@@ -48,7 +48,7 @@ function App() {
     // Текущая локация
     const location = useLocation().pathname;
     // Ошибка формы
-    const [formError, setFormError] = useState("");    
+    const [formError, setFormError] = useState("");
 
     // Меняем кол-во выводимых фильмов в зав-ти от размера экрана
     function changeDisplayedMoviesNum() {
@@ -219,13 +219,14 @@ function App() {
         setIsLoading(true);
         auth.register(newUser.name, newUser.password, newUser.email)
             .then((res) => {
-                if(res.message) {
+                if (res.message) {
                     setFormError(res.message);
                 } else {
                     setFormError("");
                 }
 
-                console.log('res', res)
+                console.log("res", res);
+
                 if (res) {
                     // handleInfoTooltipPopupOpen("success");
                     // setTimeout(redirectToLogin, 3000);
@@ -235,6 +236,43 @@ function App() {
             })
             .catch((err) => {
                 console.log(err);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }
+
+    // Авторизация пользователя
+    function handleLogin(token) {
+        console.log('handleLogin!', token)
+        // auth.getContent(token)
+        //     .then((res) => {
+        //         if (res) {
+        //             setCurrentEmail(res.email);
+        //             // авторизуем пользователя
+        //             setLoggedIn(true);
+        //             history.push("/");
+        //         }
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     });
+    }
+
+    function handleLoginUser(user) {
+        console.log('user', user)
+        setIsLoading(true);
+        auth.authorize(user.email, user.password)
+            .then((data) => {
+                console.log("data", data);
+                if (data.token) {
+                    handleLogin(data.token);
+                }
+            })
+            .catch(() => {
+                // запускается, если пользователь не найден
+                console.log("запускается, если пользователь не найден");
+                // handleInfoTooltipPopupOpen("fail");
             })
             .finally(() => {
                 setIsLoading(false);
@@ -286,7 +324,11 @@ function App() {
                             />
                         </Route>
                         <Route path="/signin">
-                            <Login />
+                            <Login
+                                onLoginUser={handleLoginUser}
+                                isLoading={isLoading}
+                                formError={formError}
+                            />
                         </Route>
                         <Route exact path="/">
                             <Main />

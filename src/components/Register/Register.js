@@ -50,9 +50,9 @@ function Register({ onRegisterUser, isLoading, formError }) {
     }
     function handleEmailChange(e) {
         let value = e.target.value;
-        let re = /^([A-Za-z0-9_\-\.])+\@([A-Za-z0-9_\-\.])+\.([A-Za-z]{2,4})$/;
+        let re = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
 
-        if (!re.test(value)) {
+        if (!re.test(value) && value.length > 0) {
             setEmailError("Введите корректный Email!");
             setIsValid(false);
         } else {
