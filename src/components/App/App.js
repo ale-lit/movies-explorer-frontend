@@ -47,6 +47,8 @@ function App() {
     const [loggedIn, setLoggedIn] = useState(false);
     // Текущая локация
     const location = useLocation().pathname;
+    // Ошибка формы
+    const [formError, setFormError] = useState("");    
 
     // Меняем кол-во выводимых фильмов в зав-ти от размера экрана
     function changeDisplayedMoviesNum() {
@@ -217,7 +219,13 @@ function App() {
         setIsLoading(true);
         auth.register(newUser.name, newUser.password, newUser.email)
             .then((res) => {
-                console.log("res", res);
+                if(res.message) {
+                    setFormError(res.message);
+                } else {
+                    setFormError("");
+                }
+
+                console.log('res', res)
                 if (res) {
                     // handleInfoTooltipPopupOpen("success");
                     // setTimeout(redirectToLogin, 3000);
@@ -271,7 +279,11 @@ function App() {
                             loggedIn={loggedIn}
                         />
                         <Route path="/signup">
-                            <Register onRegisterUser={handleRegisterUser} />
+                            <Register
+                                onRegisterUser={handleRegisterUser}
+                                isLoading={isLoading}
+                                formError={formError}
+                            />
                         </Route>
                         <Route path="/signin">
                             <Login />

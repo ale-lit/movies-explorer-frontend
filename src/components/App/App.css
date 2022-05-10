@@ -1,44 +1,67 @@
-@import url('../../vendor/fonts.css');
-@import url('../../vendor/normalize.css');
+@import url("../../vendor/fonts.css");
+@import url("../../vendor/normalize.css");
 
 .project {
-  font-family: 'Inter', Arial, sans-serif;
-  font-size: 14px;
-  line-height: 17px;
+    font-family: "Inter", Arial, sans-serif;
+    font-size: 14px;
+    line-height: 17px;
 }
 .project__link {
-  text-decoration: none;
-  color: #000;
-  transition: all .3s ease-in-out;
+    text-decoration: none;
+    color: #000;
+    transition: all 0.3s ease-in-out;
 }
 .project__link:hover {
-  opacity: .7;
+    opacity: 0.7;
 }
 .project__link_active {
-  font-weight: 500;
+    font-weight: 500;
 }
 .project__wrapper {
-  max-width: 1280px;
-  margin: 0 auto;
-  padding: 0 70px;
-  box-sizing: border-box;
+    max-width: 1280px;
+    margin: 0 auto;
+    padding: 0 70px;
+    box-sizing: border-box;
+}
+.input-label {
+    color: #a0a0a0;
+    margin-bottom: 9px;
+    text-align: left;
+}
+.error {
+    color: #ff3459;
+}
+.input-error {
+    color: #ff3459;
+    text-align: left;
+    height: 12px;
+    margin: 10px 0 0;
+}
+.form-error {
+    color: #ff3459;
+    margin: 0;
+    height: 14px;
+    font-size: 11px;
+    line-height: 13px;
+    padding-top: 34px;
+    text-align: center;
 }
 
 @media screen and (max-width: 768px) {
-  .project__wrapper {
-    padding: 0 50px;
-  }
-  .project__link_active {
-    border-bottom: 2px solid #000;
-    padding-bottom: 4px;
-  }
+    .project__wrapper {
+        padding: 0 50px;
+    }
+    .project__link_active {
+        border-bottom: 2px solid #000;
+        padding-bottom: 4px;
+    }
 }
 
 @media screen and (max-width: 320px) {
-  .project__wrapper {
-    padding: 0 18px;
-  }
-  .project__link_active {
-    padding-bottom: 7px;
-  }
+    .project__wrapper {
+        padding: 0 18px;
+    }
+    .project__link_active {
+        padding-bottom: 7px;
+    }
 }

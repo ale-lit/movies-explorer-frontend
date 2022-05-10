@@ -11,10 +11,8 @@ export function register(name, password, email) {
     })
         .then((response) => {
             try {
-                if (response.status === 201) {
-                    return response.json();
-                }
-            } catch (e) {
+                return response.json();                
+            } catch (e) {                
                 return e;
             }
         })

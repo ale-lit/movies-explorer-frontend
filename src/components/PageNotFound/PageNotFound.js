@@ -7,12 +7,12 @@ function PageNotFound() {
 
     return (
         <main className="main">
-            <section className="error project__wrapper">
-                <div className="error__wrapper">
-                    <h1 className="error__title">404</h1>
-                    <p className="error__description">Страница не найдена</p>
+            <section className="notfound project__wrapper">
+                <div className="notfound__wrapper">
+                    <h1 className="notfound__title">404</h1>
+                    <p className="notfound__description">Страница не найдена</p>
                 </div>
-                <button className="project__link error__backlink" onClick={() => history.goBack()}>Назад</button>
+                <button className="project__link notfound__backlink" onClick={() => history.goBack()}>Назад</button>
             </section>
         </main>
     );
