@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Switch, Route } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { ShortMoviesContext } from "../../contexts/ShortMoviesContext";
+import * as auth from "../../utils/MainApi";
 import "./App.css";
 
 import Header from "../Header/Header";
@@ -136,8 +137,8 @@ function App() {
             setFilteredMovies(
                 allMovies.filter((movie) => {
                     // Фильтруем на короткометражки
-                    if(!shortMovies.state) {
-                        if(movie.duration <= 40) return false;
+                    if (!shortMovies.state) {
+                        if (movie.duration <= 40) return false;
                     }
 
                     // Экранируем спецсимволы
@@ -145,7 +146,7 @@ function App() {
                         return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
                     }
 
-                    let re = new RegExp(regexpEsape(searchText), "i");                    
+                    let re = new RegExp(regexpEsape(searchText), "i");
                     return re.test(movie.nameRU);
                 })
             );
@@ -205,13 +206,35 @@ function App() {
         }
     }
 
+    // Регистрация нового пользователя
+    function handleRegisterUser(newUser) {
+        // Запускаем прелоадер
+        setIsLoading(true);
+        auth.register(newUser.name, newUser.password, newUser.email)
+            .then((res) => {
+                console.log('res', res);
+                if (res) {
+                    // handleInfoTooltipPopupOpen("success");
+                    // setTimeout(redirectToLogin, 3000);
+                } else {
+                    // handleInfoTooltipPopupOpen("fail");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }
+
     return (
         <>
             <CurrentUserContext.Provider value={currentUser}>
                 <Switch>
                     <Route path="/movies">
                         <Header />
-                        <ShortMoviesContext.Provider value={shortMovies}>                        
+                        <ShortMoviesContext.Provider value={shortMovies}>
                             <Movies
                                 onSearchForm={handleSearch}
                                 movies={displayedMovies}
@@ -235,7 +258,7 @@ function App() {
                         <Profile />
                     </Route>
                     <Route path="/signup">
-                        <Register />
+                        <Register onRegisterUser={handleRegisterUser} />
                     </Route>
                     <Route path="/signin">
                         <Login />
