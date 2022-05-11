@@ -3,7 +3,7 @@ import { useLocation } from "react-router-dom";
 import "./MoviesCard.css";
 import { BASE_MOVIES_URL } from "../../../constants";
 
-function MoviesCard({ movie, onMovieSave }) {
+function MoviesCard({ movie, onMovieSave, onDeleteMovie }) {
     const location = useLocation().pathname;
 
     // TEMP
@@ -19,6 +19,11 @@ function MoviesCard({ movie, onMovieSave }) {
         onMovieSave(movie);
     }
 
+    function handleDeleteClick() {
+        console.log('movie', movie)
+        onDeleteMovie(movie._id);
+    }    
+
     return (
         <li className="films__item">
             <div className="films__item-header">
@@ -33,7 +38,7 @@ function MoviesCard({ movie, onMovieSave }) {
                 {location === "/saved-movies" ? (
                     <button
                         className="films__save-button films__save-button_type_remove"
-                        onClick={handleSaveClick}
+                        onClick={handleDeleteClick}
                     ></button>
                 ) : (
                     <button

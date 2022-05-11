@@ -84,7 +84,8 @@ function App() {
     // Начальная инициализация
     useEffect(() => {
         if (localStorage.getItem("token")) {
-            mainApi.getAllSavedMovies()
+            mainApi
+                .getAllSavedMovies()
                 .then((movies) => {
                     // console.log('movies saved!', movies);
                     setAllSavedMovies(movies);
@@ -347,6 +348,18 @@ function App() {
     //       });
     //   }
 
+    function handleMovieDelete(id) {
+        mainApi
+            .deleteMovie(id)
+            .then(() => {
+                console.log('успешно');
+                // setCards(cards.filter((card) => card._id !== id));
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+    }
+
     return (
         <>
             <CurrentUserContext.Provider value={currentUser}>
@@ -383,6 +396,7 @@ function App() {
                             onError={handleMoviesErrorMessage}
                             isLoading={isLoading}
                             loggedIn={loggedIn}
+                            onDeleteMovie={handleMovieDelete}
                         />
                         <ProtectedRoute
                             path="/profile"

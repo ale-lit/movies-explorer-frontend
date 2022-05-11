@@ -98,6 +98,22 @@ export function postMovie(movie) {
     });
 }
 
+export function deleteMovie(id) {
+    return fetch(`${BASE_MAIN_URL}/movies/${id}`, {
+        method: "DELETE",
+        headers: {
+            authorization: localStorage.getItem("token"),
+            "Content-Type": "application/json",
+        },
+    }).then((res) => {
+        if (res.ok) {
+            return res.json();
+        }
+
+        return Promise.reject(`Произошла ошибка: ${res.status}`);
+    });
+}
+
 // export function changeLikeCardStatus(id, isLiked) {
 //     if (isLiked) {
 //         return fetch(`${this.baseUrl}/cards/${id}/likes`, {
