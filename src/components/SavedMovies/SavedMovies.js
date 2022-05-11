@@ -9,9 +9,9 @@ function SavedMovies({
     searchText,
     onError,
     movies,
-    loggedIn,
     isLoading,
-    onDeleteMovie,
+    onMovieDelete,
+    savedIds,
 }) {
     return (
         <main className="main">
@@ -20,7 +20,15 @@ function SavedMovies({
                 searchText={searchText}
                 onError={onError}
             />
-            {isLoading ? <Preloader /> : <MoviesCardList movies={movies} onDeleteMovie={onDeleteMovie} />}
+            {isLoading ? (
+                <Preloader />
+            ) : (
+                <MoviesCardList
+                    movies={movies}
+                    onMovieDelete={onMovieDelete}
+                    savedIds={savedIds}
+                />
+            )}
         </main>
     );
 }

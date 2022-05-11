@@ -14,6 +14,8 @@ function Movies({
     onError,
     isLoading,
     onMovieSave,
+    onMovieDelete,
+    savedIds,
 }) {
     useEffect(() => {
         if (movies.length === 0) {
@@ -39,6 +41,8 @@ function Movies({
                     moreButtonVisible={moreButtonVisible}
                     message={message}
                     onMovieSave={onMovieSave}
+                    onMovieDelete={onMovieDelete}
+                    savedIds={savedIds}
                 />
             )}
         </main>

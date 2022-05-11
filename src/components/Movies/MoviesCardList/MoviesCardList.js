@@ -8,7 +8,8 @@ function MoviesCardList({
     moreButtonVisible,
     message,
     onMovieSave,
-    onDeleteMovie,
+    onMovieDelete,
+    savedIds,
 }) {
     return (
         <section className="films project__wrapper">
@@ -21,7 +22,8 @@ function MoviesCardList({
                             movie={movie}
                             key={movie.id || movie._id}
                             onMovieSave={onMovieSave}
-                            onDeleteMovie={onDeleteMovie}
+                            onMovieDelete={onMovieDelete}
+                            saved={savedIds.includes(movie.id)}
                         />
                     ))}
                 </ul>

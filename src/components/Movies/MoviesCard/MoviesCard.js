@@ -3,11 +3,8 @@ import { useLocation } from "react-router-dom";
 import "./MoviesCard.css";
 import { BASE_MOVIES_URL } from "../../../constants";
 
-function MoviesCard({ movie, onMovieSave, onDeleteMovie }) {
+function MoviesCard({ movie, onMovieSave, onMovieDelete, saved }) {
     const location = useLocation().pathname;
-
-    // TEMP
-    let saved = 0;
 
     function convertTime(duration) {
         let hours = parseInt(duration / 60);
@@ -15,13 +12,20 @@ function MoviesCard({ movie, onMovieSave, onDeleteMovie }) {
         return hours + "ч " + mins + "м";
     }
 
-    function handleSaveClick() {
-        onMovieSave(movie);
+    function handleSaveClick(e) {
+        let saveButton = e.target;
+        if(saveButton.classList.contains('films__save-button_type_active')) {
+            saveButton.classList.remove('films__save-button_type_active');
+            onMovieDelete(movie.id);
+        } else {
+            saveButton.classList.add('films__save-button_type_active');
+            onMovieSave(movie);
+        }
     }
 
     function handleDeleteClick() {
         console.log('movie', movie)
-        onDeleteMovie(movie._id);
+        onMovieDelete(movie.movieId);
     }    
 
     return (

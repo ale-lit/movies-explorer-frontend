@@ -77,22 +77,19 @@ export function postMovie(movie) {
         },
         body: JSON.stringify({
             movieId: movie.id,
-            nameRU: movie.nameRU || "",
-            nameEN: movie.nameEN || "",
+            nameRU: movie.nameRU || "не указано",
+            nameEN: movie.nameEN || "не указано",
             thumbnail: BASE_MOVIES_URL + movie.image.formats.thumbnail.url,
             trailerLink: movie.trailerLink,
             image: BASE_MOVIES_URL + movie.image.url,
-            description: movie.description || "",
+            description: movie.description || "не указано",
             year: movie.year,
             duration: movie.duration,
-            director: movie.director || "",
-            country: movie.country || "",
+            director: movie.director || "не указано",
+            country: movie.country || "не указано",
         }),
     }).then((res) => {
-        console.log("resStart", res);
-        if (res.ok) {
-            return res.json();
-        }
+        if (res.ok) return res.json();
 
         return Promise.reject(`Произошла ошибка: ${res.status}`);
     });
@@ -113,23 +110,3 @@ export function deleteMovie(id) {
         return Promise.reject(`Произошла ошибка: ${res.status}`);
     });
 }
-
-// export function changeLikeCardStatus(id, isLiked) {
-//     if (isLiked) {
-//         return fetch(`${this.baseUrl}/cards/${id}/likes`, {
-//             method: "PUT",
-//             headers: {
-//                 authorization: localStorage.getItem("token"),
-//                 "Content-Type": "application/json",
-//             },
-//         }).then((res) => this._checkApiResponse(res));
-//     } else {
-//         return fetch(`${this.baseUrl}/cards/${id}/likes`, {
-//             method: "DELETE",
-//             headers: {
-//                 authorization: localStorage.getItem("token"),
-//                 "Content-Type": "application/json",
-//             },
-//         }).then((res) => this._checkApiResponse(res));
-//     }
-// }

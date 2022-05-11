@@ -21,14 +21,18 @@ import { getAllMovies } from "../../utils/MoviesApi";
 function App() {
     // Все фильмы
     const [allMovies, setAllMovies] = useState([]);
-    // Все сохраненные фильмы (ID)
+    // Все сохраненные фильмы
     const [allSavedMovies, setAllSavedMovies] = useState([]);
+    // Все сохраненные фильмы (ID)
+    const [allSavedMoviesIds, setAllSavedMoviesIds] = useState([]);
     // Все отфильтрованные фильмы
     const [filteredMovies, setFilteredMovies] = useState([]);
     // Количество отфильтрованных фильмов
     const [countFilteredMovies, setCountFilteredMovies] = useState(0);
     // Отображаемые фильмы
     const [displayedMovies, setDisplayedMovies] = useState([]);
+     // Отображаемые сохраненные фильмы
+    const [displayedSavedMovies, setDisplayedSavedMovies] = useState([]);
     // Количество отображаемых фильмов
     const [countDisplayedMovies, setCountDisplayedMovies] = useState(0);
     // Фильмов в 1 ряду
@@ -87,7 +91,6 @@ function App() {
             mainApi
                 .getAllSavedMovies()
                 .then((movies) => {
-                    // console.log('movies saved!', movies);
                     setAllSavedMovies(movies);
                 })
                 .catch((err) => {
@@ -116,6 +119,19 @@ function App() {
         }
     }, []);
 
+    useEffect(() => {
+        getIdsAllSavedMovies();
+    }, [allSavedMovies]);
+
+    //
+    function getIdsAllSavedMovies() {
+        let arrIds = [];
+        allSavedMovies.forEach((movie) => {
+            arrIds.push(movie.movieId);
+        });
+        setAllSavedMoviesIds(arrIds);
+    }
+
     // Поиск фильмов
     function handleSearch(searchText) {
         setNewSearch(true);
@@ -130,8 +146,12 @@ function App() {
             // Получаем все фильмы по API
             getAllMovies()
                 .then((data) => {
+                    let allMoviesFixed = [];
+                    data.forEach(movie => {
+                        allMoviesFixed.push(fixMovieUrl(movie));             
+                    });
                     // Помещаем все фильмы в переменную
-                    setAllMovies(data);
+                    setAllMovies(allMoviesFixed);
                 })
                 .catch((err) => {
                     handleMoviesErrorMessage(
@@ -182,6 +202,24 @@ function App() {
             // Фильтруем результаты по запросу
             setFilteredMovies(
                 allMovies.filter((movie) => {
+                    // Фильтруем на короткометражки
+                    if (!shortMovies.state) {
+                        if (movie.duration <= 40) return false;
+                    }
+
+                    // Экранируем спецсимволы
+                    function regexpEsape(text) {
+                        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+                    }
+
+                    let re = new RegExp(regexpEsape(searchText), "i");
+                    return re.test(movie.nameRU);
+                })
+            );
+
+            // Фильтруем сохраненные результаты по запросу
+            setDisplayedSavedMovies(
+                allSavedMovies.filter((movie) => {
                     // Фильтруем на короткометражки
                     if (!shortMovies.state) {
                         if (movie.duration <= 40) return false;
@@ -306,58 +344,45 @@ function App() {
             });
     }
 
-    // Сохранение фильмов
-    function handleMovieSave(movie) {
-        console.log("movie", movie);
+    // Проверка и исправление ссылки на ролик (при ее отсутствии)
+    function fixMovieUrl(movie) {
+        let regex = new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/gi);
 
-        mainApi
-            .postMovie(movie)
-            .then((newCard) => {
-                console.log("newCard", newCard);
-                // setCards([newCard, ...cards]);
-                // closeAllPopups();
-            })
-            .catch((err) => {
-                console.log(err);
-            });
-
-        // mainApi.changeSaveMovieStatus(movie._id, !isSaved)
-        //     .then((newCard) => {
-        //         setCards((state) =>
-        //             state.map((c) => (c._id === card._id ? newCard : c))
-        //         );
-        //     })
-        //     .catch((err) => {
-        //         console.log(err);
-        //     });
+        if(!movie.trailerLink || !movie.trailerLink.match(regex)) {
+            let encodeName = encodeURI(movie.nameRU.replace(/ /g, '+'));
+            movie.trailerLink = "https://www.youtube.com/results?search_query=" + encodeName;
+        }
+        return movie;
     }
 
-    // function handleCardLike(card) {
-    //     // Снова проверяем, есть ли уже лайк на этой карточке
-    //     const isSaved = card.likes.some((i) => i === currentUser._id);
-
-    //     // Отправляем запрос в API и получаем обновлённые данные карточки
-    //     api.changeLikeCardStatus(card._id, !isSaved)
-    //       .then((newCard) => {
-    //         setCards((state) =>
-    //           state.map((c) => (c._id === card._id ? newCard : c))
-    //         );
-    //       })
-    //       .catch((err) => {
-    //         console.log(err);
-    //       });
-    //   }
-
-    function handleMovieDelete(id) {
+    // Сохранение фильмов
+    function handleMovieSave(movie) {
+        console.log('movie', movie);
         mainApi
-            .deleteMovie(id)
-            .then(() => {
-                console.log('успешно');
-                // setCards(cards.filter((card) => card._id !== id));
+            .postMovie(movie)
+            .then((savedMovie) => {
+                setAllSavedMovies([...allSavedMovies, savedMovie]);
             })
             .catch((err) => {
                 console.log(err);
             });
+    }
+
+    function handleMovieDelete(id) {
+        let newSavedMoviesArr = [];
+        allSavedMovies.forEach((movie) => {
+            if (movie.movieId === id) {
+                mainApi
+                    .deleteMovie(movie._id)
+                    .then()
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            } else {
+                newSavedMoviesArr.push(movie);
+            }
+        });
+        setAllSavedMovies(newSavedMoviesArr);
     }
 
     return (
@@ -386,17 +411,20 @@ function App() {
                             isLoading={isLoading}
                             loggedIn={loggedIn}
                             onMovieSave={handleMovieSave}
+                            onMovieDelete={handleMovieDelete}
+                            savedIds={allSavedMoviesIds}
                         />
                         <ProtectedRoute
                             path="/saved-movies"
                             component={SavedMovies}
                             onSearchForm={handleSearch}
-                            movies={allSavedMovies}
+                            movies={displayedSavedMovies}
                             searchText={searchText}
                             onError={handleMoviesErrorMessage}
                             isLoading={isLoading}
                             loggedIn={loggedIn}
-                            onDeleteMovie={handleMovieDelete}
+                            onMovieDelete={handleMovieDelete}
+                            savedIds={allSavedMoviesIds}
                         />
                         <ProtectedRoute
                             path="/profile"
