@@ -194,7 +194,7 @@ function App() {
         setMoviesMessage(message);
         setTimeout(() => {
             setMoviesMessage("");
-        }, 1000);
+        }, 2000);
     }
 
     // Вывод ошибок в формах
@@ -202,7 +202,7 @@ function App() {
         setFormError(message);
         setTimeout(() => {
             setFormError("");
-        }, 1000);
+        }, 2000);
     }
 
     function checkToken() {
@@ -308,9 +308,10 @@ function App() {
             .then((res) => {
                 if (res.message) {
                     handleFormsErrorMessage(res.message);
+                } else {
+                    // При успехе авторизуем пользователя
+                    handleLoginUser(newUser);
                 }
-                // При успехе авторизуем пользователя
-                if (res) handleLoginUser(newUser);
             })
             .catch((err) => {
                 console.log(err);
@@ -352,9 +353,7 @@ function App() {
             .then((res) => {
                 if (res.message) {
                     handleFormsErrorMessage(res.message);
-                }
-
-                if (res) {
+                } else {
                     setCurrentUser(res);
                     handleFormsErrorMessage("Успешно!");
                 }

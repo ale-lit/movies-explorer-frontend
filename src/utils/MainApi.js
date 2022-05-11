@@ -60,12 +60,8 @@ export function getAllSavedMovies() {
             "Content-Type": "application/json",
         },
     }).then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-
-        return Promise.reject(`Произошла ошибка: ${res.status}`);
-    });
+        return res.json();
+    }).catch((err) => console.log(err));
 }
 
 export function postMovie(movie) {
@@ -89,10 +85,8 @@ export function postMovie(movie) {
             country: movie.country || "не указано",
         }),
     }).then((res) => {
-        if (res.ok) return res.json();
-
-        return Promise.reject(`Произошла ошибка: ${res.status}`);
-    });
+        return res.json();
+    }).catch((err) => console.log(err));
 }
 
 export function deleteMovie(id) {
@@ -103,12 +97,8 @@ export function deleteMovie(id) {
             "Content-Type": "application/json",
         },
     }).then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-
-        return Promise.reject(`Произошла ошибка: ${res.status}`);
-    });
+        return res.json();
+    }).catch((err) => console.log(err));
 }
 
 export function editUserInfo(name, email) {
@@ -123,10 +113,6 @@ export function editUserInfo(name, email) {
             email: email,
         }),
     }).then((res) => {
-        if (res.ok) {
-            return res.json();
-        }
-
-        return Promise.reject(`Произошла ошибка: ${res.status}`);
-    });
+        return res.json();
+    }).catch((err) => console.log(err));
 }
