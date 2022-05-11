@@ -110,3 +110,23 @@ export function deleteMovie(id) {
         return Promise.reject(`Произошла ошибка: ${res.status}`);
     });
 }
+
+export function editUserInfo(name, email) {
+    return fetch(`${BASE_MAIN_URL}/users/me`, {
+        method: "PATCH",
+        headers: {
+            authorization: localStorage.getItem("token"),
+            "Content-Type": "application/json",
+        },
+        body: JSON.stringify({
+            name: name,
+            email: email,
+        }),
+    }).then((res) => {
+        if (res.ok) {
+            return res.json();
+        }
+
+        return Promise.reject(`Произошла ошибка: ${res.status}`);
+    });
+}

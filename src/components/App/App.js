@@ -31,7 +31,7 @@ function App() {
     const [countFilteredMovies, setCountFilteredMovies] = useState(0);
     // Отображаемые фильмы
     const [displayedMovies, setDisplayedMovies] = useState([]);
-     // Отображаемые сохраненные фильмы
+    // Отображаемые сохраненные фильмы
     const [displayedSavedMovies, setDisplayedSavedMovies] = useState([]);
     // Количество отображаемых фильмов
     const [countDisplayedMovies, setCountDisplayedMovies] = useState(0);
@@ -41,6 +41,8 @@ function App() {
     const [moreButtonVisible, setMoreButtonVisible] = useState(false);
     // Поисковый запрос
     const [searchText, setSearchText] = useState("");
+    // Поисковый запрос по сохраненным фильмам
+    const [searchSavedText, setSearchSavedText] = useState("");
     // Новый поиск или нет
     const [newSearch, setNewSearch] = useState(false);
     // Ошибка при поиске фильмов
@@ -123,7 +125,6 @@ function App() {
         getIdsAllSavedMovies();
     }, [allSavedMovies]);
 
-    //
     function getIdsAllSavedMovies() {
         let arrIds = [];
         allSavedMovies.forEach((movie) => {
@@ -138,6 +139,10 @@ function App() {
         setSearchText(searchText);
     }
 
+    function handleSavedSearch(searchText) {
+        setSearchSavedText(searchText);
+    }
+
     // Получаем фильмы по поисковому запросу
     useEffect(() => {
         if (newSearch) {
@@ -147,8 +152,8 @@ function App() {
             getAllMovies()
                 .then((data) => {
                     let allMoviesFixed = [];
-                    data.forEach(movie => {
-                        allMoviesFixed.push(fixMovieUrl(movie));             
+                    data.forEach((movie) => {
+                        allMoviesFixed.push(fixMovieUrl(movie));
                     });
                     // Помещаем все фильмы в переменную
                     setAllMovies(allMoviesFixed);
@@ -162,19 +167,23 @@ function App() {
                 .finally(() => {
                     setIsLoading(false);
                 });
-
-            // TODO: ПРОВЕРИТЬ КАК БУДЕТ ПРИ ПЕРЕХОДАХ ПО СТРАНИЧКАМ
-            // setNewSearch(false);
         }
     }, [searchText, shortMovies]);
 
     // Вывод ошибок пользователю при поиске фильмов
     function handleMoviesErrorMessage(message) {
-        if (message) {
-            setMoviesMessage(message);
-        } else {
+        setMoviesMessage(message);
+        setTimeout(() => {
             setMoviesMessage("");
-        }
+        }, 1000);
+    }
+
+    // Вывод ошибок в формах
+    function handleFormsErrorMessage(message) {
+        setFormError(message);
+        setTimeout(() => {
+            setFormError("");
+        }, 1000);
     }
 
     function checkToken() {
@@ -216,26 +225,29 @@ function App() {
                     return re.test(movie.nameRU);
                 })
             );
-
-            // Фильтруем сохраненные результаты по запросу
-            setDisplayedSavedMovies(
-                allSavedMovies.filter((movie) => {
-                    // Фильтруем на короткометражки
-                    if (!shortMovies.state) {
-                        if (movie.duration <= 40) return false;
-                    }
-
-                    // Экранируем спецсимволы
-                    function regexpEsape(text) {
-                        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-                    }
-
-                    let re = new RegExp(regexpEsape(searchText), "i");
-                    return re.test(movie.nameRU);
-                })
-            );
         }
     }, [allMovies]);
+
+    // Вывод сохраненных фильмов
+    useEffect(() => {
+        // Фильтруем сохраненные результаты по запросу
+        setDisplayedSavedMovies(
+            allSavedMovies.filter((movie) => {
+                // Фильтруем на короткометражки
+                if (!shortMovies.state) {
+                    if (movie.duration <= 40) return false;
+                }
+
+                // Экранируем спецсимволы
+                function regexpEsape(text) {
+                    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+                }
+
+                let re = new RegExp(regexpEsape(searchSavedText), "i");
+                return re.test(movie.nameRU);
+            })
+        );
+    }, [allSavedMovies, searchSavedText, shortMovies]);
 
     // Формируем первичый набор отображаемых фильмов
     useEffect(() => {
@@ -298,9 +310,7 @@ function App() {
             .register(newUser.name, newUser.password, newUser.email)
             .then((res) => {
                 if (res.message) {
-                    setFormError(res.message);
-                } else {
-                    setFormError("");
+                    handleFormsErrorMessage(res.message);
                 }
                 // При успехе авторизуем пользователя
                 if (res) handleLoginUser(newUser);
@@ -315,49 +325,74 @@ function App() {
 
     // Авторизация пользователя
     function handleLoginUser(user) {
-        console.log("user", user);
         setIsLoading(true);
         mainApi
             .authorize(user.email, user.password)
-            .then((data) => {
-                if (data.message) {
-                    setFormError(data.message);
-                } else {
-                    setFormError("");
+            .then((res) => {
+                if (res.message) {
+                    handleFormsErrorMessage(res.message);
                 }
 
-                if (data.token) {
-                    console.log("data", data);
-                    localStorage.setItem("token", data.token);
-                    handleLogin(data.token);
+                if (res.token) {
+                    localStorage.setItem("token", res.token);
+                    handleLogin(res.token);
                 }
             })
-            .catch((res) => {
-                console.log("res", res);
-                // TODO доделать
-                // запускается, если пользователь не найден
-                console.log("запускается, если пользователь не найден");
-                // handleInfoTooltipPopupOpen("fail");
+            .catch((err) => {
+                console.log(err);
             })
             .finally(() => {
                 setIsLoading(false);
             });
     }
 
+    // Редактирование пользователя
+    function handleUpdateUser(newUser) {
+        // Запускаем прелоадер
+        setIsLoading(true);
+        mainApi
+            .editUserInfo(newUser.name, newUser.email)
+            .then((res) => {
+                if (res.message) {
+                    handleFormsErrorMessage(res.message);
+                }
+
+                if (res) {
+                    setCurrentUser(res);
+                    handleFormsErrorMessage("Успешно!");
+                }
+            })
+            .catch((err) => {
+                console.log(err);
+            })
+            .finally(() => {
+                setIsLoading(false);
+            });
+    }
+
+    // Разлогинивание пользователя
+    function handleLogOut() {
+        setLoggedIn(false);
+        localStorage.removeItem("token");
+        history.push("/");
+    }
+
     // Проверка и исправление ссылки на ролик (при ее отсутствии)
     function fixMovieUrl(movie) {
-        let regex = new RegExp(/https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/gi);
+        let regex = new RegExp(
+            /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/gi
+        );
 
-        if(!movie.trailerLink || !movie.trailerLink.match(regex)) {
-            let encodeName = encodeURI(movie.nameRU.replace(/ /g, '+'));
-            movie.trailerLink = "https://www.youtube.com/results?search_query=" + encodeName;
+        if (!movie.trailerLink || !movie.trailerLink.match(regex)) {
+            let encodeName = encodeURI(movie.nameRU.replace(/ /g, "+"));
+            movie.trailerLink =
+                "https://www.youtube.com/results?search_query=" + encodeName;
         }
         return movie;
     }
 
     // Сохранение фильмов
     function handleMovieSave(movie) {
-        console.log('movie', movie);
         mainApi
             .postMovie(movie)
             .then((savedMovie) => {
@@ -417,9 +452,9 @@ function App() {
                         <ProtectedRoute
                             path="/saved-movies"
                             component={SavedMovies}
-                            onSearchForm={handleSearch}
+                            onSearchForm={handleSavedSearch}
                             movies={displayedSavedMovies}
-                            searchText={searchText}
+                            searchText={searchSavedText}
                             onError={handleMoviesErrorMessage}
                             isLoading={isLoading}
                             loggedIn={loggedIn}
@@ -430,6 +465,10 @@ function App() {
                             path="/profile"
                             component={Profile}
                             loggedIn={loggedIn}
+                            onEditUser={handleUpdateUser}
+                            formError={formError}
+                            isLoading={isLoading}
+                            onLogoutUser={handleLogOut}
                         />
                         <Route path="/signup">
                             <Register

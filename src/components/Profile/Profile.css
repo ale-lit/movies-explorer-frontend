@@ -34,20 +34,41 @@
 .user__email-title {
     font-weight: 500;
 }
-
 .user__links {
     font-size: 13px;
     line-height: 16px;
     display: flex;
     flex-direction: column;
-    padding-top: 220px;
+    padding-top: 158px;
     padding-bottom: 70px;
     gap: 16px;
 }
-
 .user__link-logout {
     font-weight: 500;
     color: #ff3459;
+}
+.user__input {
+    text-align: right;
+    border: none;
+    outline: none;
+    padding: 0;
+    font-size: 11px;
+    line-height: 13px;
+}
+.user__edit-button {
+    background: none;
+    border: none;
+    cursor: pointer;
+    transition: all 0.3s ease-in-out;
+}
+.user__edit-button:hover {
+    opacity: .8;
+}
+.user__edit-button:disabled {
+    background: none;
+    border: none;
+    cursor: default;
+    color: #c2c2c2;
 }
 
 @media screen and (max-width: 768px) {
