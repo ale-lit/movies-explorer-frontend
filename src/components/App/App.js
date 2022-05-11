@@ -3,7 +3,7 @@ import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { ShortMoviesContext } from "../../contexts/ShortMoviesContext";
 import ProtectedRoute from "../../utils/ProtectedRoute";
-import * as auth from "../../utils/MainApi";
+import * as mainApi from "../../utils/MainApi";
 import "./App.css";
 
 import Header from "../Header/Header";
@@ -21,6 +21,8 @@ import { getAllMovies } from "../../utils/MoviesApi";
 function App() {
     // Все фильмы
     const [allMovies, setAllMovies] = useState([]);
+    // Все сохраненные фильмы (ID)
+    const [allSavedMovies, setAllSavedMovies] = useState([]);
     // Все отфильтрованные фильмы
     const [filteredMovies, setFilteredMovies] = useState([]);
     // Количество отфильтрованных фильмов
@@ -81,12 +83,24 @@ function App() {
 
     // Начальная инициализация
     useEffect(() => {
+        if (localStorage.getItem("token")) {
+            mainApi.getAllSavedMovies()
+                .then((movies) => {
+                    // console.log('movies saved!', movies);
+                    setAllSavedMovies(movies);
+                })
+                .catch((err) => {
+                    console.log(err);
+                });
+        }
+
         // Проверяем токен (если он есть)
         checkToken();
         // Рассчитываем начальное кол-во отображаемых фильмов и подгружаемых
         changeDisplayedMoviesNum();
         // Проверяем и подгружаем старые результаты поиска если они есть из localStorage
         if (!newSearch && localStorage.searchText) {
+            // setAllSavedMoviesId(localStorage.getItem("allSavedMoviesId"));
             setSearchText(localStorage.getItem("searchText"));
             setShortMovies({
                 ...shortMovies,
@@ -144,12 +158,13 @@ function App() {
 
     function checkToken() {
         const token = localStorage.getItem("token");
-        if(token) handleLogin(token);
+        if (token) handleLogin(token);
     }
 
     function handleLogin(token) {
-        auth.getContent(token)
-            .then((res) => {                
+        mainApi
+            .getContent(token)
+            .then((res) => {
                 if (res && !res.message) {
                     setCurrentUser(res);
                     setLoggedIn(true);
@@ -240,7 +255,8 @@ function App() {
     function handleRegisterUser(newUser) {
         // Запускаем прелоадер
         setIsLoading(true);
-        auth.register(newUser.name, newUser.password, newUser.email)
+        mainApi
+            .register(newUser.name, newUser.password, newUser.email)
             .then((res) => {
                 if (res.message) {
                     setFormError(res.message);
@@ -248,7 +264,7 @@ function App() {
                     setFormError("");
                 }
                 // При успехе авторизуем пользователя
-                if(res) handleLoginUser(newUser);
+                if (res) handleLoginUser(newUser);
             })
             .catch((err) => {
                 console.log(err);
@@ -260,9 +276,10 @@ function App() {
 
     // Авторизация пользователя
     function handleLoginUser(user) {
-        console.log('user', user)
+        console.log("user", user);
         setIsLoading(true);
-        auth.authorize(user.email, user.password)
+        mainApi
+            .authorize(user.email, user.password)
             .then((data) => {
                 if (data.message) {
                     setFormError(data.message);
@@ -273,7 +290,7 @@ function App() {
                 if (data.token) {
                     console.log("data", data);
                     localStorage.setItem("token", data.token);
-                    handleLogin(data.token);                    
+                    handleLogin(data.token);
                 }
             })
             .catch((res) => {
@@ -287,6 +304,48 @@ function App() {
                 setIsLoading(false);
             });
     }
+
+    // Сохранение фильмов
+    function handleMovieSave(movie) {
+        console.log("movie", movie);
+
+        mainApi
+            .postMovie(movie)
+            .then((newCard) => {
+                console.log("newCard", newCard);
+                // setCards([newCard, ...cards]);
+                // closeAllPopups();
+            })
+            .catch((err) => {
+                console.log(err);
+            });
+
+        // mainApi.changeSaveMovieStatus(movie._id, !isSaved)
+        //     .then((newCard) => {
+        //         setCards((state) =>
+        //             state.map((c) => (c._id === card._id ? newCard : c))
+        //         );
+        //     })
+        //     .catch((err) => {
+        //         console.log(err);
+        //     });
+    }
+
+    // function handleCardLike(card) {
+    //     // Снова проверяем, есть ли уже лайк на этой карточке
+    //     const isSaved = card.likes.some((i) => i === currentUser._id);
+
+    //     // Отправляем запрос в API и получаем обновлённые данные карточки
+    //     api.changeLikeCardStatus(card._id, !isSaved)
+    //       .then((newCard) => {
+    //         setCards((state) =>
+    //           state.map((c) => (c._id === card._id ? newCard : c))
+    //         );
+    //       })
+    //       .catch((err) => {
+    //         console.log(err);
+    //       });
+    //   }
 
     return (
         <>
@@ -313,11 +372,16 @@ function App() {
                             onError={handleMoviesErrorMessage}
                             isLoading={isLoading}
                             loggedIn={loggedIn}
+                            onMovieSave={handleMovieSave}
                         />
                         <ProtectedRoute
                             path="/saved-movies"
                             component={SavedMovies}
-                            // TODO ДОДЕЛАТЬ
+                            onSearchForm={handleSearch}
+                            movies={allSavedMovies}
+                            searchText={searchText}
+                            onError={handleMoviesErrorMessage}
+                            isLoading={isLoading}
                             loggedIn={loggedIn}
                         />
                         <ProtectedRoute

@@ -2,18 +2,30 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 
-function MoviesCardList({ movies, loadMoreMovies, moreButtonVisible, message }) {
+function MoviesCardList({
+    movies,
+    loadMoreMovies,
+    moreButtonVisible,
+    message,
+    onMovieSave,
+}) {
     return (
         <section className="films project__wrapper">
             {message ? <p className="films__message">{message}</p> : ""}
 
             {movies.length ? (
                 <ul className="films__list">
-                    {movies.map((movie, i) =>
-                        <MoviesCard movie={movie} key={movie.id} />
-                    )}
+                    {movies.map((movie, i) => (
+                        <MoviesCard
+                            movie={movie}
+                            key={movie.id}
+                            onMovieSave={onMovieSave}
+                        />
+                    ))}
                 </ul>
-            ) : ""}
+            ) : (
+                ""
+            )}
 
             <div className="films__more-block">
                 {moreButtonVisible ? (

@@ -13,6 +13,7 @@ function Movies({
     message,
     onError,
     isLoading,
+    onMovieSave,
 }) {
     useEffect(() => {
         if (movies.length === 0) {
@@ -37,6 +38,7 @@ function Movies({
                     loadMoreMovies={loadMoreMovies}
                     moreButtonVisible={moreButtonVisible}
                     message={message}
+                    onMovieSave={onMovieSave}
                 />
             )}
         </main>
