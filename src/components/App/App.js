@@ -68,7 +68,6 @@ function App() {
             if (countDisplayedMovies === 0) setCountDisplayedMovies(12);
             setMoviesPerRow(3);
         } else if (displayWidth > 767 && displayWidth < 1280) {
-            // TODO: 480 по заданию
             if (countDisplayedMovies === 0) setCountDisplayedMovies(8);
             setMoviesPerRow(2);
         } else {
@@ -143,9 +142,9 @@ function App() {
         setSearchSavedText(searchText);
     }
 
-    // Получаем фильмы по поисковому запросу
+    // Получаем все фильмы
     useEffect(() => {
-        if (newSearch) {
+        if (allMovies.length === 0) {
             // Запускаем прелоадер
             setIsLoading(true);
             // Получаем все фильмы по API
@@ -167,6 +166,26 @@ function App() {
                 .finally(() => {
                     setIsLoading(false);
                 });
+        }
+
+        if (newSearch) {
+            // Фильтруем результаты по запросу
+            setFilteredMovies(
+                allMovies.filter((movie) => {
+                    // Фильтруем на короткометражки
+                    if (!shortMovies.state) {
+                        if (movie.duration <= 40) return false;
+                    }
+
+                    // Экранируем спецсимволы
+                    function regexpEsape(text) {
+                        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+                    }
+
+                    let re = new RegExp(regexpEsape(searchText), "i");
+                    return re.test(movie.nameRU);
+                })
+            );
         }
     }, [searchText, shortMovies]);
 
@@ -205,28 +224,6 @@ function App() {
                 console.log(err);
             });
     }
-
-    useEffect(() => {
-        if (newSearch) {
-            // Фильтруем результаты по запросу
-            setFilteredMovies(
-                allMovies.filter((movie) => {
-                    // Фильтруем на короткометражки
-                    if (!shortMovies.state) {
-                        if (movie.duration <= 40) return false;
-                    }
-
-                    // Экранируем спецсимволы
-                    function regexpEsape(text) {
-                        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
-                    }
-
-                    let re = new RegExp(regexpEsape(searchText), "i");
-                    return re.test(movie.nameRU);
-                })
-            );
-        }
-    }, [allMovies]);
 
     // Вывод сохраненных фильмов
     useEffect(() => {
