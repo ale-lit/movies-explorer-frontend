@@ -403,7 +403,7 @@ function App() {
 
     // Разлогинивание пользователя
     function handleLogOut() {
-        // сбрасываем все стейты
+        // Сбрасываем все стейты
         setAllMovies([]);
         setAllSavedMovies([]);
         setAllSavedMoviesIds([]);
