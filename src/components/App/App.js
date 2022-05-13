@@ -77,6 +77,7 @@ function App() {
 
     const history = useHistory();
 
+    // Разлогиниваем если токен некорректный
     useEffect(() => {
         if(wrongToken) handleLogOut();
     }, [wrongToken])
