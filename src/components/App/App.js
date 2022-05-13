@@ -72,8 +72,14 @@ function App() {
     const location = useLocation().pathname;
     // Ошибка формы
     const [formError, setFormError] = useState("");
+    // Некорректный токен
+    const [wrongToken, setWrongToken] = useState(false);
 
     const history = useHistory();
+
+    useEffect(() => {
+        if(wrongToken) handleLogOut();
+    }, [wrongToken])
 
     // Меняем кол-во выводимых фильмов в зав-ти от размера экрана
     function changeDisplayedMoviesNum() {
@@ -118,13 +124,18 @@ function App() {
             mainApi
                 .getAllSavedMovies()
                 .then((movies) => {
+                    if(movies.message) {
+                        // Если токен некорректный - разлогиниваем
+                        setWrongToken(true);
+                    }
+                    
                     setAllSavedMovies(movies);
                 })
-                .catch((err) => {
+                .catch((err) => {                    
                     console.log(err);
                 });
         }
-        
+
         // Проверяем токен (если он есть)
         checkToken();
         // Рассчитываем начальное кол-во отображаемых фильмов и подгружаемых
@@ -143,7 +154,7 @@ function App() {
                 JSON.parse(localStorage.getItem("filteredMovies"))
             );
         }
-    }, []); // TODO [currentUser]? loggedIn
+    }, []);
 
     useEffect(() => {
         getIdsAllSavedMovies();
@@ -236,7 +247,7 @@ function App() {
 
     function handleLogin(token) {
         mainApi
-            .getContent(token)
+            .getUserInfo(token)
             .then((res) => {
                 if (res && !res.message) {
                     setCurrentUser(res);
@@ -413,6 +424,7 @@ function App() {
             state: true,
             toggleCheckbox: toggleCheckbox,
         });
+        setWrongToken(false);
 
         // Очищаем localstorage
         localStorage.removeItem("token");

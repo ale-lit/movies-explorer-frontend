@@ -39,7 +39,7 @@ export function authorize(email, password) {
         .catch((err) => console.log(err));
 }
 
-export function getContent(token) {
+export function getUserInfo(token) {
     return fetch(`${BASE_MAIN_URL}/users/me`, {
         method: "GET",
         headers: {
