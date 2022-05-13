@@ -2,6 +2,7 @@ import React, { useState, useEffect } from "react";
 import { Switch, Route, useLocation, useHistory } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import { ShortMoviesContext } from "../../contexts/ShortMoviesContext";
+import { ShortSavedMoviesContext } from "../../contexts/ShortSavedMoviesContext";
 import ProtectedRoute from "../../utils/ProtectedRoute";
 import * as mainApi from "../../utils/MainApi";
 import "./App.css";
@@ -97,10 +98,18 @@ function App() {
     function toggleCheckbox(e) {
         setShortMovies({ ...shortMovies, state: e.target.checked });
     }
-
     const [shortMovies, setShortMovies] = useState({
         state: true,
         toggleCheckbox: toggleCheckbox,
+    });
+
+    // переключатель поиска по коротким видео (сохраненные)
+    function toggleSavedCheckbox(e) {
+        setShortSavedMovies({ ...shortSavedMovies, savedState: e.target.checked });
+    }
+    const [shortSavedMovies, setShortSavedMovies] = useState({
+        savedState: true,
+        toggleSavedCheckbox: toggleSavedCheckbox,
     });
 
     // Начальная инициализация
@@ -398,10 +407,8 @@ function App() {
         setSearchSavedText("");
         setNewSearch(false);
         setMoviesMessage("");
-        setIsLoading(false);
         setCurrentUser({});
         setLoggedIn(false);
-        setFormError("");
         setShortMovies({
             state: true,
             toggleCheckbox: toggleCheckbox,
@@ -410,6 +417,7 @@ function App() {
         // Очищаем localstorage
         localStorage.removeItem("token");
         localStorage.removeItem("filteredMovies");
+        localStorage.removeItem("searchText");
         localStorage.removeItem("shortSearch");
 
         // Редиректим на главную
@@ -461,80 +469,82 @@ function App() {
         <>
             <CurrentUserContext.Provider value={currentUser}>
                 <ShortMoviesContext.Provider value={shortMovies}>
-                    {location === "/" ||
-                    location === "/movies" ||
-                    location === "/saved-movies" ||
-                    location === "/profile" ? (
-                        <Header loggedIn={loggedIn} />
-                    ) : (
-                        ""
-                    )}
-                    <Switch>
-                        <ProtectedRoute
-                            path="/movies"
-                            component={Movies}
-                            onSearchForm={handleSearch}
-                            movies={displayedMovies}
-                            searchText={searchText}
-                            loadMoreMovies={loadMoreMovies}
-                            moreButtonVisible={moreButtonVisible}
-                            message={moviesMessage}
-                            onError={handleMoviesErrorMessage}
-                            isLoading={isLoading}
-                            loggedIn={loggedIn}
-                            onMovieSave={handleMovieSave}
-                            onMovieDelete={handleMovieDelete}
-                            savedIds={allSavedMoviesIds}
-                        />
-                        <ProtectedRoute
-                            path="/saved-movies"
-                            component={SavedMovies}
-                            onSearchForm={handleSavedSearch}
-                            movies={displayedSavedMovies}
-                            searchText={searchSavedText}
-                            onError={handleMoviesErrorMessage}
-                            isLoading={isLoading}
-                            loggedIn={loggedIn}
-                            onMovieDelete={handleMovieDelete}
-                            savedIds={allSavedMoviesIds}
-                        />
-                        <ProtectedRoute
-                            path="/profile"
-                            component={Profile}
-                            loggedIn={loggedIn}
-                            onEditUser={handleUpdateUser}
-                            formError={formError}
-                            isLoading={isLoading}
-                            onLogoutUser={handleLogOut}
-                        />
-                        <Route path="/signup">
-                            <Register
-                                onRegisterUser={handleRegisterUser}
+                    <ShortSavedMoviesContext.Provider value={shortSavedMovies}>
+                        {location === "/" ||
+                        location === "/movies" ||
+                        location === "/saved-movies" ||
+                        location === "/profile" ? (
+                            <Header loggedIn={loggedIn} />
+                        ) : (
+                            ""
+                        )}
+                        <Switch>
+                            <ProtectedRoute
+                                path="/movies"
+                                component={Movies}
+                                onSearchForm={handleSearch}
+                                movies={displayedMovies}
+                                searchText={searchText}
+                                loadMoreMovies={loadMoreMovies}
+                                moreButtonVisible={moreButtonVisible}
+                                message={moviesMessage}
+                                onError={handleMoviesErrorMessage}
                                 isLoading={isLoading}
-                                formError={formError}
+                                loggedIn={loggedIn}
+                                onMovieSave={handleMovieSave}
+                                onMovieDelete={handleMovieDelete}
+                                savedIds={allSavedMoviesIds}
                             />
-                        </Route>
-                        <Route path="/signin">
-                            <Login
-                                onLoginUser={handleLoginUser}
+                            <ProtectedRoute
+                                path="/saved-movies"
+                                component={SavedMovies}
+                                onSearchForm={handleSavedSearch}
+                                movies={displayedSavedMovies}
+                                searchText={searchSavedText}
+                                onError={handleMoviesErrorMessage}
                                 isLoading={isLoading}
-                                formError={formError}
+                                loggedIn={loggedIn}
+                                onMovieDelete={handleMovieDelete}
+                                savedIds={allSavedMoviesIds}
                             />
-                        </Route>
-                        <Route exact path="/">
-                            <Main />
-                        </Route>
-                        <Route path="*">
-                            <PageNotFound />
-                        </Route>
-                    </Switch>
-                    {location === "/" ||
-                    location === "/movies" ||
-                    location === "/saved-movies" ? (
-                        <Footer />
-                    ) : (
-                        ""
-                    )}
+                            <ProtectedRoute
+                                path="/profile"
+                                component={Profile}
+                                loggedIn={loggedIn}
+                                onEditUser={handleUpdateUser}
+                                formError={formError}
+                                isLoading={isLoading}
+                                onLogoutUser={handleLogOut}
+                            />
+                            <Route path="/signup">
+                                <Register
+                                    onRegisterUser={handleRegisterUser}
+                                    isLoading={isLoading}
+                                    formError={formError}
+                                />
+                            </Route>
+                            <Route path="/signin">
+                                <Login
+                                    onLoginUser={handleLoginUser}
+                                    isLoading={isLoading}
+                                    formError={formError}
+                                />
+                            </Route>
+                            <Route exact path="/">
+                                <Main />
+                            </Route>
+                            <Route path="*">
+                                <PageNotFound />
+                            </Route>
+                        </Switch>
+                        {location === "/" ||
+                        location === "/movies" ||
+                        location === "/saved-movies" ? (
+                            <Footer />
+                        ) : (
+                            ""
+                        )}
+                    </ShortSavedMoviesContext.Provider>
                 </ShortMoviesContext.Provider>
             </CurrentUserContext.Provider>
         </>
