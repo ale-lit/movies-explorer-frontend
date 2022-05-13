@@ -383,8 +383,36 @@ function App() {
 
     // Разлогинивание пользователя
     function handleLogOut() {
+        // сбрасываем все стейты
+        setAllMovies([]);
+        setAllSavedMovies([]);
+        setAllSavedMoviesIds([]);
+        setFilteredMovies([]);
+        setCountFilteredMovies(0);
+        setDisplayedMovies([]);
+        setDisplayedSavedMovies([]);
+        setCountDisplayedMovies(0);
+        setMoviesPerRow(0);
+        setMoreButtonVisible(false);
+        setSearchText("");
+        setSearchSavedText("");
+        setNewSearch(false);
+        setMoviesMessage("");
+        setIsLoading(false);
+        setCurrentUser({});
         setLoggedIn(false);
+        setFormError("");
+        setShortMovies({
+            state: true,
+            toggleCheckbox: toggleCheckbox,
+        });
+
+        // Очищаем localstorage
         localStorage.removeItem("token");
+        localStorage.removeItem("filteredMovies");
+        localStorage.removeItem("shortSearch");
+
+        // Редиректим на главную
         history.push("/");
     }
 
