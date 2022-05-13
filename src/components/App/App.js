@@ -232,7 +232,6 @@ function App() {
                 if (res && !res.message) {
                     setCurrentUser(res);
                     setLoggedIn(true);
-                    history.push("/movies");
                 }
             })
             .catch((err) => {
@@ -349,6 +348,7 @@ function App() {
                 if (res.token) {
                     localStorage.setItem("token", res.token);
                     handleLogin(res.token);
+                    history.push("/movies");
                 }
             })
             .catch((err) => {
