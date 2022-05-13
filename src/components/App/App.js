@@ -18,6 +18,20 @@ import PageNotFound from "../PageNotFound/PageNotFound";
 
 import { getAllMovies } from "../../utils/MoviesApi";
 
+import {
+    SHORT_MOVIE_DURATION,
+    COUNT_DISPLAYED_MOVIES_DESKTOP,
+    COUNT_PERROW_MOVIES_DESKTOP,
+    COUNT_DISPLAYED_MOVIES_LAPTOP,
+    COUNT_PERROW_MOVIES_LAPTOP,
+    COUNT_DISPLAYED_MOVIES_MOBILE,
+    COUNT_PERROW_MOVIES_MOBILE,
+    SERVER_OK_MESSAGE,
+    SERVER_ERROR_MESSAGE,
+} from "../../constants";
+
+import { REGEXP_URL_CHECK, REGEXP_ESCAPE_SPECIALS } from "../../regexp";
+
 function App() {
     // Все фильмы
     const [allMovies, setAllMovies] = useState([]);
@@ -65,14 +79,17 @@ function App() {
         let displayWidth = window.screen.width;
 
         if (displayWidth >= 1280) {
-            if (countDisplayedMovies === 0) setCountDisplayedMovies(12);
-            setMoviesPerRow(3);
+            if (countDisplayedMovies === 0)
+                setCountDisplayedMovies(COUNT_DISPLAYED_MOVIES_DESKTOP);
+            setMoviesPerRow(COUNT_PERROW_MOVIES_DESKTOP);
         } else if (displayWidth > 767 && displayWidth < 1280) {
-            if (countDisplayedMovies === 0) setCountDisplayedMovies(8);
-            setMoviesPerRow(2);
+            if (countDisplayedMovies === 0)
+                setCountDisplayedMovies(COUNT_DISPLAYED_MOVIES_LAPTOP);
+            setMoviesPerRow(COUNT_PERROW_MOVIES_LAPTOP);
         } else {
-            if (countDisplayedMovies === 0) setCountDisplayedMovies(5);
-            setMoviesPerRow(2);
+            if (countDisplayedMovies === 0)
+                setCountDisplayedMovies(COUNT_DISPLAYED_MOVIES_MOBILE);
+            setMoviesPerRow(COUNT_PERROW_MOVIES_MOBILE);
         }
     }
 
@@ -105,7 +122,6 @@ function App() {
         changeDisplayedMoviesNum();
         // Проверяем и подгружаем старые результаты поиска если они есть из localStorage
         if (!newSearch && localStorage.searchText) {
-            // setAllSavedMoviesId(localStorage.getItem("allSavedMoviesId"));
             setSearchText(localStorage.getItem("searchText"));
             setShortMovies({
                 ...shortMovies,
@@ -158,9 +174,7 @@ function App() {
                     setAllMovies(allMoviesFixed);
                 })
                 .catch((err) => {
-                    handleMoviesErrorMessage(
-                        "Во время запроса произошла ошибка. Возможно, проблема с соединением или сервер недоступен. Подождите немного и попробуйте ещё раз"
-                    );
+                    handleMoviesErrorMessage(SERVER_ERROR_MESSAGE);
                     console.log(err);
                 })
                 .finally(() => {
@@ -174,12 +188,13 @@ function App() {
                 allMovies.filter((movie) => {
                     // Фильтруем на короткометражки
                     if (!shortMovies.state) {
-                        if (movie.duration <= 40) return false;
+                        if (movie.duration <= SHORT_MOVIE_DURATION)
+                            return false;
                     }
 
                     // Экранируем спецсимволы
                     function regexpEsape(text) {
-                        return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+                        return text.replace(REGEXP_ESCAPE_SPECIALS, "\\$&");
                     }
 
                     let re = new RegExp(regexpEsape(searchText), "i");
@@ -232,12 +247,12 @@ function App() {
             allSavedMovies.filter((movie) => {
                 // Фильтруем на короткометражки
                 if (!shortMovies.state) {
-                    if (movie.duration <= 40) return false;
+                    if (movie.duration <= SHORT_MOVIE_DURATION) return false;
                 }
 
                 // Экранируем спецсимволы
                 function regexpEsape(text) {
-                    return text.replace(/[-[\]{}()*+?.,\\^$|#\s]/g, "\\$&");
+                    return text.replace(REGEXP_ESCAPE_SPECIALS, "\\$&");
                 }
 
                 let re = new RegExp(regexpEsape(searchSavedText), "i");
@@ -355,7 +370,7 @@ function App() {
                     handleFormsErrorMessage(res.message);
                 } else {
                     setCurrentUser(res);
-                    handleFormsErrorMessage("Успешно!");
+                    handleFormsErrorMessage(SERVER_OK_MESSAGE);
                 }
             })
             .catch((err) => {
@@ -375,9 +390,7 @@ function App() {
 
     // Проверка и исправление ссылки на ролик (при ее отсутствии)
     function fixMovieUrl(movie) {
-        let regex = new RegExp(
-            /https?:\/\/(www\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\.[a-zA-Z0-9()]{1,6}\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)/gi
-        );
+        let regex = new RegExp(REGEXP_URL_CHECK);
 
         if (!movie.trailerLink || !movie.trailerLink.match(regex)) {
             let encodeName = encodeURI(movie.nameRU.replace(/ /g, "+"));

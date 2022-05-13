@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import { CurrentUserContext } from "../../contexts/CurrentUserContext";
 import "./Profile.css";
 
+import { REGEXP_EMAIL_CHECK } from "../../regexp";
+
 function Profile({ onEditUser, formError, isLoading, onLogoutUser }) {
     // TODO
     const [name, setName] = useState("");
@@ -53,9 +55,8 @@ function Profile({ onEditUser, formError, isLoading, onLogoutUser }) {
     }
     function handleEmailChange(e) {
         let value = e.target.value;
-        let re = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
 
-        if (!re.test(value) && value.length > 0) {
+        if (!REGEXP_EMAIL_CHECK.test(value) && value.length > 0) {
             setEmailError("Ошибка!");
             setIsValid(false);
         } else {

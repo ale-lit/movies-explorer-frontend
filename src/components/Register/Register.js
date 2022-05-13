@@ -3,6 +3,8 @@ import { Link } from "react-router-dom";
 import "./Register.css";
 import logo from "../../images/logo.svg";
 
+import { REGEXP_EMAIL_CHECK } from "../../regexp";
+
 function Register({ onRegisterUser, isLoading, formError }) {
     const [name, setName] = useState("");
     const [email, setEmail] = useState("");
@@ -50,9 +52,8 @@ function Register({ onRegisterUser, isLoading, formError }) {
     }
     function handleEmailChange(e) {
         let value = e.target.value;
-        let re = /^([A-Za-z0-9_\-.])+@([A-Za-z0-9_\-.])+\.([A-Za-z]{2,4})$/;
 
-        if (!re.test(value) && value.length > 0) {
+        if (!REGEXP_EMAIL_CHECK.test(value) && value.length > 0) {
             setEmailError("Введите корректный Email!");
             setIsValid(false);
         } else {
