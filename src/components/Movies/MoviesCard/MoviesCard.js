@@ -1,26 +1,69 @@
 import React from "react";
 import { useLocation } from "react-router-dom";
 import "./MoviesCard.css";
+import { BASE_MOVIES_URL } from "../../../constants";
 
-function MoviesCard({ title, duration, image, saved }) {
-
+function MoviesCard({ movie, onMovieSave, onMovieDelete, saved }) {
     const location = useLocation().pathname;
+
+    function convertTime(duration) {
+        let hours = parseInt(duration / 60);
+        let mins = duration % 60;
+        return hours + "ч " + mins + "м";
+    }
+
+    function handleSaveClick(e) {
+        let saveButton = e.target;
+        if(saveButton.classList.contains('films__save-button_type_active')) {
+            saveButton.classList.remove('films__save-button_type_active');
+            onMovieDelete(movie.id);
+        } else {
+            saveButton.classList.add('films__save-button_type_active');
+            onMovieSave(movie);
+        }
+    }
+
+    function handleDeleteClick() {
+        onMovieDelete(movie.movieId);
+    }    
 
     return (
         <li className="films__item">
             <div className="films__item-header">
                 <div className="films__item-info">
-                    <p className="films__title">{title}</p>
-                    <p className="films__duration">{duration}</p>
+                    <p className="films__title" title={movie.nameRU}>
+                        {movie.nameRU}
+                    </p>
+                    <p className="films__duration">
+                        {convertTime(movie.duration)}
+                    </p>
                 </div>
                 {location === "/saved-movies" ? (
-                    <button className="films__save-button films__save-button_type_remove"></button>
+                    <button
+                        className="films__save-button films__save-button_type_remove"
+                        onClick={handleDeleteClick}
+                    ></button>
                 ) : (
-                    <button className={`films__save-button ${saved ? 'films__save-button_type_active' : ''}`}></button>
+                    <button
+                        className={`films__save-button ${
+                            saved ? "films__save-button_type_active" : ""
+                        }`}
+                        onClick={handleSaveClick}
+                    ></button>
                 )}
-                
             </div>
-            <img src={image} className="films__poster" alt={title} />
+            <a
+                href={movie.trailerLink}
+                target="_blank"
+                rel="noopener noreferrer"
+            >
+                <img
+                    src={location === "/saved-movies" ? movie.image : BASE_MOVIES_URL + movie.image.url}
+                    className="films__poster"
+                    alt={movie.nameRU}
+                    title={movie.nameRU}
+                />
+            </a>
         </li>
     );
 }

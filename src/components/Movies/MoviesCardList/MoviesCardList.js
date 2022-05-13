@@ -2,43 +2,43 @@ import React from "react";
 import MoviesCard from "../MoviesCard/MoviesCard";
 import "./MoviesCardList.css";
 
-import image from "../../../images/example.jpg";
-
-function MoviesCardList({ items }) {
-    // Временное решение
-    let cards = [];
-
-    for (let i = 0; i < items; i++) {
-        cards.push({
-            title: "33 слова о дизайне",
-            duration: "1ч 47м",
-            poster: image,
-            saved: Math.floor(Math.random() * 2),
-            _id: i,
-        });
-    }
-
+function MoviesCardList({
+    movies,
+    loadMoreMovies,
+    moreButtonVisible,
+    message,
+    onMovieSave,
+    onMovieDelete,
+    savedIds,
+}) {
     return (
         <section className="films project__wrapper">
-            <ul className="films__list">
-                {cards.map((card, i) =>
-                    i < 12 ? (
+            {message ? <p className="films__message">{message}</p> : ""}
+
+            {movies.length ? (
+                <ul className="films__list">
+                    {movies.map((movie, i) => (
                         <MoviesCard
-                            title={card.title}
-                            duration={card.duration}
-                            image={card.poster}
-                            saved={card.saved}
-                            key={card._id}
+                            movie={movie}
+                            key={movie.id || movie._id}
+                            onMovieSave={onMovieSave}
+                            onMovieDelete={onMovieDelete}
+                            saved={savedIds.includes(movie.id)}
                         />
-                    ) : (
-                        ""
-                    )
-                )}
-            </ul>
+                    ))}
+                </ul>
+            ) : (
+                ""
+            )}
 
             <div className="films__more-block">
-                {items > 12 ? (
-                    <button className="films__more-button">Ещё</button>
+                {moreButtonVisible ? (
+                    <button
+                        className="films__more-button"
+                        onClick={loadMoreMovies}
+                    >
+                        Ещё
+                    </button>
                 ) : (
                     ""
                 )}
