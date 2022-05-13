@@ -124,7 +124,7 @@ function App() {
                     console.log(err);
                 });
         }
-
+        
         // Проверяем токен (если он есть)
         checkToken();
         // Рассчитываем начальное кол-во отображаемых фильмов и подгружаемых
@@ -143,7 +143,7 @@ function App() {
                 JSON.parse(localStorage.getItem("filteredMovies"))
             );
         }
-    }, []);
+    }, []); // TODO [currentUser]? loggedIn
 
     useEffect(() => {
         getIdsAllSavedMovies();

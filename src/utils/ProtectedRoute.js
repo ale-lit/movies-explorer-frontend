@@ -7,10 +7,10 @@ const ProtectedRoute = ({ component: Component, ...props }) => {
     return (
         <Route>
             {() =>
-                props.loggedIn ? (
-                    <Component {...props} />
-                ) : (
+                !props.loggedIn && !localStorage.getItem("token") ? (                    
                     <Redirect to="/" />
+                ) : (
+                    <Component {...props} />
                 )
             }
         </Route>
