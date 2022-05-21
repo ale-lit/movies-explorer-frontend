@@ -56,7 +56,7 @@ export function getUserInfo(token) {
 export function getAllSavedMovies() {
     return fetch(`${BASE_MAIN_URL}/movies`, {
         headers: {
-            authorization: localStorage.getItem("token"),
+            Authorization: localStorage.getItem("token"),
             "Content-Type": "application/json",
         },
     }).then((res) => {
@@ -68,7 +68,7 @@ export function postMovie(movie) {
     return fetch(`${BASE_MAIN_URL}/movies`, {
         method: "POST",
         headers: {
-            authorization: localStorage.getItem("token"),
+            Authorization: localStorage.getItem("token"),
             "Content-Type": "application/json",
         },
         body: JSON.stringify({
@@ -93,7 +93,7 @@ export function deleteMovie(id) {
     return fetch(`${BASE_MAIN_URL}/movies/${id}`, {
         method: "DELETE",
         headers: {
-            authorization: localStorage.getItem("token"),
+            Authorization: localStorage.getItem("token"),
             "Content-Type": "application/json",
         },
     }).then((res) => {
@@ -105,7 +105,7 @@ export function editUserInfo(name, email) {
     return fetch(`${BASE_MAIN_URL}/users/me`, {
         method: "PATCH",
         headers: {
-            authorization: localStorage.getItem("token"),
+            Authorization: localStorage.getItem("token"),
             "Content-Type": "application/json",
         },
         body: JSON.stringify({

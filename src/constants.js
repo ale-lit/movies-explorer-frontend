@@ -1,5 +1,7 @@
-export const BASE_MOVIES_URL = "https://api.nomoreparties.co";
-export const BASE_MAIN_URL = "https://api.myfilms.nomoredomains.work";
+// export const BASE_MOVIES_URL = "https://api.nomoreparties.co";
+// export const BASE_MAIN_URL = "https://api.myfilms.nomoredomains.work";
+export const BASE_MOVIES_URL = "http://localhost/yamov/api/v1";
+export const BASE_MAIN_URL = "http://localhost/yamov/api/v1";
 
 export const SHORT_MOVIE_DURATION = 40;
 export const COUNT_DISPLAYED_MOVIES_DESKTOP = 12;
