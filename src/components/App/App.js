@@ -454,6 +454,8 @@ function App() {
         mainApi
             .postMovie(movie)
             .then((savedMovie) => {
+                console.log('savedMovie', savedMovie);
+                console.log('movie', movie);
                 setAllSavedMovies([...allSavedMovies, savedMovie]);
             })
             .catch((err) => {

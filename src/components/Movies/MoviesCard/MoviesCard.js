@@ -58,7 +58,7 @@ function MoviesCard({ movie, onMovieSave, onMovieDelete, saved }) {
                 rel="noopener noreferrer"
             >
                 <img
-                    src={BASE_MOVIES_URL + movie.image.url}
+                    src={movie.image.url ? BASE_MOVIES_URL + movie.image.url : movie.image}
                     className="films__poster"
                     alt={movie.nameRU}
                     title={movie.nameRU}
