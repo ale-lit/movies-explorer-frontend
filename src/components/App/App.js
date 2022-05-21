@@ -454,8 +454,6 @@ function App() {
         mainApi
             .postMovie(movie)
             .then((savedMovie) => {
-                console.log('savedMovie', savedMovie);
-                console.log('movie', movie);
                 setAllSavedMovies([...allSavedMovies, savedMovie]);
             })
             .catch((err) => {
@@ -466,9 +464,9 @@ function App() {
     function handleMovieDelete(id) {
         let newSavedMoviesArr = [];
         allSavedMovies.forEach((movie) => {
-            if (movie.movieId === id) {
+            if (movie.movieId === id || movie.id === id) {
                 mainApi
-                    .deleteMovie(movie._id)
+                    .deleteMovie(movie._id || movie.id)
                     .then()
                     .catch((err) => {
                         console.log(err);

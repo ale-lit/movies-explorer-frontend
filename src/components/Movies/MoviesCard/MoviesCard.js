@@ -16,7 +16,7 @@ function MoviesCard({ movie, onMovieSave, onMovieDelete, saved }) {
         let saveButton = e.target;
         if(saveButton.classList.contains('films__save-button_type_active')) {
             saveButton.classList.remove('films__save-button_type_active');
-            onMovieDelete(movie.id);
+            onMovieDelete(movie.movieId || movie.id);
         } else {
             saveButton.classList.add('films__save-button_type_active');
             onMovieSave(movie);
@@ -24,7 +24,7 @@ function MoviesCard({ movie, onMovieSave, onMovieDelete, saved }) {
     }
 
     function handleDeleteClick() {
-        onMovieDelete(movie.movieId);
+        onMovieDelete(movie.movieId || movie.id);
     }    
 
     return (
