@@ -164,7 +164,7 @@ function App() {
     function getIdsAllSavedMovies() {
         let arrIds = [];
         allSavedMovies.forEach((movie) => {
-            arrIds.push(movie.movieId);
+            arrIds.push(movie.movieId || movie.id);
         });
         setAllSavedMoviesIds(arrIds);
     }
@@ -451,6 +451,7 @@ function App() {
 
     // Сохранение фильмов
     function handleMovieSave(movie) {
+        console.log('movie', movie);
         mainApi
             .postMovie(movie)
             .then((savedMovie) => {
@@ -466,7 +467,7 @@ function App() {
         allSavedMovies.forEach((movie) => {
             if (movie.movieId === id || movie.id === id) {
                 mainApi
-                    .deleteMovie(movie._id || movie.id)
+                    .deleteMovie(movie._id || movie.id || movie.movieId)
                     .then()
                     .catch((err) => {
                         console.log(err);
