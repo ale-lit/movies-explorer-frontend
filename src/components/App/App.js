@@ -451,7 +451,6 @@ function App() {
 
     // Сохранение фильмов
     function handleMovieSave(movie) {
-        console.log('movie', movie);
         mainApi
             .postMovie(movie)
             .then((savedMovie) => {
