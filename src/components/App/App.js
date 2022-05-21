@@ -369,7 +369,7 @@ function App() {
                 if (res.token) {
                     localStorage.setItem("token", res.token);
                     handleLogin(res.token);
-                    history.push("/movies");
+                    history.push("/movies-explorer/movies");
                 }
             })
             .catch((err) => {
@@ -434,7 +434,7 @@ function App() {
         localStorage.removeItem("shortSearch");
 
         // Редиректим на главную
-        history.push("/");
+        history.push("/movies-explorer/");
     }
 
     // Проверка и исправление ссылки на ролик (при ее отсутствии)
@@ -483,17 +483,17 @@ function App() {
             <CurrentUserContext.Provider value={currentUser}>
                 <ShortMoviesContext.Provider value={shortMovies}>
                     <ShortSavedMoviesContext.Provider value={shortSavedMovies}>
-                        {location === "/" ||
-                        location === "/movies" ||
-                        location === "/saved-movies" ||
-                        location === "/profile" ? (
+                        {location === "/movies-explorer/" ||
+                        location === "/movies-explorer/movies" ||
+                        location === "/movies-explorer/saved-movies" ||
+                        location === "/movies-explorer/profile" ? (
                             <Header loggedIn={loggedIn} />
                         ) : (
                             ""
                         )}
                         <Switch>
                             <ProtectedRoute
-                                path="/movies"
+                                path="/movies-explorer/movies"
                                 component={Movies}
                                 onSearchForm={handleSearch}
                                 movies={displayedMovies}
@@ -509,7 +509,7 @@ function App() {
                                 savedIds={allSavedMoviesIds}
                             />
                             <ProtectedRoute
-                                path="/saved-movies"
+                                path="/movies-explorer/saved-movies"
                                 component={SavedMovies}
                                 onSearchForm={handleSavedSearch}
                                 movies={displayedSavedMovies}
@@ -521,7 +521,7 @@ function App() {
                                 savedIds={allSavedMoviesIds}
                             />
                             <ProtectedRoute
-                                path="/profile"
+                                path="/movies-explorer/profile"
                                 component={Profile}
                                 loggedIn={loggedIn}
                                 onEditUser={handleUpdateUser}
@@ -529,30 +529,30 @@ function App() {
                                 isLoading={isLoading}
                                 onLogoutUser={handleLogOut}
                             />
-                            <Route path="/signup">
+                            <Route path="/movies-explorer/signup">
                                 <Register
                                     onRegisterUser={handleRegisterUser}
                                     isLoading={isLoading}
                                     formError={formError}
                                 />
                             </Route>
-                            <Route path="/signin">
+                            <Route path="/movies-explorer/signin">
                                 <Login
                                     onLoginUser={handleLoginUser}
                                     isLoading={isLoading}
                                     formError={formError}
                                 />
                             </Route>
-                            <Route exact path="/">
+                            <Route exact path="/movies-explorer/">
                                 <Main />
                             </Route>
                             <Route path="*">
                                 <PageNotFound />
                             </Route>
                         </Switch>
-                        {location === "/" ||
-                        location === "/movies" ||
-                        location === "/saved-movies" ? (
+                        {location === "/movies-explorer/" ||
+                        location === "/movies-explorer/movies" ||
+                        location === "/movies-explorer/saved-movies" ? (
                             <Footer />
                         ) : (
                             ""

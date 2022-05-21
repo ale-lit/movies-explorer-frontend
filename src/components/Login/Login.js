@@ -66,7 +66,7 @@ function Login({ onLoginUser, isLoading, formError }) {
     return (
         <main className="main">
             <section className="register project__wrapper">
-                <Link to="/" className="project__link" title="На главную">
+                <Link to="/movies-explorer/" className="project__link" title="На главную">
                     <img src={logo} alt="Логотип" className="register__logo" />
                 </Link>
 
@@ -119,7 +119,7 @@ function Login({ onLoginUser, isLoading, formError }) {
 
                     <p className="register__login-link">
                         Ещё не зарегистрированы?{" "}
-                        <Link to="/signup" className="project__link">
+                        <Link to="/movies-explorer/signup" className="project__link">
                             Регистрация
                         </Link>
                     </p>

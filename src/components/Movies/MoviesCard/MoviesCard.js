@@ -38,7 +38,7 @@ function MoviesCard({ movie, onMovieSave, onMovieDelete, saved }) {
                         {convertTime(movie.duration)}
                     </p>
                 </div>
-                {location === "/saved-movies" ? (
+                {location === "/movies-explorer/saved-movies" ? (
                     <button
                         className="films__save-button films__save-button_type_remove"
                         onClick={handleDeleteClick}

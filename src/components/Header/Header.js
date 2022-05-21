@@ -23,7 +23,7 @@ function Header({ loggedIn }) {
 
     return (
         <header className={`header ${location === '/' ? ' blue-background' : ''}`}>
-            <Link to="/" className="project__link" title="На главную">
+            <Link to="/movies-explorer/" className="project__link" title="На главную">
                 <img src={logo} alt="Логотип" className="header__logo" />
             </Link>
                     {loggedIn ? (
@@ -32,16 +32,16 @@ function Header({ loggedIn }) {
                                 <button className={`header__mob-menu-button ${showMenu ? 'header__mob-menu-button_active' : ''}`} onClick={toggleMenu}><span></span></button>
                                 <div className={`header__menu ${showMenu ? 'header__menu_visible' : ''}`}>
                                 <NavTab closeMenu={closeMenu} />
-                                <Link to='/profile' className='header__profile-link project__link' onClick={closeMenu}>Аккаунт</Link>
+                                <Link to='/movies-explorer/profile' className='header__profile-link project__link' onClick={closeMenu}>Аккаунт</Link>
                                 </div>
                             </div>
                         </>
                     ) : (
                         <div className="header__auth">
-                            <Link to="/signup" className="header__link project__link">
+                            <Link to="/movies-explorer/signup" className="header__link project__link">
                                 Регистрация
                             </Link>
-                            <Link to="/signin" className="header__login-link">
+                            <Link to="/movies-explorer/signin" className="header__login-link">
                                 Войти
                             </Link>
                         </div>

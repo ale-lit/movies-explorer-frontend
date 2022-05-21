@@ -91,7 +91,7 @@ function Register({ onRegisterUser, isLoading, formError }) {
     return (
         <main className="main">
             <section className="register project__wrapper">
-                <Link to="/" className="project__link" title="На главную">
+                <Link to="/movies-explorer/" className="project__link" title="На главную">
                     <img src={logo} alt="Логотип" className="register__logo" />
                 </Link>
 
@@ -159,7 +159,7 @@ function Register({ onRegisterUser, isLoading, formError }) {
 
                     <p className="register__login-link">
                         Уже зарегистрированы?{" "}
-                        <Link to="/signin" className="project__link">
+                        <Link to="/movies-explorer/signin" className="project__link">
                             Войти
                         </Link>
                     </p>

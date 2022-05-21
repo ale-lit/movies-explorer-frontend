@@ -9,7 +9,7 @@ function NavTab({ closeMenu }) {
                 <li className="header__nav-item">
                     <NavLink
                         exact
-                        to="/"
+                        to="/movies-explorer/"
                         className="project__link"
                         activeClassName="project__link_active"
                         onClick={closeMenu}
@@ -19,7 +19,7 @@ function NavTab({ closeMenu }) {
                 </li>
                 <li className="header__nav-item">
                     <NavLink
-                        to="/movies"
+                        to="/movies-explorer/movies"
                         className="project__link"
                         activeClassName="project__link_active"
                         onClick={closeMenu}
@@ -29,7 +29,7 @@ function NavTab({ closeMenu }) {
                 </li>
                 <li className="header__nav-item">
                     <NavLink
-                        to="/saved-movies"
+                        to="/movies-explorer/saved-movies"
                         className="project__link"
                         activeClassName="project__link_active"
                         onClick={closeMenu}
