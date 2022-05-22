@@ -29,12 +29,22 @@ function Portfolio() {
                 </li>
                 <li className="portfolio__item">
                     <a
-                        href="https://github.com/ale-lit/mesto"
+                        href="https://github.com/ale-lit/mesto-react"
                         target="_blank"
                         rel="noopener noreferrer"
                         className="portfolio__link project__link"
                     >
                         Одностраничное приложение
+                    </a>
+                </li>
+                <li className="portfolio__item">
+                    <a
+                        href="https://github.com/ale-lit/movies-explorer-frontend"
+                        target="_blank"
+                        rel="noopener noreferrer"
+                        className="portfolio__link project__link"
+                    >
+                        Репозиторий с данным проектом
                     </a>
                 </li>
             </ul>
