@@ -1,3 +1,1 @@
-Проект: https://myfilms.nomoredomains.work/
-
-Макет: https://myfilms.nomoredomains.work/maket.fig
+Проект: https://ale-lit.ru/movies-explorer/
