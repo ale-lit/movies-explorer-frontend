@@ -1,4 +1,4 @@
-# Дипломный проект: «Movies Explorer» (React)
+# Дипломный проект: «Movies Explorer» (Frontend: React)
 
 <div align="center">
 
