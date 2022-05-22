@@ -9,9 +9,9 @@
 
 </div>
 
-Данная работа реализована, для подтверждения и закрепления полученных знаний, в ходе учебного процесса на платформе [Яндекс.Практикума](https://practicum.yandex.ru/ "Сервис онлайн-образования от Яндекса"). В ней я практиковался в верстке и оформлении элементов различной сложности, а также оттачивал мастерство реализации того или иного функционала на JavaScript. Добавлена плавность при изменении всех интерактивных элементов, а также открытии всплывающих модальных окон. Также, создна файловая структура и осуществлено разнесение всех стилей по методологии [БЭМ](https://ru.bem.info/ "Методология созданная в Яндексе для удобной разработки сайтов").
+Данная дипломная работа реализована, для подтверждения и закрепления полученных знаний, в ходе учебного процесса курса «Фронтенд разработчик» на платформе [Яндекс.Практикума](https://practicum.yandex.ru/ "Сервис онлайн-образования от Яндекса"). В ней я реализовывал полноценное одностраничное приложение (SPA) имитирующее полноценный кино-портал, позволяющее пользователям создавать раздельные аккаунты со своими закладками.
 
-**Реализованный функционал на JavaScript:**
+**Реализованный функционал на React:**
 - Интерактивное редактирование имени и специализации профиля автора блога, во всплывающем Popup-окне
 - Возможность переключения на светлую тему (при клике по логотипу)
 - Добавление пользователями новых фотографий различных мест с описаниями
@@ -26,19 +26,11 @@
 * HTML 5
 * CSS 3
 * FlexBox
-* JavaScript
-* Адаптивная, кроссбраузерная верстка и файловая структура по методологии "БЭМ"
+* React
+* Адаптивная, кроссбраузерная верстка
 
-## Макеты в Figma
-https://www.figma.com/file/2cn9N9jSkmxD84oJik7xL7/JavaScript.-Sprint-4?node-id=0%3A1
-https://www.figma.com/file/bjyvbKKJN2naO0ucURl2Z0/JavaScript.-Sprint-5?node-id=0%3A1
-https://www.figma.com/file/kRVLKwYG3d1HGLvh7JFWRT/JavaScript.-Sprint-6?node-id=0%3A1
-https://www.figma.com/file/PSdQFRHoxXJFs2FH8IXViF/JavaScript.-Sprint-9?node-id=0%3A1
+## Макет в Figma
+https://ale-lit.ru/movies-explorer/maket.fig
 
-## Чеклисты по работе
-https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-4/index.html
-https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-5/index.html
-https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-6/index.html
-https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-7/index.html
-https://code.s3.yandex.net/web-developer/checklists/new-program/checklist-8/index.html
-https://code.s3.yandex.net/web-developer/checklists-pdf/new-program/checklist-9.pdf
+## Чеклист по работе
+https://code.s3.yandex.net/web-developer/static/new-program/web-diploma-criteria-2.0/index.html
