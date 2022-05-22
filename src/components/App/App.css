@@ -17,6 +17,22 @@
 .project__link_active {
     font-weight: 500;
 }
+.project__link-border {
+    text-decoration: none;
+    color: #000;
+}
+.project__link-border::after {
+    content: '';
+    display: block;
+    height: 1px;
+    width: 0;
+    background: #959595;
+    transition: all .3s ease-in-out;
+    margin: 0 auto;
+}
+.project__link-border:hover::after, .project__link_active::after {
+    width: 100%;
+}
 .project__wrapper {
     max-width: 1280px;
     margin: 0 auto;

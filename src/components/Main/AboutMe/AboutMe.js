@@ -27,7 +27,7 @@ function AboutMe() {
                             <a
                                 href="https://t.me/alelitv"
                                 target="_blank"
-                                className="project__link"
+                                className="project__link-border"
                                 rel="noopener noreferrer"
                             >
                                 Telegram
@@ -37,7 +37,7 @@ function AboutMe() {
                             <a
                                 href="https://github.com/ale-lit"
                                 target="_blank"
-                                className="project__link"
+                                className="project__link-border"
                                 rel="noopener noreferrer"
                             >
                                 Github

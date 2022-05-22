@@ -20,7 +20,7 @@ function NavTab({ closeMenu }) {
                 <li className="header__nav-item">
                     <NavLink
                         to="/movies-explorer/movies"
-                        className="project__link"
+                        className="project__link-border"
                         activeClassName="project__link_active"
                         onClick={closeMenu}
                     >
@@ -30,7 +30,7 @@ function NavTab({ closeMenu }) {
                 <li className="header__nav-item">
                     <NavLink
                         to="/movies-explorer/saved-movies"
-                        className="project__link"
+                        className="project__link-border"
                         activeClassName="project__link_active"
                         onClick={closeMenu}
                     >

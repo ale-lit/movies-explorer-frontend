@@ -38,7 +38,7 @@ function Header({ loggedIn }) {
                         </>
                     ) : (
                         <div className="header__auth">
-                            <Link to="/movies-explorer/signup" className="header__link project__link">
+                            <Link to="/movies-explorer/signup" className="header__link project__link-border">
                                 Регистрация
                             </Link>
                             <Link to="/movies-explorer/signin" className="header__login-link">
